@@ -1,0 +1,3553 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ثبت‌کننده ساعت مطالعه</title>
+  <meta name="theme-color" content="#0a0a12" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="مطالعه" />
+  <link rel="manifest" id="appManifest" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="dark"] {
+      --form-label: #a5f3fc;
+      --greeting: #a5f3fc;
+      --bg: #0a0a12;
+      --bg-card: rgba(24, 24, 40, 0.85);
+      --bg-input: rgba(15, 15, 28, 0.9);
+      --border: rgba(167, 139, 250, 0.45);
+      --border-light: rgba(196, 181, 253, 0.55);
+      --text: #f5f3ff;
+      --text-muted: #c4b5fd;
+      --text-dim: #8b7cb8;
+      --accent: #22d3ee;
+      --accent-soft: #67e8f9;
+      --accent-dim: rgba(34, 211, 238, 0.12);
+      --success: #34d399;
+      --danger: #fb7185;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 8px 32px rgba(88, 28, 135, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.08);
+      --ai-bg: rgba(76, 29, 149, 0.25);
+      --glow: 0 0 40px rgba(34, 211, 238, 0.08);
+    }
+    [data-theme="light"] #todayShamsi { color: #0f172a !important; }
+    [data-theme="light"] {
+      --form-label: #6d28d9;
+      --greeting: #7c3aed;
+      --bg: #f5f3ff;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --bg-input: #faf8ff;
+      --border: rgba(124, 58, 237, 0.15);
+      --border-light: rgba(124, 58, 237, 0.25);
+      --text: #1e1b4b;
+      --text-muted: #6b7280;
+      --text-dim: #9ca3af;
+      --accent: #7c3aed;
+      --accent-soft: #a78bfa;
+      --accent-dim: rgba(124, 58, 237, 0.1);
+      --success: #059669;
+      --danger: #e11d48;
+      --shadow: 0 8px 30px rgba(124, 58, 237, 0.1), 0 0 0 1px rgba(124, 58, 237, 0.06);
+      --ai-bg: rgba(237, 233, 254, 0.8);
+      --glow: 0 0 40px rgba(124, 58, 237, 0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', 'Cairo', 'Calibri', 'Segoe UI', Tahoma, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+    /* پس‌زمینه مدرن صفحه اصلی */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background-color: #06060e;
+      background-image:
+        radial-gradient(circle 600px at 15% 20%, rgba(139, 92, 246, 0.55), transparent 70%),
+        radial-gradient(circle 500px at 85% 15%, rgba(34, 211, 238, 0.4), transparent 65%),
+        radial-gradient(circle 450px at 70% 75%, rgba(192, 132, 252, 0.35), transparent 70%),
+        radial-gradient(circle 400px at 20% 85%, rgba(56, 189, 248, 0.25), transparent 65%),
+        radial-gradient(circle 300px at 50% 50%, rgba(99, 102, 241, 0.12), transparent 70%),
+        linear-gradient(160deg, #06060e 0%, #0c0820 35%, #081018 70%, #0a0a14 100%);
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(167, 139, 250, 0.18) 1px, transparent 0);
+      background-size: 28px 28px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 10%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 10%, transparent 70%);
+    }
+    body[data-theme="light"]::before {
+      background-color: #f8f5ff;
+      background-image:
+        radial-gradient(circle 600px at 10% 15%, rgba(167, 139, 250, 0.65), transparent 70%),
+        radial-gradient(circle 500px at 90% 10%, rgba(165, 243, 252, 0.45), transparent 65%),
+        radial-gradient(circle 450px at 75% 80%, rgba(196, 181, 253, 0.5), transparent 70%),
+        radial-gradient(circle 400px at 15% 80%, rgba(233, 213, 255, 0.55), transparent 65%),
+        linear-gradient(160deg, #faf8ff 0%, #f3e8ff 40%, #ede9fe 100%);
+    }
+    body[data-theme="light"]::after {
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(124, 58, 237, 0.2) 1px, transparent 0);
+      background-size: 28px 28px;
+      opacity: 0.4;
+    }
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      input, select, button, textarea { font-size: 16px !important; }
+      #app { padding: 12px 10px 80px; }
+      header { margin-bottom: 18px; padding-bottom: 12px; }
+      header h1 { font-size: 1.15rem; }
+      .stats-grid { gap: 10px; margin-bottom: 16px; }
+      .stat-card { padding: 14px 10px; }
+      .stat-card .value { font-size: 1.1rem; }
+      .card { padding: 16px 14px; margin-bottom: 14px; }
+      .card h2 { font-size: 0.98rem; }
+      .form-grid { gap: 12px; }
+      .btn { padding: 10px 14px; font-size: 0.88rem; }
+      .filter-row { gap: 8px; }
+      .filter-row select { min-width: 120px; flex: 1; }
+      .session-item {
+        padding: 12px 10px; flex-wrap: wrap; gap: 8px;
+        align-items: flex-start;
+      }
+      .day-header {
+        padding: 12px 10px; flex-wrap: wrap; gap: 8px;
+        align-items: flex-start;
+      }
+      .day-header .day-title {
+        font-size: 0.88rem; line-height: 1.5; word-break: break-word;
+        flex: 1; min-width: 0;
+      }
+      .day-header .day-total { font-size: 0.82rem; }
+      .day-header .day-actions {
+        width: 100%; justify-content: space-between; flex-wrap: wrap;
+      }
+      .session-subject {
+        font-size: 0.9rem; line-height: 1.6; word-break: break-word;
+      }
+      .session-meta {
+        font-size: 0.78rem; line-height: 1.5; word-break: break-word;
+      }
+      .session-duration {
+        font-size: 0.88rem; width: 100%; text-align: right;
+        margin-top: 4px;
+      }
+      .tests-badge {
+        display: inline-block; margin: 2px 0; font-size: 0.72rem;
+        line-height: 1.4;
+      }
+      .badge { font-size: 0.72rem; margin: 0 2px; }
+      .subj-row { grid-template-columns: 70px 1fr 70px; gap: 6px; }
+      .chart-bars { gap: 4px; height: 150px; }
+      .chart-label { font-size: 0.65rem; }
+      .week-compare { gap: 10px; }
+      .weekday-label { min-width: 70px; padding: 10px 8px; font-size: 0.8rem; }
+      .header-actions .top-row { gap: 6px; }
+      .login-box { padding: 28px 22px; }
+    }
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: transparent;
+    }
+    .login-box {
+      background: rgba(24, 24, 40, 0.65);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 22px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 12px 40px rgba(88, 28, 135, 0.35), 0 0 60px rgba(34, 211, 238, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      text-align: center;
+    }
+    [data-theme="light"] .login-box {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    }
+    .login-box h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; color: var(--accent); }
+    .login-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 28px; }
+    .login-box input {
+      width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px 16px; color: var(--text);
+      font-size: 1.1rem; text-align: center; letter-spacing: 3px; outline: none;
+      margin-bottom: 18px; transition: border 0.2s; font-family: inherit;
+    }
+    .login-box input:focus { border-color: var(--accent); }
+    .login-box button {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(56,189,248,0.8) 0%, rgba(14,165,233,0.7) 100%);
+      color: #fff;
+      border: 1px solid rgba(125,211,252,0.4);
+      border-radius: var(--radius-sm);
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 18px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+    .login-box button:hover {
+      filter: none;
+      background: linear-gradient(135deg, rgba(56,189,248,0.95) 0%, rgba(14,165,233,0.85) 100%);
+      box-shadow: 0 6px 24px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+      transform: translateY(-1px);
+    }
+    .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; min-height: 20px; }
+    #app { display: none; max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; position: relative; z-index: 1; }
+    header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+      flex-wrap: wrap; gap: 12px;
+    }
+    header h1 { font-size: 1.35rem; font-weight: 600; color: var(--accent); }
+    .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    .header-actions .top-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      padding: 9px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .btn:hover {
+      border-color: rgba(56,189,248,0.45);
+      color: var(--accent);
+      background: rgba(56,189,248,0.1);
+      box-shadow: 0 6px 20px rgba(56,189,248,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #c084fc 100%);
+      border: 1px solid rgba(167, 139, 250, 0.5);
+      color: #0f0a1a;
+      font-weight: 700;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 6px 28px rgba(34, 211, 238, 0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+      transform: translateY(-1px);
+    }
+    [data-theme="light"] .btn-primary {
+      background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+      color: #fff;
+      border-color: rgba(124, 58, 237, 0.4);
+      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.3);
+    }
+    .btn-danger {
+      color: var(--danger);
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .btn-danger:hover {
+      background: rgba(239,68,68,0.18);
+      border-color: rgba(239,68,68,0.55);
+      box-shadow: 0 4px 16px rgba(239,68,68,0.15);
+    }
+    .btn-icon { padding: 8px 12px; font-size: 1.1rem; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+    /* تم روشن — دکمه‌های شیشه‌ای کمی متفاوت */
+    [data-theme="light"] .btn {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    [data-theme="light"] .btn:hover {
+      background: rgba(2,132,199,0.1);
+      border-color: rgba(2,132,199,0.3);
+    }
+    [data-theme="light"] .btn-primary {
+      background: linear-gradient(135deg, rgba(2,132,199,0.85) 0%, rgba(14,165,233,0.75) 100%);
+      border: 1px solid rgba(14,165,233,0.4);
+      box-shadow: 0 4px 16px rgba(2,132,199,0.2), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    [data-theme="light"] .btn-primary:hover {
+      background: linear-gradient(135deg, rgba(2,132,199,0.95) 0%, rgba(14,165,233,0.9) 100%);
+    }
+    [data-theme="light"] .btn-danger {
+      background: rgba(220,38,38,0.08);
+      border-color: rgba(220,38,38,0.3);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+    @media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+    }
+    [data-theme="light"] .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .stat-card .label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+    .stat-card .value { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+    .stat-card .sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 4px; }
+    .stat-card.up .value { color: var(--success); }
+    .stat-card.down .value { color: var(--danger); }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow), var(--glow);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+    }
+    [data-theme="light"] .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+    }
+    .card h2 {
+      font-size: 1.05rem; font-weight: 600; margin-bottom: 0; color: var(--accent);
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      cursor: default;
+    }
+    .card.collapsible > h2 {
+      cursor: pointer; user-select: none; padding: 4px 0;
+    }
+    .card.collapsible > h2:hover { opacity: 0.9; }
+    .card.collapsible > h2 .toggle-icon {
+      font-size: 0.9rem; transition: transform 0.25s ease; color: var(--text-muted);
+    }
+    .card.collapsible.collapsed > h2 .toggle-icon { transform: rotate(-90deg); }
+    .card.collapsible .collapsible-body {
+      overflow: hidden; transition: max-height 0.35s ease, opacity 0.25s ease, margin 0.25s;
+      max-height: 3000px; opacity: 1; margin-top: 16px;
+    }
+    .card.collapsible.collapsed .collapsible-body {
+      max-height: 0; opacity: 0; margin-top: 0; pointer-events: none;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 11px 14px; color: var(--text);
+      font-size: 0.95rem; outline: none; transition: border 0.2s; font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+    select {
+      cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2338bdf8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: left 12px center; padding-left: 32px;
+    }
+    .form-actions { margin-top: 16px; display: flex; gap: 10px; }
+    .form-actions button { flex: 1; }
+    .hint { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 14px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .tab {
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: all 0.25s ease;
+    }
+    .tab.active {
+      background: rgba(56,189,248,0.15);
+      border-color: rgba(56,189,248,0.5);
+      color: var(--accent);
+      box-shadow: 0 2px 12px rgba(56,189,248,0.12);
+    }
+    .tab:hover:not(.active) {
+      border-color: rgba(56,189,248,0.35);
+      color: var(--accent-soft);
+      background: rgba(56,189,248,0.08);
+    }
+    [data-theme="light"] .tab {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    [data-theme="light"] .tab.active {
+      background: rgba(2,132,199,0.12);
+      border-color: rgba(2,132,199,0.4);
+    }
+    .chart-area { min-height: 200px; }
+    .chart-bars {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      height: 180px; gap: 8px; padding: 0 4px;
+    }
+    .chart-bar-wrap {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      height: 100%; justify-content: flex-end; min-width: 0;
+    }
+    .chart-bar {
+      width: 100%; max-width: 42px;
+      background: linear-gradient(180deg, var(--accent-soft) 0%, var(--accent) 100%);
+      border-radius: 6px 6px 3px 3px; transition: height 0.35s ease; min-height: 4px; position: relative;
+    }
+    .chart-bar:hover, .chart-bar.active-tip { filter: brightness(1.15); }
+    .chart-bar .tooltip {
+      position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+      background: var(--bg-card); color: var(--text); font-size: 0.72rem; padding: 6px 10px;
+      border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none;
+      margin-bottom: 6px; transition: opacity 0.2s; z-index: 20; border: 1px solid var(--border-light);
+      box-shadow: var(--shadow); line-height: 1.5; text-align: center;
+    }
+    .chart-bar:hover .tooltip, .chart-bar.active-tip .tooltip { opacity: 1; }
+    .chart-bar-wrap { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .mood-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mood-pills label {
+      flex: 1; min-width: 90px; text-align: center; padding: 10px 8px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--bg-input); cursor: pointer;
+      font-size: 0.85rem; transition: all 0.2s; color: var(--text-muted); margin: 0;
+    }
+    .mood-pills input { display: none; }
+    .mood-pills label:has(input:checked) {
+      border-color: var(--accent); color: var(--accent); background: var(--accent-dim);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    .tm-priority {
+      font-size: 0.7rem; padding: 2px 7px; border-radius: 6px; font-weight: 600;
+    }
+    .tm-priority.high { background: rgba(251,113,133,0.15); color: #fb7185; }
+    .tm-priority.normal { background: rgba(56,189,248,0.12); color: var(--accent); }
+    .tm-priority.low { background: rgba(148,163,184,0.15); color: var(--text-muted); }
+    .tm-subj-tag {
+      font-size: 0.72rem; padding: 2px 7px; border-radius: 6px;
+      background: var(--accent-dim); color: var(--accent); font-weight: 500;
+    }
+    .chart-label {
+      font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; text-align: center;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+    }
+    .subj-bars { display: flex; flex-direction: column; gap: 12px; }
+    .subj-row { display: grid; grid-template-columns: 90px 1fr 80px; align-items: center; gap: 10px; }
+    .subj-name { font-size: 0.9rem; font-weight: 500; text-align: left; }
+    .subj-track { height: 18px; background: var(--bg-input); border-radius: 9px; overflow: hidden; border: 1px solid var(--border); }
+    .subj-fill {
+      height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+      border-radius: 9px; transition: width 0.4s ease; min-width: 2px;
+    }
+    .subj-val { font-size: 0.85rem; color: var(--accent); text-align: left; font-weight: 600; }
+    .week-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+    @media (max-width: 500px) { .week-compare { grid-template-columns: 1fr; } }
+    .week-box {
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .week-box {
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .week-box .title { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+    .week-box .hours { font-size: 1.45rem; font-weight: 700; color: var(--accent); }
+    .week-box .diff { font-size: 0.8rem; margin-top: 6px; }
+    .diff.up { color: var(--success); }
+    .diff.down { color: var(--danger); }
+    .diff.same { color: var(--text-dim); }
+    .day-group { margin-bottom: 18px; }
+    .day-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      border: 1px solid rgba(167, 139, 250, 0.4);
+      gap: 8px; flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .day-header {
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .day-header .day-title { font-weight: 600; font-size: 0.95rem; }
+    .day-header .day-total { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+    .day-header .day-actions { display: flex; gap: 6px; align-items: center; }
+    .session-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 14px; border-bottom: 1px solid rgba(167, 139, 250, 0.28); gap: 10px;
+    }
+    [data-theme="light"] .session-item { border-bottom-color: var(--border); }
+    .session-item:last-child { border-bottom: none; }
+    .session-info { flex: 1; min-width: 0; }
+    .session-subject { font-weight: 500; margin-bottom: 2px; }
+    .session-meta { font-size: 0.8rem; color: var(--text-muted); }
+    .session-duration { font-weight: 600; color: var(--accent); white-space: nowrap; font-size: 0.95rem; text-align: left; }
+    .session-delete {
+      background: transparent; border: none; color: var(--text-dim); cursor: pointer;
+      font-size: 1.2rem; padding: 4px 8px; border-radius: 6px; transition: all 0.2s;
+    }
+    .session-delete:hover { color: var(--danger); }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-state span { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+    .filter-row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+    .filter-row select { width: auto; min-width: 140px; }
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--bg-card); color: var(--text); padding: 12px 24px; border-radius: 12px;
+      border: 1px solid var(--border-light); font-weight: 500; opacity: 0; transition: all 0.3s;
+      z-index: 200; pointer-events: none; box-shadow: var(--shadow); max-width: 90vw; text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.error { border-color: var(--danger); color: var(--danger); }
+    .badge { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; margin-left: 6px; }
+    .badge-spec { background: transparent; color: #4ade80; border: none; font-weight: 600; padding: 0 4px; }
+    [data-theme="light"] .badge-spec { background: transparent; color: #15803d; border: none; }
+    .badge-gen { background: transparent; color: #eab308; border: none; font-weight: 600; padding: 0 4px; }
+    [data-theme="light"] .badge-gen { background: transparent; color: #a16207; border: none; }
+    optgroup { background: var(--bg-card); color: var(--text-muted); font-weight: 600; }
+    .chart-title { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; }
+    .tests-badge {
+      display: inline-block; font-size: 0.75rem; background: var(--accent-dim); color: var(--accent);
+      padding: 1px 7px; border-radius: 6px; margin-right: 4px;
+    }
+    .date-row { display: flex; gap: 10px; align-items: flex-end; }
+    .date-row > div { flex: 1; }
+    .weekday-label {
+      font-size: 0.85rem; color: var(--accent); font-weight: 600;
+      padding: 11px 14px; background: var(--accent-dim); border-radius: var(--radius-sm);
+      border: 1px solid var(--accent); white-space: nowrap; text-align: center;
+      min-width: 90px;
+    }
+    .ai-box {
+      background: rgba(12, 25, 41, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-top: 0;
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="light"] .ai-box {
+      background: rgba(240, 249, 255, 0.6);
+      border: 1px solid rgba(2, 132, 199, 0.3);
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+    .ai-box .ai-title {
+      font-weight: 600; color: var(--accent); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ai-box .ai-content {
+      font-size: 0.9rem; color: var(--text); line-height: 1.8;
+    }
+    .ai-box .ai-content p { margin-bottom: 8px; }
+    .ai-box .ai-content strong { color: var(--accent); }
+    .session-timeout-hint {
+      font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;
+    }
+
+    .theme-pair {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .theme-btn {
+      background: rgba(255,255,255,0.08) !important;
+      border: 1px solid rgba(255,255,255,0.2) !important;
+      color: #fff !important;
+      opacity: 0.55;
+      box-shadow: none !important;
+      backdrop-filter: blur(8px);
+    }
+    .theme-btn.active {
+      opacity: 1;
+      border-color: rgba(255,255,255,0.45) !important;
+      background: rgba(255,255,255,0.14) !important;
+    }
+    [data-theme="light"] .theme-btn {
+      color: #6b7280 !important;
+      background: rgba(0,0,0,0.04) !important;
+      border: 1px solid rgba(0,0,0,0.1) !important;
+      opacity: 0.5;
+    }
+    [data-theme="light"] .theme-btn.active {
+      opacity: 1;
+      color: #4b5563 !important;
+      background: rgba(0,0,0,0.08) !important;
+      border-color: rgba(0,0,0,0.18) !important;
+    }
+    .edit-btn {
+      background: transparent; border: none; cursor: pointer;
+      font-size: 1rem; padding: 4px 6px; border-radius: 6px;
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .edit-btn:hover { opacity: 1; background: rgba(56,189,248,0.12); }
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 300; padding: 16px;
+    }
+    .modal-box {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px; width: 100%; max-width: 420px;
+      max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow);
+    }
+    .modal-box h3 { color: var(--accent); margin-bottom: 14px; font-size: 1.05rem; }
+
+    #addForm label { color: var(--form-label) !important; }
+    #greeting { color: var(--greeting) !important; }
+
+
+
+    /* رتبه‌بندی روز و مقایسه هفتگی روزها */
+    .day-rank-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .day-rank-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.35); border: 1px solid rgba(167, 139, 250, 0.35);
+      border-radius: var(--radius-sm);
+    }
+    [data-theme="light"] .day-rank-item {
+      background: rgba(255,255,255,0.5); border-color: var(--border);
+    }
+    .day-rank-num { font-weight: 700; color: var(--accent); min-width: 28px; }
+    .day-rank-name { flex: 1; font-weight: 500; }
+    .day-rank-val { color: var(--accent); font-weight: 600; }
+    .week-days-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 12px;
+    }
+    @media (max-width: 700px) {
+      .week-days-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .week-day-cell {
+      text-align: center; padding: 12px 6px; border-radius: var(--radius-sm);
+      background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(167, 139, 250, 0.35);
+    }
+    [data-theme="light"] .week-day-cell {
+      background: rgba(255,255,255,0.5); border-color: var(--border);
+    }
+    .week-day-cell .wd-name { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+    .week-day-cell .wd-val { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
+    .week-day-cell.today-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .tomorrow-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 8px;
+      background: rgba(15, 23, 42, 0.35); border: 1px solid rgba(167, 139, 250, 0.35);
+      border-radius: var(--radius-sm); transition: opacity 0.2s;
+    }
+    [data-theme="light"] .tomorrow-item {
+      background: rgba(255,255,255,0.55); border-color: var(--border);
+    }
+    .tomorrow-item.done { opacity: 0.55; }
+    .tomorrow-item .tm-text { flex: 1; font-size: 0.92rem; }
+    .tomorrow-item.done .tm-text { text-decoration: line-through; }
+    .tomorrow-input-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .tomorrow-input-row input { flex: 1; min-width: 140px; }
+    .install-banner {
+      display: none; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 16px; margin-bottom: 16px; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(167,139,250,0.15));
+      border: 1px solid rgba(167, 139, 250, 0.4);
+    }
+    .install-banner.show { display: flex; }
+    .install-banner p { font-size: 0.9rem; color: var(--text); margin: 0; }
+    [data-theme="dark"] .card { border-color: rgba(167, 139, 250, 0.4); }
+    [data-theme="dark"] .stat-card { border-color: rgba(167, 139, 250, 0.4); }
+    [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea {
+      border-color: rgba(167, 139, 250, 0.4);
+    }
+    [data-theme="dark"] .subj-track { border-color: rgba(167, 139, 250, 0.35); }
+    [data-theme="dark"] .ai-box { border-color: rgba(56, 189, 248, 0.45); }
+
+  </style>
+</head>
+<body data-theme="dark">
+  <div id="loginScreen">
+    <div class="login-box">
+      <h1>📚 ثبت‌کننده مطالعه</h1>
+      <p>برای ورود رمز عبور را وارد کنید</p>
+      <input type="password" id="passwordInput" placeholder="رمز عبور" maxlength="20" autocomplete="off" />
+      <button onclick="tryLogin()">ورود</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+  <div id="app">
+    <header>
+      <div>
+        <h1>📚 ثبت‌کننده ساعت مطالعه</h1>
+        <div id="todayShamsi" style="margin-top:6px;font-size:0.9rem;color:#ffffff;font-weight:500;"></div>
+      </div>
+      <div class="header-actions">
+        <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا به پلنت خوش اومدی</span>
+        <div class="top-row">
+          <button type="button" class="btn btn-icon theme-btn active" id="themeToggleBtn" onclick="toggleTheme()" title="تغییر تم">🌙</button>
+          <button class="btn btn-danger" onclick="logout()">خروج</button>
+        </div>
+        
+      </div>
+    </header>
+    <div class="install-banner" id="installBanner">
+      <div style="flex:1;min-width:0;">
+        <p style="margin:0 0 4px;font-weight:600;">📱 نصب به‌صورت اپلیکیشن</p>
+        <p style="margin:0;font-size:0.82rem;opacity:0.9;">بعد از نصب، از صفحه اصلی گوشی/دسکتاپ باز می‌شود و با بستن کروم از بین نمی‌رود.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button type="button" class="btn btn-primary btn-sm" id="installBtn" onclick="triggerInstall()">نصب اپ</button>
+        <button type="button" class="btn btn-sm" onclick="showInstallHelp()">راهنما</button>
+      </div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-card"><div class="label">📅 امروز</div><div class="value" id="statToday">۰ دقیقه</div></div>
+      <div class="stat-card"><div class="label">📆 این هفته</div><div class="value" id="statWeek">۰ دقیقه</div></div>
+      <div class="stat-card" id="statCompareCard">
+        <div class="label">📊 نسبت به هفته قبل</div>
+        <div class="value" id="statCompare">—</div>
+        <div class="sub" id="statCompareSub"></div>
+      </div>
+      <div class="stat-card" id="statTestsCard">
+        <div class="label">📝 تست‌های این هفته</div>
+        <div class="value" id="statTests">۰</div>
+        <div class="sub" id="statTestsBreakdown" style="margin-top:6px;line-height:1.5;font-size:0.72rem;"></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">🔥 روزهای متوالی</div>
+        <div class="value" id="statStreak">۰</div>
+        <div class="sub" id="statStreakSub"></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">🎯 هدف روزانه</div>
+        <div class="value" id="statGoal">—</div>
+        <div class="sub" id="statGoalSub"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>✍️ ثبت مطالعه</h2>
+      <p class="hint">می‌تونی چند درس مختلف در یک روز ثبت کنی. سال و ماه قفل هستن، فقط روز رو تغییر بده.</p>
+      <form id="addForm" onsubmit="addSession(event)">
+        <div class="form-grid">
+          <div>
+            <label for="subject">📖 درس</label>
+            <select id="subject" required>
+              <option value="">انتخاب درس...</option>
+              <optgroup label="دروس تخصصی">
+                <option value="زیست">زیست</option>
+                <option value="شیمی">شیمی</option>
+                <option value="فیزیک">فیزیک</option>
+                <option value="ریاضی">ریاضی</option>
+                <option value="زمین‌شناسی">زمین‌شناسی</option>
+              </optgroup>
+              <optgroup label="دروس عمومی">
+                <option value="دینی">دینی</option>
+                <option value="زبان">زبان</option>
+                <option value="فارسی">فارسی</option>
+                <option value="عربی">عربی</option>
+              </optgroup>
+            </select>
+          </div>
+          <div>
+            <label>📅 تاریخ</label>
+            <div class="date-row">
+              <div>
+                <input type="number" id="dateDay" min="1" max="31" required placeholder="روز" oninput="updateWeekday()" />
+              </div>
+              <div>
+                <input type="text" id="dateMonthYear" readonly style="opacity:0.7;cursor:default;" />
+              </div>
+              <div class="weekday-label" id="weekdayLabel">—</div>
+            </div>
+          </div>
+          <div>
+            <label for="hours">⏰ ساعت</label>
+            <input type="number" id="hours" min="0" max="24" value="" placeholder="۰" />
+          </div>
+          <div>
+            <label for="minutes">⏱️ دقیقه</label>
+            <input type="number" id="minutes" min="0" max="59" value="" placeholder="۰" />
+          </div>
+          <div>
+            <label for="tests">📝 تعداد تست</label>
+            <input type="number" id="tests" min="0" max="9999" value="" placeholder="۰" />
+          </div>
+          <div>
+            <label for="videoWatched">🎬 فیلم آموزشی</label>
+            <select id="videoWatched" onchange="toggleVideoHours()">
+              <option value="no">دیده نشده</option>
+              <option value="yes">دیده شده</option>
+            </select>
+          </div>
+          <div id="videoHoursWrap" style="display:none;">
+            <label for="videoHours">⏱️ ساعت فیلم</label>
+            <input type="number" id="videoHours" min="0" max="24" value="" placeholder="۰" />
+          </div>
+          <div id="videoMinutesWrap" style="display:none;">
+            <label for="videoMinutes">⏱️ دقیقه فیلم</label>
+            <input type="number" id="videoMinutes" min="0" max="59" value="" placeholder="۰" />
+          </div>
+          <div id="testSectionWrap">
+            <label for="testSection">📝 تست‌های زده‌شده</label>
+            <input type="text" id="testSection" placeholder="مثلاً فصل ۳ — گردش مواد" />
+          </div>
+          <div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+              <input type="checkbox" id="descriptiveStudy" style="width:auto;accent-color:var(--accent);" />
+              📄 مطالعه تشریحی
+            </label>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <label for="note">📌 یادداشت (اختیاری)</label>
+          <input type="text" id="note" placeholder="نکته یا توضیح کوتاه..." />
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">✅ ثبت جلسه</button>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- امکانات بیشتر -->
+    <div class="card collapsible collapsed" id="extraCard">
+      <h2 onclick="toggleCollapse('extraCard')">✨ امکانات بیشتر <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <div class="form-grid">
+          <div>
+            <label>🎯 هدف مطالعه روزانه (دقیقه)</label>
+            <input type="number" id="dailyGoalMin" min="0" max="1440" placeholder="مثلاً ۱۸۰" onchange="saveGoal()" />
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <label id="trendTitle">📊 روند نیمه‌ماه</label>
+          <div id="trendChart" style="margin-top:10px;"></div>
+        </div>
+        <div style="margin-top:16px;" class="form-grid">
+          <div>
+            <label>📈 میانگین روزانه (۷ روز)</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statAvg7">—</span></div>
+          </div>
+          <div>
+            <label>🏆 رکورد یک روز</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statRecord">—</span></div>
+          </div>
+          <div>
+            <label>📚 ساعت‌های این هفته</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statLifetime">—</span><div class="sub" id="statLifetimeRange" style="margin-top:4px;"></div></div>
+          </div>
+          <div>
+            <label>📝 کل تست‌ها (عمر)</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statLifeTests">—</span></div>
+          </div>
+          <div>
+            <label>🌟 بهترین روز هفته</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statBestWeekday">—</span></div>
+          </div>
+          <div>
+            <label>😴 ضعیف‌ترین روز هفته</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statWorstWeekday">—</span></div>
+          </div>
+          <div>
+            <label>📊 نسبت به ماه قبل</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statMonthCompare">—</span></div>
+          </div>
+          <div>
+            <label>🕳️ روزهای صفر این ماه</label>
+            <div class="stat-card" style="padding:12px;margin:0;"><span id="statZeroDays">—</span></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <label>🥇 رتبه‌بندی دروس این هفته</label>
+          <div id="weekRanking" style="margin-top:8px;"></div>
+        </div>
+        <div style="margin-top:16px;">
+          <label>🏆 رتبه‌بندی روزهای این هفته</label>
+          <div id="dayRanking" class="day-rank-list" style="margin-top:8px;"></div>
+        </div>
+        <div style="margin-top:16px;">
+          <label>📋 کارهای فردا / برنامه مطالعه</label>
+          <p class="hint" style="margin-bottom:8px;">کارها روی دستگاه ذخیره می‌شوند و با همگام‌سازی ابری بین گوشی و کامپیوتر یکی می‌شوند. می‌تونی اولویت و درس مشخص کنی.</p>
+          <div id="tomorrowPlan" style="margin-top:8px;"></div>
+          <div class="tomorrow-input-row" style="flex-direction:column;align-items:stretch;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <input type="text" id="tomorrowInput" placeholder="مثلاً: زیست فصل ۳ + ۲۰ تست" maxlength="120" style="flex:2;min-width:160px;" />
+              <select id="tomorrowSubject" style="flex:1;min-width:110px;">
+                <option value="">بدون درس</option>
+                <optgroup label="تخصصی">
+                  <option value="زیست">زیست</option>
+                  <option value="شیمی">شیمی</option>
+                  <option value="فیزیک">فیزیک</option>
+                  <option value="ریاضی">ریاضی</option>
+                  <option value="زمین‌شناسی">زمین‌شناسی</option>
+                </optgroup>
+                <optgroup label="عمومی">
+                  <option value="دینی">دینی</option>
+                  <option value="زبان">زبان</option>
+                  <option value="فارسی">فارسی</option>
+                  <option value="عربی">عربی</option>
+                </optgroup>
+              </select>
+              <select id="tomorrowPriority" style="width:110px;">
+                <option value="normal">اولویت عادی</option>
+                <option value="high">اولویت بالا</option>
+                <option value="low">اولویت پایین</option>
+              </select>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+              <button type="button" class="btn btn-sm btn-primary" onclick="addTomorrowItem()">＋ افزودن کار</button>
+              <button type="button" class="btn btn-sm" onclick="clearDoneTomorrow()">پاک کردن انجام‌شده‌ها</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:16px;" class="form-grid">
+          <div>
+            <label>🔍 مقایسه دو درس (این ماه)</label>
+            <select id="cmpSubjA" onchange="renderSubjectCompare()"></select>
+          </div>
+          <div>
+            <label>&nbsp;</label>
+            <select id="cmpSubjB" onchange="renderSubjectCompare()"></select>
+          </div>
+        </div>
+        <div id="subjectCompareResult" style="margin-top:8px;font-size:0.9rem;color:var(--text-muted);"></div>
+      </div>
+    </div>
+
+    <!-- AI Analysis (collapsible) -->
+    <div class="card collapsible collapsed" id="aiCard">
+      <h2 onclick="toggleCollapse('aiCard')">🤖 تحلیل هوشمند <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <div class="ai-box">
+          <div class="ai-title">✨ تحلیل خودکار عملکردت</div>
+          <div class="ai-content" id="aiAnalysis">
+            هنوز داده‌ای برای تحلیل وجود نداره. چند جلسه ثبت کن تا تحلیل برات آماده بشه.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts (collapsible) -->
+    <div class="card collapsible collapsed" id="chartsCard">
+      <h2 onclick="toggleCollapse('chartsCard')">📊 نمودارها <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <div class="tabs">
+          <button class="tab active" data-tab="daily" onclick="switchChart('daily')">📅 روزانه</button>
+          <button class="tab" data-tab="weekly" onclick="switchChart('weekly')">📆 هفتگی</button>
+          <button class="tab" data-tab="monthly" onclick="switchChart('monthly')">🗓️ ماهانه</button>
+        </div>
+        <div id="chartArea" class="chart-area"></div>
+        <h2 style="margin-top:28px;cursor:default;">📅 مقایسه هفته‌ها (شنبه تا جمعه)</h2>
+        <div class="week-compare">
+          <div class="week-box">
+            <div class="title">این هفته</div>
+            <div class="hours" id="thisWeekHours">۰ دقیقه</div>
+          </div>
+          <div class="week-box">
+            <div class="title">هفته قبل</div>
+            <div class="hours" id="lastWeekHours">۰ دقیقه</div>
+            <div class="diff" id="weekDiff"></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <h2 style="margin:0;cursor:default;font-size:1rem;">📊 مقایسه روزبه‌روز این هفته</h2>
+            <button type="button" class="btn btn-sm btn-primary" onclick="downloadWeekDaysImage()">🖼️ تصویر هفته</button>
+          </div>
+          <div id="weekDaysCompare" class="week-days-grid"></div>
+        </div>
+        <h2 style="margin-top:28px;cursor:default;">📆 مقایسه روزها</h2>
+        <div class="week-compare">
+          <div class="week-box">
+            <div class="title">امروز</div>
+            <div class="hours" id="todayCompareHours">۰ دقیقه</div>
+            <div class="diff" id="todayTestsInfo" style="color:var(--text-muted);"></div>
+          </div>
+          <div class="week-box">
+            <div class="title">دیروز</div>
+            <div class="hours" id="yesterdayHours">۰ دقیقه</div>
+            <div class="diff" id="dayDiff"></div>
+          </div>
+        </div>
+        <h2 style="margin-top:28px;cursor:default;">📅 مقایسه دو هفته (جزئی)</h2>
+        <div class="week-compare">
+          <div class="week-box">
+            <div class="title">این هفته</div>
+            <div class="hours" id="thisWeekHours2">۰ دقیقه</div>
+            <div class="diff" id="thisWeekTestsInfo" style="color:var(--text-muted);"></div>
+          </div>
+          <div class="week-box">
+            <div class="title">هفته قبل</div>
+            <div class="hours" id="lastWeekHours2">۰ دقیقه</div>
+            <div class="diff" id="weekDiff2"></div>
+          </div>
+        </div>
+        <div id="weekByWeekBars" style="margin-top:12px;"></div>
+      </div>
+    </div>
+
+    <div class="card" style="display:none;">
+      <h2>☁️ همگام‌سازی خودکار (گوشی ↔ کامپیوتر)</h2>
+      <p class="hint">یک‌بار تنظیم کن؛ بعد از آن هر ثبت یا حذف روی یک دستگاه، با زدن «همگام‌سازی الان» یا هنگام باز کردن برنامه روی دستگاه دیگر، به صورت خودکار یکی می‌شود.</p>
+      <div class="form-grid">
+        <div>
+          <label>🔑 API Key (از JSONBin)</label>
+          <input type="password" id="syncApiKey" placeholder="آی‌پی‌آی کی JSONBin" />
+        </div>
+        <div>
+          <label>📦 Bin ID</label>
+          <input type="text" id="syncBinId" placeholder="شناسه Bin" />
+        </div>
+      </div>
+      <div class="form-actions" style="margin-top:12px;">
+        <button type="button" class="btn btn-primary" onclick="saveSyncSettings()">💾 ذخیره تنظیمات همگام‌سازی</button>
+        <button type="button" class="btn" onclick="syncNow()">🔄 همگام‌سازی الان</button>
+      </div>
+      <p class="hint" style="margin-top:12px;" id="syncStatus">همگام‌سازی خاموش است.</p>
+
+      <div style="margin-top:16px;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-input);font-size:0.85rem;color:var(--text-muted);line-height:1.8;">
+        <strong style="color:var(--accent);">🛡️ اگر اینترنت ملی / قطع شد:</strong><br>
+        ۱) همیشه از «خروجی پشتیبان» فایل JSON بگیر و توی گوشی یا فلش نگه دار<br>
+        ۲) داده اصلی روی خود دستگاه می‌ماند و بدون اینترنت کار می‌کند<br>
+        ۳) همگام‌سازی ابری فقط با اینترنت بین‌الملل کار می‌کند<br>
+        ۴) برای ماندگاری بهتر روی گوشی: فایل را جایی مثل GitHub Pages بگذار و Add to Home Screen کن
+      </div>
+
+    </div>
+
+    <!-- History (collapsible) -->
+    <div class="card collapsible collapsed" id="historyCard">
+      <h2 onclick="toggleCollapse('historyCard')">📋 تاریخچه مطالعه <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <div class="filter-row">
+          <select id="filterRange" onchange="renderHistory()">
+            <option value="all">همه روزها</option>
+            <option value="today">فقط امروز</option>
+            <option value="7">۷ روز اخیر (شامل امروز)</option>
+            <option value="30">۳۰ روز اخیر (شامل امروز)</option>
+          </select>
+          <select id="filterSubject" onchange="renderHistory()">
+            <option value="all">همه دروس</option>
+            <optgroup label="تخصصی">
+              <option value="زیست">زیست</option>
+              <option value="شیمی">شیمی</option>
+              <option value="فیزیک">فیزیک</option>
+              <option value="ریاضی">ریاضی</option>
+              <option value="زمین‌شناسی">زمین‌شناسی</option>
+            </optgroup>
+            <optgroup label="عمومی">
+              <option value="دینی">دینی</option>
+              <option value="زبان">زبان</option>
+              <option value="فارسی">فارسی</option>
+              <option value="عربی">عربی</option>
+            </optgroup>
+          </select>
+          <button class="btn" onclick="exportData()">💾 خروجی پشتیبان</button>
+          <button class="btn" onclick="document.getElementById('importFile').click()">📥 ورود پشتیبان</button>
+          <input type="file" id="importFile" accept=".json,application/json" style="display:none;" onchange="importData(event)" />
+        </div>
+        <p class="hint" style="margin-top:8px;">💡 اطلاعات فقط روی همین دستگاه ذخیره می‌شود. برای انتقال بین گوشی و کامپیوتر از «خروجی / ورود پشتیبان» استفاده کن.<br>🖼️ برای هر روز می‌تونی تصویر خلاصه روز رو دانلود کنی.</p>
+        <div id="historyList"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="editModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)closeEditModal()">
+    <div class="modal-box">
+      <h3>✏️ ویرایش جلسه</h3>
+      <input type="hidden" id="editId" />
+      <div class="form-grid">
+        <div>
+          <label>درس</label>
+          <select id="editSubject"></select>
+        </div>
+        <div>
+          <label>تاریخ</label>
+          <input type="text" id="editDate" />
+        </div>
+        <div>
+          <label>ساعت</label>
+          <input type="number" id="editHours" min="0" max="24" />
+        </div>
+        <div>
+          <label>دقیقه</label>
+          <input type="number" id="editMinutes" min="0" max="59" />
+        </div>
+        <div>
+          <label>تعداد تست</label>
+          <input type="number" id="editTests" min="0" />
+        </div>
+        <div>
+          <label>تست‌های زده‌شده</label>
+          <input type="text" id="editTestSection" />
+        </div>
+        <div>
+          <label>فیلم</label>
+          <select id="editVideo" onchange="var w=document.getElementById('editVideoTimeWrap');w.style.display=this.value==='yes'?'':'none';">
+            <option value="no">دیده نشده</option>
+            <option value="yes">دیده شده</option>
+          </select>
+        </div>
+        <div id="editVideoTimeWrap" style="display:none;">
+          <label>ساعت فیلم / دقیقه</label>
+          <div class="date-row">
+            <input type="number" id="editVideoH" min="0" max="24" placeholder="ساعت" />
+            <input type="number" id="editVideoM" min="0" max="59" placeholder="دقیقه" />
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px;">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="editDescriptive" style="width:auto;" /> مطالعه تشریحی
+        </label>
+      </div>
+      <div style="margin-top:12px;">
+        <label>یادداشت</label>
+        <input type="text" id="editNote" />
+      </div>
+      <div class="form-actions" style="margin-top:16px;">
+        <button type="button" class="btn btn-primary" onclick="saveEditSession()">ذخیره</button>
+        <button type="button" class="btn" onclick="closeEditModal()">انصراف</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script>
+    const PASSWORD = '0950144691';
+    const SPECIALIZED = ['زیست', 'شیمی', 'فیزیک', 'ریاضی', 'زمین‌شناسی'];
+    const ALL_SUBJECTS = ['زیست', 'شیمی', 'فیزیک', 'ریاضی', 'زمین‌شناسی', 'دینی', 'زبان', 'فارسی', 'عربی'];
+    const WEEKDAYS_FA = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
+    const STORAGE_KEY = 'studyTracker_v2';
+    const START_DAY = 21;
+    const SESSION_TIMEOUT_MS = 365 * 24 * 60 * 60 * 1000; // بدون محدودیت عملی
+    let currentChart = 'daily';
+    let sessions = [];
+    let currentJY, currentJM;
+    let sessionCheckTimer = null;
+
+    function gregorianToJalali(gy, gm, gd) {
+      const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+      let jy = (gy <= 1600) ? 0 : 979;
+      gy -= (gy <= 1600) ? 621 : 1600;
+      let gy2 = (gm > 2) ? (gy + 1) : gy;
+      let days = (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100) + Math.floor((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+      jy += 33 * Math.floor(days / 12053);
+      days %= 12053;
+      jy += 4 * Math.floor(days / 1461);
+      days %= 1461;
+      if (days > 365) { jy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+      let jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+      let jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+      return [jy, jm, jd];
+    }
+    function jalaliToGregorian(jy, jm, jd) {
+      let gy = (jy <= 979) ? 621 : 1600;
+      jy -= (jy <= 979) ? 0 : 979;
+      let days = (365 * jy) + Math.floor(jy / 33) * 8 + Math.floor(((jy % 33) + 3) / 4) + 78 + jd + ((jm < 7) ? (jm - 1) * 31 : ((jm - 7) * 30 + 186));
+      gy += 400 * Math.floor(days / 146097);
+      days %= 146097;
+      if (days > 36524) { gy += 100 * Math.floor(--days / 36524); days %= 36524; if (days >= 365) days++; }
+      gy += 4 * Math.floor(days / 1461);
+      days %= 1461;
+      if (days > 365) { gy += Math.floor((days - 1) / 365); days = (days - 1) % 365; }
+      let gd = days + 1;
+      const sal_a = [0, 31, ((gy % 4 === 0 && gy % 100 !== 0) || (gy % 400 === 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+      let gm;
+      for (gm = 1; gm <= 12 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
+      return [gy, gm, gd];
+    }
+    function toJalaliStr(date) {
+      date = date || new Date();
+      const r = gregorianToJalali(date.getFullYear(), date.getMonth() + 1, date.getDate());
+      return r[0] + '/' + String(r[1]).padStart(2, '0') + '/' + String(r[2]).padStart(2, '0');
+    }
+    function parseJalali(str) {
+      const parts = str.replace(/[۰-۹]/g, function(d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }).split(/[\/\-\.]/);
+      if (parts.length !== 3) return null;
+      const jy = parseInt(parts[0]), jm = parseInt(parts[1]), jd = parseInt(parts[2]);
+      if (isNaN(jy) || isNaN(jm) || isNaN(jd)) return null;
+      const g = jalaliToGregorian(jy, jm, jd);
+      return new Date(g[0], g[1] - 1, g[2]);
+    }
+    function jalaliToKey(str) {
+      const parts = str.replace(/[۰-۹]/g, function(d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }).split(/[\/\-\.]/);
+      if (parts.length !== 3) return str;
+      return parts[0].padStart(4, '0') + '/' + parts[1].padStart(2, '0') + '/' + parts[2].padStart(2, '0');
+    }
+    function daysAgoJalali(n) {
+      const d = new Date(); d.setDate(d.getDate() - n); return toJalaliStr(d);
+    }
+    function toPersian(num) {
+      return String(num).replace(/\d/g, function(d) { return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+    }
+    function formatDuration(mins) {
+      if (mins === 0) return '۰ دقیقه';
+      const h = Math.floor(mins / 60), m = mins % 60;
+      if (h === 0) return toPersian(m) + ' دقیقه';
+      if (m === 0) return toPersian(h) + ' ساعت';
+      return toPersian(h) + ' ساعت و ' + toPersian(m) + ' دقیقه';
+    }
+    function getWeekdayFa(date) {
+      return WEEKDAYS_FA[date.getDay()];
+    }
+    function showToast(msg, isError) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isError ? ' error' : '');
+      setTimeout(function() { t.classList.remove('show'); }, 2800);
+    }
+
+    /** نمره هوشمند ۰ تا ۱۰ بر اساس ساعت امروز نسبت به میانگین روزهای قبل + تست‌ها */
+    function calcDayScore(dateKey, totalMin, totalTests) {
+      totalMin = totalMin || 0;
+      totalTests = totalTests || 0;
+      // میانگین ۷ روز قبل (بدون خود امروز)
+      let sumPrev = 0, cntPrev = 0;
+      for (let i = 1; i <= 7; i++) {
+        const k = jalaliToKey(daysAgoJalali(i));
+        // اگر dateKey مشخص است، روزهای قبل نسبت به همان تاریخ
+        const m = getMinutesForDate(k);
+        sumPrev += m;
+        if (m > 0) cntPrev++;
+      }
+      // اگر تاریخ غیر امروز است، میانگین را نسبت به آن روز حساب کن
+      try {
+        const d0 = parseJalali(dateKey.replace(/-/g, '/'));
+        if (d0) {
+          sumPrev = 0; cntPrev = 0;
+          for (let i = 1; i <= 7; i++) {
+            const dd = new Date(d0); dd.setDate(dd.getDate() - i);
+            const m = getMinutesForDate(jalaliToKey(toJalaliStr(dd)));
+            sumPrev += m;
+            if (m > 0) cntPrev++;
+          }
+        }
+      } catch (e) {}
+      const avgPrev = cntPrev > 0 ? (sumPrev / 7) : 0; // میانگین روی ۷ روز تقویمی
+      const activeAvg = cntPrev > 0 ? (sumPrev / cntPrev) : 0;
+
+      let score = 0;
+      if (totalMin <= 0 && totalTests <= 0) {
+        score = 0;
+      } else if (avgPrev <= 0 && activeAvg <= 0) {
+        // اولین روزها — بر اساس مقدار مطلق
+        if (totalMin >= 300) score = 9;
+        else if (totalMin >= 240) score = 8;
+        else if (totalMin >= 180) score = 7;
+        else if (totalMin >= 120) score = 6;
+        else if (totalMin >= 90) score = 5;
+        else if (totalMin >= 60) score = 4;
+        else if (totalMin >= 30) score = 3;
+        else score = 2;
+      } else {
+        const base = Math.max(avgPrev, activeAvg * 0.75, 30);
+        const ratio = totalMin / base;
+        if (ratio >= 1.6) score = 10;
+        else if (ratio >= 1.35) score = 9;
+        else if (ratio >= 1.15) score = 8;
+        else if (ratio >= 1.0) score = 7;
+        else if (ratio >= 0.85) score = 6;
+        else if (ratio >= 0.7) score = 5;
+        else if (ratio >= 0.5) score = 4;
+        else if (ratio >= 0.35) score = 3;
+        else if (ratio >= 0.2) score = 2;
+        else score = 1;
+      }
+      // پاداش تست
+      if (totalTests >= 80) score = Math.min(10, score + 1);
+      else if (totalTests >= 40) score = Math.min(10, score + 0); // نگه دار
+      else if (totalTests >= 20 && score < 10) { /* خنثی */ }
+      if (totalTests >= 50 && totalMin >= 120) score = Math.min(10, score + 1);
+
+      score = Math.max(0, Math.min(10, Math.round(score)));
+
+      const table = [
+        { emoji: '💀', color: '#fb7185', label: 'خیلی ضعیف' },
+        { emoji: '😞', color: '#fb7185', label: 'ضعیف' },
+        { emoji: '😔', color: '#f97316', label: 'کم' },
+        { emoji: '😐', color: '#eab308', label: 'متوسط رو به پایین' },
+        { emoji: '🙂', color: '#eab308', label: 'متوسط' },
+        { emoji: '😊', color: '#84cc16', label: 'خوب' },
+        { emoji: '😄', color: '#22c55e', label: 'خیلی خوب' },
+        { emoji: '🔥', color: '#22c55e', label: 'عالی' },
+        { emoji: '💪', color: '#34d399', label: 'فوق‌العاده' },
+        { emoji: '🌟', color: '#38bdf8', label: 'درخشان' },
+        { emoji: '🏆', color: '#a78bfa', label: 'قهرمانانه' }
+      ];
+      const info = table[score] || table[0];
+      return { score: score, emoji: info.emoji, color: info.color, label: info.label };
+    }
+    function toggleChartTip(wrap) {
+      const bar = wrap.querySelector('.chart-bar');
+      if (!bar) return;
+      const was = bar.classList.contains('active-tip');
+      document.querySelectorAll('.chart-bar.active-tip').forEach(function(b){ b.classList.remove('active-tip'); });
+      if (!was) bar.classList.add('active-tip');
+    }
+    function isSpecialized(subj) { return SPECIALIZED.indexOf(subj) !== -1; }
+    function isActive(s) { return s && !s.deleted; }
+    function loadData() {
+      try { sessions = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+      catch (e) { sessions = []; }
+    }
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+      if (localStorage.getItem(SYNC_KEY) && localStorage.getItem(SYNC_BIN)) {
+        pushToCloud();
+      }
+    }
+
+    // ===== Session timeout (۵ دقیقه) =====
+    function isSessionValid() {
+      return localStorage.getItem('study_logged_in') === '1' || sessionStorage.getItem('study_logged_in') === '1';
+    }
+    function refreshSession() {
+      if (isSessionValid()) {
+        localStorage.setItem('study_login_time', String(Date.now()));
+        sessionStorage.setItem('study_login_time', String(Date.now()));
+        updateSessionHint();
+      }
+    }
+    function updateSessionHint() {
+      const el = document.getElementById('sessionHint');
+      if (!el) return;
+      const t = sessionStorage.getItem('study_login_time');
+      if (!t) { el.textContent = ''; return; }
+      const left = Math.max(0, SESSION_TIMEOUT_MS - (Date.now() - parseInt(t, 10)));
+      const sec = Math.ceil(left / 1000);
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      el.textContent = '⏳ جلسه تا ' + toPersian(m) + ':' + toPersian(String(s).padStart(2, '0')) + ' دیگر فعال است';
+    }
+    function checkSessionTimeout() { /* بدون محدودیت زمانی */ }
+    function startSessionTimer() { /* غیرفعال */ }
+    function updateSessionHint() { /* غیرفعال */ }
+
+    function tryLogin() {
+      const input = document.getElementById('passwordInput');
+      const err = document.getElementById('loginError');
+      // تبدیل ارقام فارسی و عربی به انگلیسی
+      let val = input.value.trim()
+        .replace(/[۰-۹]/g, function(d) { return String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); })
+        .replace(/[٠-٩]/g, function(d) { return String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)); })
+        .replace(/\s+/g, '');
+      if (val === PASSWORD) {
+        // ورود ماندگار — حتی بعد از بستن مرورگر/اپ
+        localStorage.setItem('study_logged_in', '1');
+        localStorage.setItem('study_login_time', String(Date.now()));
+        sessionStorage.setItem('study_logged_in', '1');
+        sessionStorage.setItem('study_login_time', String(Date.now()));
+        showApp();
+      } else {
+        err.textContent = 'رمز عبور اشتباه است — دوباره امتحان کن';
+        input.value = ''; input.focus();
+      }
+    }
+    function logout() {
+      localStorage.removeItem('study_logged_in');
+      localStorage.removeItem('study_login_time');
+      sessionStorage.removeItem('study_logged_in');
+      sessionStorage.removeItem('study_login_time');
+      if (sessionCheckTimer) { clearInterval(sessionCheckTimer); sessionCheckTimer = null; }
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('loginError').textContent = '';
+    }
+    function setTheme(next) {
+      document.body.setAttribute('data-theme', next);
+      localStorage.setItem('study_theme', next);
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.textContent = next === 'dark' ? '🌙' : '☀️';
+        btn.title = next === 'dark' ? 'تم تیره — کلیک برای روشن' : 'تم روشن — کلیک برای تیره';
+        btn.classList.add('active');
+      }
+    }
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme') || 'dark';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    }
+    function showApp() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      const savedTheme = localStorage.getItem('study_theme') || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+      setTheme(savedTheme);
+
+      const now = new Date();
+      const j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      currentJY = j[0]; currentJM = j[1];
+      const weekday = getWeekdayFa(now);
+      document.getElementById('todayShamsi').textContent = '( ' + toPersian(toJalaliStr()) + ' — ' + weekday + ' )';
+      const defaultDay = j[2] < START_DAY ? START_DAY : j[2];
+      document.getElementById('dateDay').value = defaultDay;
+      document.getElementById('dateMonthYear').value = toPersian(j[0]) + '/' + toPersian(String(j[1]).padStart(2, '0'));
+      updateWeekday();
+      loadData();
+      loadSyncSettings();
+      updateAll();
+      startSessionTimer();
+      // refresh session on any interaction
+      document.getElementById('app').addEventListener('click', refreshSession, { passive: true });
+      document.getElementById('app').addEventListener('input', refreshSession, { passive: true });
+      if (localStorage.getItem(SYNC_KEY) && localStorage.getItem(SYNC_BIN)) {
+        syncNow();
+      }
+    }
+    function jalaliDaysInMonth(jy, jm) {
+      if (jm <= 6) return 31;
+      if (jm <= 11) return 30;
+      const breaks = [1,5,9,13,17,22,26,30];
+      const cy = jy - 979;
+      const cycle = cy % 33;
+      return breaks.indexOf(cycle) >= 0 ? 30 : 29;
+    }
+    function updateWeekday() {
+      let day = parseInt(document.getElementById('dateDay').value) || 1;
+      const maxD = jalaliDaysInMonth(currentJY, currentJM);
+      if (day > maxD) {
+        day = day - maxD;
+        currentJM += 1;
+        if (currentJM > 12) { currentJM = 1; currentJY += 1; }
+        document.getElementById('dateDay').value = day;
+        document.getElementById('dateMonthYear').value = toPersian(currentJY) + '/' + toPersian(String(currentJM).padStart(2, '0'));
+      }
+      if (day < 1) day = 1;
+      try {
+        const g = jalaliToGregorian(currentJY, currentJM, day);
+        const d = new Date(g[0], g[1] - 1, g[2]);
+        document.getElementById('weekdayLabel').textContent = getWeekdayFa(d);
+      } catch (e) {
+        document.getElementById('weekdayLabel').textContent = '—';
+      }
+    }
+    function getSelectedDateStr() {
+      const day = parseInt(document.getElementById('dateDay').value) || 1;
+      return currentJY + '/' + String(currentJM).padStart(2, '0') + '/' + String(day).padStart(2, '0');
+    }
+
+    function toggleVideoHours() {
+      const watched = document.getElementById('videoWatched').value === 'yes';
+      const hw = document.getElementById('videoHoursWrap');
+      const mw = document.getElementById('videoMinutesWrap');
+      if (hw) hw.style.display = watched ? '' : 'none';
+      if (mw) mw.style.display = watched ? '' : 'none';
+      if (!watched) {
+        const vh = document.getElementById('videoHours');
+        const vm = document.getElementById('videoMinutes');
+        if (vh) vh.value = '';
+        if (vm) vm.value = '';
+      }
+    }
+
+    function toggleCollapse(cardId) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      card.classList.toggle('collapsed');
+    }
+
+    function addSession(e) {
+      e.preventDefault();
+      refreshSession();
+      const subject = document.getElementById('subject').value;
+      const dateStr = getSelectedDateStr();
+      const hours = parseInt(document.getElementById('hours').value) || 0;
+      const minutes = parseInt(document.getElementById('minutes').value) || 0;
+      const tests = parseInt(document.getElementById('tests').value) || 0;
+      const videoWatched = document.getElementById('videoWatched').value === 'yes';
+      const videoH = parseInt(document.getElementById('videoHours').value) || 0;
+      const videoM = parseInt((document.getElementById('videoMinutes') || {}).value) || 0;
+      const videoHours = videoWatched ? (videoH + videoM / 60) : 0;
+      const descriptive = !!(document.getElementById('descriptiveStudy') && document.getElementById('descriptiveStudy').checked);
+      const testSection = (document.getElementById('testSection') && document.getElementById('testSection').value || '').trim();
+      const note = document.getElementById('note').value.trim();
+      const totalMin = hours * 60 + minutes;
+      if (!subject) { showToast('لطفاً درس را انتخاب کنید', true); return; }
+      if (totalMin <= 0 && tests <= 0 && !(videoWatched && videoHours > 0) && !descriptive) {
+        showToast('حداقل زمان مطالعه، تست، فیلم یا تشریحی را وارد کنید', true); return;
+      }
+      if (!parseJalali(dateStr)) { showToast('تاریخ معتبر نیست', true); return; }
+      const dayNum = parseInt(document.getElementById('dateDay').value) || 0;
+      const parts = dateStr.split('/');
+      const jy = parseInt(parts[0]), jm = parseInt(parts[1]), jd = parseInt(parts[2]);
+      const nowJ = gregorianToJalali(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+      if (jy < nowJ[0] || (jy === nowJ[0] && jm < nowJ[1]) || (jy === nowJ[0] && jm === nowJ[1] && jd < START_DAY)) {
+        if (!(jy > nowJ[0] || (jy === nowJ[0] && jm > nowJ[1]))) {
+          showToast('شروع اصلی از روز ' + toPersian(START_DAY) + ' است. تاریخ قبل از آن ثبت نمی‌شود.', true);
+          return;
+        }
+      }
+      const nowIso = new Date().toISOString();
+      sessions.unshift({
+        id: Date.now() + Math.random(),
+        subject: subject,
+        minutes: totalMin,
+        tests: tests,
+        testSection: testSection,
+        videoWatched: videoWatched,
+        videoHours: videoWatched ? videoHours : 0,
+        descriptive: descriptive,
+        date: dateStr,
+        dateKey: jalaliToKey(dateStr),
+        note: note,
+        createdAt: nowIso,
+        updatedAt: nowIso,
+        deleted: false
+      });
+      saveData();
+      document.getElementById('addForm').reset();
+      document.getElementById('dateDay').value = Math.max(START_DAY, parseInt(parts[2]) || START_DAY);
+      document.getElementById('dateMonthYear').value = toPersian(currentJY) + '/' + toPersian(String(currentJM).padStart(2, '0'));
+      document.getElementById('hours').value = '';
+      document.getElementById('minutes').value = '';
+      document.getElementById('tests').value = '';
+      document.getElementById('videoWatched').value = 'no';
+      document.getElementById('videoHours').value = '';
+      const vm = document.getElementById('videoMinutes'); if (vm) vm.value = '';
+      const ds = document.getElementById('descriptiveStudy'); if (ds) ds.checked = false;
+      const ts = document.getElementById('testSection'); if (ts) ts.value = '';
+      toggleVideoHours();
+      updateWeekday();
+      updateAll();
+      showToast('جلسه «' + subject + '» ثبت شد ✓');
+      playSuccessSound();
+    }
+    function deleteSession(id) {
+      if (!confirm('این جلسه حذف شود؟')) return;
+      refreshSession();
+      const nowIso = new Date().toISOString();
+      sessions = sessions.map(function(s) {
+        if (s.id === id) {
+          return Object.assign({}, s, { deleted: true, updatedAt: nowIso });
+        }
+        return s;
+      });
+      saveData(); updateAll(); showToast('جلسه حذف شد');
+    }
+    function getMinutesForDate(dateKey) {
+      return sessions.filter(function(s) { return isActive(s) && jalaliToKey(s.date) === dateKey; })
+        .reduce(function(sum, s) { return sum + s.minutes; }, 0);
+    }
+    function getTestsForDate(dateKey) {
+      return sessions.filter(function(s) { return isActive(s) && jalaliToKey(s.date) === dateKey; })
+        .reduce(function(sum, s) { return sum + (s.tests || 0); }, 0);
+    }
+    function getMinutesBySubjectForDate(dateKey) {
+      const map = {};
+      sessions.forEach(function(s) {
+        if (isActive(s) && jalaliToKey(s.date) === dateKey) map[s.subject] = (map[s.subject] || 0) + s.minutes;
+      });
+      return map;
+    }
+    // هفته از شنبه تا جمعه
+    function getWeekRange(offset) {
+      const today = new Date();
+      const day = today.getDay(); // 0=یکشنبه ... 6=شنبه
+      const satOffset = (day + 1) % 7; // فاصله تا شنبه قبلی/فعلی
+      const start = new Date(today);
+      start.setDate(today.getDate() - satOffset + (offset * 7));
+      start.setHours(0, 0, 0, 0);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6);
+      end.setHours(23, 59, 59, 999);
+      return { start: start, end: end };
+    }
+    function getMinutesInRange(start, end) {
+      return sessions.reduce(function(sum, s) {
+        if (!isActive(s)) return sum;
+        const d = parseJalali(s.date);
+        if (d && d >= start && d <= end) return sum + s.minutes;
+        return sum;
+      }, 0);
+    }
+    function getTestsInRange(start, end) {
+      return sessions.reduce(function(sum, s) {
+        if (!isActive(s)) return sum;
+        const d = parseJalali(s.date);
+        if (d && d >= start && d <= end) return sum + (s.tests || 0);
+        return sum;
+      }, 0);
+    }
+    function getSubjectMinutesInRange(start, end) {
+      const map = {};
+      sessions.forEach(function(s) {
+        if (!isActive(s)) return;
+        const d = parseJalali(s.date);
+        if (d && d >= start && d <= end) map[s.subject] = (map[s.subject] || 0) + s.minutes;
+      });
+      return map;
+    }
+    function getSubjectTestsInRange(start, end) {
+      const map = {};
+      sessions.forEach(function(s) {
+        if (!isActive(s) || !(s.tests > 0)) return;
+        const d = parseJalali(s.date);
+        if (d && d >= start && d <= end) map[s.subject] = (map[s.subject] || 0) + s.tests;
+      });
+      return map;
+    }
+    function updateAll() { updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderAI(); renderExtras(); }
+    function updateStats() {
+      const todayKey = jalaliToKey(toJalaliStr());
+      const todayMin = getMinutesForDate(todayKey);
+      const thisWeek = getWeekRange(0);
+      const lastWeek = getWeekRange(-1);
+      const thisWeekMin = getMinutesInRange(thisWeek.start, thisWeek.end);
+      const lastWeekMin = getMinutesInRange(lastWeek.start, lastWeek.end);
+      // فقط تست‌های این هفته
+      const weekTests = getTestsInRange(thisWeek.start, thisWeek.end);
+      
+      document.getElementById('statToday').textContent = formatDuration(todayMin);
+      // streak + goal
+      try {
+        const streak = calcStreak();
+        const stEl = document.getElementById('statStreak');
+        if (stEl) stEl.textContent = toPersian(streak);
+        const stSub = document.getElementById('statStreakSub');
+        if (stSub) stSub.textContent = streak > 0 ? 'روز پشت‌سرهم' : 'امروز شروع کن';
+        const goal = getGoal();
+        const gEl = document.getElementById('statGoal');
+        const gSub = document.getElementById('statGoalSub');
+        if (gEl) {
+          if (goal <= 0) { gEl.textContent = '—'; if (gSub) gSub.textContent = 'هدف تنظیم نشده'; }
+          else {
+            const pct = Math.min(100, Math.round(todayMin / goal * 100));
+            gEl.textContent = toPersian(pct) + '٪';
+            if (gSub) gSub.textContent = formatDuration(todayMin) + ' از ' + formatDuration(goal);
+            checkGoalCelebration(todayMin);
+          }
+        }
+      } catch (e) {}
+      document.getElementById('statWeek').textContent = formatDuration(thisWeekMin);
+      document.getElementById('statTests').textContent = toPersian(weekTests);
+      const testsBySubj = getSubjectTestsInRange(thisWeek.start, thisWeek.end);
+      const breakdownEl = document.getElementById('statTestsBreakdown');
+      if (Object.keys(testsBySubj).length === 0) {
+        breakdownEl.textContent = weekTests === 0 ? 'هنوز تستی این هفته زده نشده' : '';
+      } else {
+        const parts = Object.keys(testsBySubj)
+          .sort(function(a, b) { return testsBySubj[b] - testsBySubj[a]; })
+          .map(function(subj) { return subj + ': ' + toPersian(testsBySubj[subj]); });
+        breakdownEl.textContent = parts.join(' · ');
+      }
+      const card = document.getElementById('statCompareCard');
+      const val = document.getElementById('statCompare');
+      const sub = document.getElementById('statCompareSub');
+      if (lastWeekMin === 0 && thisWeekMin === 0) {
+        val.textContent = '—'; sub.textContent = ''; card.className = 'stat-card';
+      } else if (lastWeekMin === 0) {
+        val.textContent = 'شروع خوب'; sub.textContent = 'هفته قبل صفر بود'; card.className = 'stat-card up';
+      } else {
+        const diff = thisWeekMin - lastWeekMin;
+        const pct = Math.round((diff / lastWeekMin) * 100);
+        if (diff > 0) {
+          val.textContent = '+' + toPersian(Math.abs(pct)) + '٪';
+          sub.textContent = formatDuration(diff) + ' بیشتر'; card.className = 'stat-card up';
+        } else if (diff < 0) {
+          val.textContent = toPersian(pct) + '٪';
+          sub.textContent = formatDuration(Math.abs(diff)) + ' کمتر'; card.className = 'stat-card down';
+        } else {
+          val.textContent = 'بدون تغییر'; sub.textContent = ''; card.className = 'stat-card';
+        }
+      }
+    }
+    function switchChart(type) {
+      currentChart = type;
+      document.querySelectorAll('.tab').forEach(function(t) {
+        t.classList.toggle('active', t.getAttribute('data-tab') === type);
+      });
+      renderChart();
+    }
+    function renderChart() {
+      const area = document.getElementById('chartArea');
+      if (currentChart === 'daily') renderDailyChart(area);
+      else if (currentChart === 'weekly') renderWeeklyChart(area);
+      else renderMonthlyChart(area);
+    }
+    function renderDailyChart(area) {
+      const todayKey = jalaliToKey(toJalaliStr());
+      const bySubj = getMinutesBySubjectForDate(todayKey);
+      const hasToday = Object.keys(bySubj).length > 0;
+      let html = '';
+      html += '<div class="chart-title">امروز — به تفکیک درس</div>';
+      if (!hasToday) {
+        html += '<div class="empty-state" style="padding:20px;"><span style="font-size:1.5rem;">📭</span>امروز هنوز مطالعه‌ای ثبت نشده</div>';
+      } else {
+        const max = Math.max.apply(null, Object.values(bySubj)) || 1;
+        html += '<div class="subj-bars">';
+        ALL_SUBJECTS.forEach(function(subj) {
+          const m = bySubj[subj] || 0;
+          if (m === 0) return;
+          const pct = Math.round((m / max) * 100);
+          html += '<div class="subj-row"><div class="subj-name">' + subj + '</div>' +
+            '<div class="subj-track"><div class="subj-fill" style="width:' + pct + '%"></div></div>' +
+            '<div class="subj-val">' + formatDuration(m) + '</div></div>';
+        });
+        html += '</div>';
+      }
+      html += '<div class="chart-title" style="margin-top:24px;">۷ روز اخیر (شامل امروز)</div>';
+      const days = []; let maxMin = 1;
+      for (let i = 6; i >= 0; i--) {
+        const jStr = daysAgoJalali(i);
+        const key = jalaliToKey(jStr);
+        const mins = getMinutesForDate(key);
+        const tests = getTestsForDate(key);
+        if (mins > maxMin) maxMin = mins;
+        const parts = jStr.split('/');
+        days.push({ label: toPersian(parts[1] + '/' + parts[2]), mins: mins, tests: tests, date: jStr });
+      }
+      html += '<div class="chart-bars">';
+      days.forEach(function(d) {
+        const h = Math.max(4, Math.round((d.mins / maxMin) * 150));
+        const tip = formatDuration(d.mins) + (d.tests > 0 ? '\n📝 ' + toPersian(d.tests) + ' تست' : '\nبدون تست');
+        html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)"><div class="chart-bar" style="height:' + h + 'px"><div class="tooltip">' + formatDuration(d.mins) + '<br>📝 ' + (d.tests > 0 ? toPersian(d.tests) + ' تست' : 'بدون تست') + '</div></div><div class="chart-label">' + d.label + '</div></div>';
+      });
+      html += '</div>';
+      area.innerHTML = html;
+    }
+    function renderWeeklyChart(area) {
+      let html = '<div class="chart-title">۴ هفته اخیر (شنبه تا جمعه)</div>';
+      const weeks = []; let maxMin = 1;
+      for (let i = 3; i >= 0; i--) {
+        const range = getWeekRange(-i);
+        const mins = getMinutesInRange(range.start, range.end);
+        const tests = getTestsInRange(range.start, range.end);
+        if (mins > maxMin) maxMin = mins;
+        const label = i === 0 ? 'این هفته' : (i === 1 ? 'هفته قبل' : toPersian(i) + ' هفته قبل');
+        weeks.push({ label: label, mins: mins, tests: tests });
+      }
+      html += '<div class="chart-bars">';
+      weeks.forEach(function(w) {
+        const h = Math.max(4, Math.round((w.mins / maxMin) * 150));
+        html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)"><div class="chart-bar" style="height:' + h + 'px"><div class="tooltip">' + formatDuration(w.mins) + '<br>📝 ' + (w.tests > 0 ? toPersian(w.tests) + ' تست' : 'بدون تست') + '</div></div><div class="chart-label">' + w.label + '</div></div>';
+      });
+      html += '</div>';
+      const thisWeek = getWeekRange(0);
+      const bySubj = getSubjectMinutesInRange(thisWeek.start, thisWeek.end);
+      html += '<div class="chart-title" style="margin-top:24px;">این هفته — به تفکیک درس</div>';
+      if (Object.keys(bySubj).length === 0) {
+        html += '<div class="empty-state" style="padding:16px;">هنوز داده‌ای برای این هفته نیست</div>';
+      } else {
+        const max = Math.max.apply(null, Object.values(bySubj)) || 1;
+        html += '<div class="subj-bars">';
+        ALL_SUBJECTS.forEach(function(subj) {
+          const m = bySubj[subj] || 0;
+          if (m === 0) return;
+          const pct = Math.round((m / max) * 100);
+          html += '<div class="subj-row"><div class="subj-name">' + subj + '</div>' +
+            '<div class="subj-track"><div class="subj-fill" style="width:' + pct + '%"></div></div>' +
+            '<div class="subj-val">' + formatDuration(m) + '</div></div>';
+        });
+        html += '</div>';
+      }
+      area.innerHTML = html;
+    }
+    function renderMonthlyChart(area) {
+      let html = '<div class="chart-title">۳۰ روز اخیر (شامل امروز)</div>';
+      const buckets = []; let maxMin = 1;
+      for (let b = 5; b >= 0; b--) {
+        let sum = 0, testsSum = 0;
+        for (let d = 0; d < 5; d++) {
+          const dayIdx = b * 5 + d;
+          if (dayIdx > 29) continue;
+          const k = jalaliToKey(daysAgoJalali(dayIdx));
+          sum += getMinutesForDate(k);
+          testsSum += getTestsForDate(k);
+        }
+        if (sum > maxMin) maxMin = sum;
+        const label = b === 0 ? '۵ روز اخیر' : toPersian((b * 5) + 1) + '–' + toPersian((b + 1) * 5) + ' روز قبل';
+        buckets.push({ label: label, mins: sum, tests: testsSum });
+      }
+      buckets.reverse();
+      html += '<div class="chart-bars">';
+      buckets.forEach(function(b) {
+        const h = Math.max(4, Math.round((b.mins / maxMin) * 150));
+        html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)"><div class="chart-bar" style="height:' + h + 'px"><div class="tooltip">' + formatDuration(b.mins) + '<br>📝 ' + (b.tests > 0 ? toPersian(b.tests) + ' تست' : 'بدون تست') + '</div></div><div class="chart-label">' + b.label + '</div></div>';
+      });
+      html += '</div>';
+      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30); cutoff.setHours(0, 0, 0, 0);
+      const bySubj = {};
+      sessions.forEach(function(s) {
+        if (!isActive(s)) return;
+        const d = parseJalali(s.date);
+        if (d && d >= cutoff) bySubj[s.subject] = (bySubj[s.subject] || 0) + s.minutes;
+      });
+      html += '<div class="chart-title" style="margin-top:24px;">۳۰ روز اخیر — به تفکیک درس</div>';
+      if (Object.keys(bySubj).length === 0) {
+        html += '<div class="empty-state" style="padding:16px;">هنوز داده‌ای نیست</div>';
+      } else {
+        const max = Math.max.apply(null, Object.values(bySubj)) || 1;
+        html += '<div class="subj-bars">';
+        ALL_SUBJECTS.forEach(function(subj) {
+          const m = bySubj[subj] || 0;
+          if (m === 0) return;
+          const pct = Math.round((m / max) * 100);
+          html += '<div class="subj-row"><div class="subj-name">' + subj + '</div>' +
+            '<div class="subj-track"><div class="subj-fill" style="width:' + pct + '%"></div></div>' +
+            '<div class="subj-val">' + formatDuration(m) + '</div></div>';
+        });
+        html += '</div>';
+      }
+      area.innerHTML = html;
+    }
+    function renderWeekCompare() {
+      const thisWeek = getWeekRange(0);
+      const lastWeek = getWeekRange(-1);
+      const thisMin = getMinutesInRange(thisWeek.start, thisWeek.end);
+      const lastMin = getMinutesInRange(lastWeek.start, lastWeek.end);
+      const thisTests = getTestsInRange(thisWeek.start, thisWeek.end);
+      const lastTests = getTestsInRange(lastWeek.start, lastWeek.end);
+      document.getElementById('thisWeekHours').textContent = formatDuration(thisMin);
+      document.getElementById('lastWeekHours').textContent = formatDuration(lastMin);
+      const diffEl = document.getElementById('weekDiff');
+      if (lastMin === 0 && thisMin === 0) { diffEl.textContent = ''; diffEl.className = 'diff'; }
+      else if (thisMin > lastMin) { diffEl.textContent = '↑ پیشرفت ' + formatDuration(thisMin - lastMin); diffEl.className = 'diff up'; }
+      else if (thisMin < lastMin) { diffEl.textContent = '↓ پسرفت ' + formatDuration(lastMin - thisMin); diffEl.className = 'diff down'; }
+      else { diffEl.textContent = 'بدون تغییر'; diffEl.className = 'diff same'; }
+
+      // نسخه دوم مقایسه دو هفته (زیر مقایسه روزها)
+      const el2a = document.getElementById('thisWeekHours2');
+      const el2b = document.getElementById('lastWeekHours2');
+      const el2t = document.getElementById('thisWeekTestsInfo');
+      const el2d = document.getElementById('weekDiff2');
+      if (el2a) el2a.textContent = formatDuration(thisMin);
+      if (el2b) el2b.textContent = formatDuration(lastMin);
+      if (el2t) el2t.textContent = thisTests > 0 ? toPersian(thisTests) + ' تست' : '';
+      if (el2d) {
+        if (lastMin === 0 && thisMin === 0) { el2d.textContent = ''; el2d.className = 'diff'; }
+        else if (thisMin > lastMin) { el2d.textContent = '↑ پیشرفت ' + formatDuration(thisMin - lastMin) + (lastTests || thisTests ? ' · تست: ' + toPersian(thisTests) + ' در برابر ' + toPersian(lastTests) : ''); el2d.className = 'diff up'; }
+        else if (thisMin < lastMin) { el2d.textContent = '↓ پسرفت ' + formatDuration(lastMin - thisMin) + (lastTests || thisTests ? ' · تست: ' + toPersian(thisTests) + ' در برابر ' + toPersian(lastTests) : ''); el2d.className = 'diff down'; }
+        else { el2d.textContent = 'بدون تغییر' + (thisTests ? ' · ' + toPersian(thisTests) + ' تست' : ''); el2d.className = 'diff same'; }
+      }
+
+      // مقایسه روزبه‌روز این هفته
+      renderWeekDaysCompare();
+      renderWeekByWeekBars();
+
+      const todayKey = jalaliToKey(toJalaliStr());
+      const yesterdayKey = jalaliToKey(daysAgoJalali(1));
+      const todayMin = getMinutesForDate(todayKey);
+      const yesterdayMin = getMinutesForDate(yesterdayKey);
+      const todayTests = getTestsForDate(todayKey);
+      document.getElementById('todayCompareHours').textContent = formatDuration(todayMin);
+      document.getElementById('todayTestsInfo').textContent = todayTests > 0 ? toPersian(todayTests) + ' تست' : '';
+      document.getElementById('yesterdayHours').textContent = formatDuration(yesterdayMin);
+      const dayDiffEl = document.getElementById('dayDiff');
+      if (yesterdayMin === 0 && todayMin === 0) { dayDiffEl.textContent = ''; dayDiffEl.className = 'diff'; }
+      else if (todayMin > yesterdayMin) { dayDiffEl.textContent = '↑ بیشتر از دیروز ' + formatDuration(todayMin - yesterdayMin); dayDiffEl.className = 'diff up'; }
+      else if (todayMin < yesterdayMin) { dayDiffEl.textContent = '↓ کمتر از دیروز ' + formatDuration(yesterdayMin - todayMin); dayDiffEl.className = 'diff down'; }
+      else { dayDiffEl.textContent = 'مساوی با دیروز'; dayDiffEl.className = 'diff same'; }
+    }
+
+    function getWeekDayStats(offset) {
+      const range = getWeekRange(offset);
+      const days = [];
+      const todayKey = jalaliToKey(toJalaliStr());
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(range.start);
+        d.setDate(range.start.getDate() + i);
+        const jStr = toJalaliStr(d);
+        const key = jalaliToKey(jStr);
+        const mins = getMinutesForDate(key);
+        const tests = getTestsForDate(key);
+        days.push({
+          date: jStr, key: key, mins: mins, tests: tests,
+          weekday: getWeekdayFa(d), isToday: key === todayKey,
+          dayNum: toPersian(jStr.split('/')[2])
+        });
+      }
+      return days;
+    }
+
+    function renderWeekDaysCompare() {
+      const el = document.getElementById('weekDaysCompare');
+      if (!el) return;
+      const days = getWeekDayStats(0);
+      el.innerHTML = days.map(function(d) {
+        const cls = d.isToday ? ' week-day-cell today-cell' : 'week-day-cell';
+        const val = d.mins > 0 ? formatDuration(d.mins) : '—';
+        const t = d.tests > 0 ? '<div style="font-size:0.7rem;color:var(--text-muted);margin-top:2px;">📝 ' + toPersian(d.tests) + '</div>' : '';
+        return '<div class="' + cls + '"><div class="wd-name">' + d.weekday + '<br>' + d.dayNum + '</div><div class="wd-val">' + val + '</div>' + t + '</div>';
+      }).join('');
+    }
+
+    function renderWeekByWeekBars() {
+      const el = document.getElementById('weekByWeekBars');
+      if (!el) return;
+      const thisDays = getWeekDayStats(0);
+      const lastDays = getWeekDayStats(-1);
+      let maxM = 1;
+      thisDays.concat(lastDays).forEach(function(d) { if (d.mins > maxM) maxM = d.mins; });
+      let html = '<div class="chart-title">مقایسه روزهای این هفته با هفته قبل</div>';
+      html += '<div style="display:flex;flex-direction:column;gap:10px;">';
+      for (let i = 0; i < 7; i++) {
+        const a = thisDays[i], b = lastDays[i];
+        const ha = Math.max(4, Math.round((a.mins / maxM) * 100));
+        const hb = Math.max(4, Math.round((b.mins / maxM) * 100));
+        html += '<div style="display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;">';
+        html += '<div style="font-size:0.8rem;color:var(--text-muted);">' + a.weekday + '</div>';
+        html += '<div><div style="font-size:0.72rem;color:var(--accent);margin-bottom:2px;">این: ' + (a.mins ? formatDuration(a.mins) : '—') + '</div>';
+        html += '<div style="height:10px;background:var(--bg-input);border-radius:6px;overflow:hidden;border:1px solid var(--border);"><div style="height:100%;width:' + (a.mins ? ha : 0) + '%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));border-radius:6px;"></div></div></div>';
+        html += '<div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:2px;">قبل: ' + (b.mins ? formatDuration(b.mins) : '—') + '</div>';
+        html += '<div style="height:10px;background:var(--bg-input);border-radius:6px;overflow:hidden;border:1px solid var(--border);"><div style="height:100%;width:' + (b.mins ? hb : 0) + '%;background:rgba(148,163,184,0.5);border-radius:6px;"></div></div></div>';
+        html += '</div>';
+      }
+      html += '</div>';
+      el.innerHTML = html;
+    }
+
+    function renderAI() {
+      const el = document.getElementById('aiAnalysis');
+      const activeCount = sessions.filter(isActive).length;
+      if (activeCount === 0) {
+        el.innerHTML = '<p>هنوز داده‌ای برای تحلیل وجود نداره. چند جلسه ثبت کن تا تحلیل برات آماده بشه.</p>';
+        return;
+      }
+      const todayKey = jalaliToKey(toJalaliStr());
+      const yesterdayKey = jalaliToKey(daysAgoJalali(1));
+      const todayMin = getMinutesForDate(todayKey);
+      const yesterdayMin = getMinutesForDate(yesterdayKey);
+      const thisWeek = getWeekRange(0);
+      const lastWeek = getWeekRange(-1);
+      const thisWeekMin = getMinutesInRange(thisWeek.start, thisWeek.end);
+      const lastWeekMin = getMinutesInRange(lastWeek.start, lastWeek.end);
+      const bySubjToday = getMinutesBySubjectForDate(todayKey);
+      const weekTests = getTestsInRange(thisWeek.start, thisWeek.end);
+      const thisWeekSubj = getSubjectMinutesInRange(thisWeek.start, thisWeek.end);
+
+      let lines = [];
+
+      if (todayMin === 0) {
+        lines.push('<p>📭 <strong>امروز</strong> هنوز مطالعه‌ای ثبت نکردی. یه شروع کوچک هم خوبه!</p>');
+      } else {
+        const subjList = Object.keys(bySubjToday).map(function(s) {
+          return s + ' (' + formatDuration(bySubjToday[s]) + ')';
+        }).join('، ');
+        lines.push('<p>📖 <strong>امروز</strong> ' + formatDuration(todayMin) + ' مطالعه کردی: ' + subjList + '</p>');
+        if (yesterdayMin > 0) {
+          if (todayMin > yesterdayMin) lines.push('<p>📈 نسبت به دیروز <strong>پیشرفت</strong> داشتی (' + formatDuration(todayMin - yesterdayMin) + ' بیشتر).</p>');
+          else if (todayMin < yesterdayMin) lines.push('<p>📉 نسبت به دیروز کمی کمتر خوندی (' + formatDuration(yesterdayMin - todayMin) + ' کمتر). مشکلی نیست، فردا جبران کن.</p>');
+          else lines.push('<p>➡️ امروز و دیروز تقریباً مساوی بودن.</p>');
+        }
+      }
+
+      if (thisWeekMin > 0 || lastWeekMin > 0) {
+        if (lastWeekMin === 0 && thisWeekMin > 0) {
+          lines.push('<p>🚀 <strong>این هفته</strong> شروع خوبی داشتی: ' + formatDuration(thisWeekMin) + '</p>');
+        } else if (thisWeekMin > lastWeekMin) {
+          const pct = Math.round(((thisWeekMin - lastWeekMin) / lastWeekMin) * 100);
+          lines.push('<p>🔥 <strong>این هفته</strong> نسبت به هفته قبل <strong>+' + toPersian(pct) + '٪ پیشرفت</strong> داشتی. عالی!</p>');
+        } else if (thisWeekMin < lastWeekMin) {
+          const pct = Math.round(((lastWeekMin - thisWeekMin) / lastWeekMin) * 100);
+          lines.push('<p>⚠️ <strong>این هفته</strong> نسبت به هفته قبل حدود ' + toPersian(pct) + '٪ کمتر خوندی. سعی کن روزهای باقی‌مانده رو پر کنی.</p>');
+        } else if (thisWeekMin > 0) {
+          lines.push('<p>➡️ هفته جاری و هفته قبل تقریباً مساوی بودن.</p>');
+        }
+      }
+
+      const sortedSubj = Object.keys(thisWeekSubj).sort(function(a, b) { return thisWeekSubj[b] - thisWeekSubj[a]; });
+      if (sortedSubj.length > 0) {
+        lines.push('<p>🏆 بیشترین مطالعه این هفته: <strong>' + sortedSubj[0] + '</strong> با ' + formatDuration(thisWeekSubj[sortedSubj[0]]) + '</p>');
+        if (sortedSubj.length > 1) {
+          const least = sortedSubj[sortedSubj.length - 1];
+          if (thisWeekSubj[least] < thisWeekSubj[sortedSubj[0]] * 0.3) {
+            lines.push('<p>💡 پیشنهاد: به درس <strong>' + least + '</strong> هم بیشتر برس.</p>');
+          }
+        }
+      }
+
+      const missing = ALL_SUBJECTS.filter(function(s) { return !thisWeekSubj[s]; });
+      if (missing.length > 0 && thisWeekMin > 0) {
+        lines.push('<p>📌 این هفته هنوز این دروس رو کار نکردی: ' + missing.slice(0, 4).join('، ') + (missing.length > 4 ? '...' : '') + '</p>');
+      }
+
+      if (weekTests > 0) {
+        lines.push('<p>📝 این هفته مجموعاً <strong>' + toPersian(weekTests) + ' تست</strong> زدی. ادامه بده!</p>');
+      }
+
+      if (thisWeekMin >= 600) lines.push('<p>🌟 هفته خیلی قوی‌ای داشتی. همین روند رو حفظ کن.</p>');
+      else if (thisWeekMin >= 300) lines.push('<p>👍 هفته‌ی قابل قبولی داشتی. اگه کمی بیشتر بذاری عالی می‌شه.</p>');
+      else if (thisWeekMin > 0) lines.push('<p>🌱 هنوز جا برای پیشرفت هست. هر روز حتی ۳۰ دقیقه هم اثر داره.</p>');
+
+      el.innerHTML = lines.join('');
+    }
+
+    function renderHistory() {
+      const range = document.getElementById('filterRange').value;
+      const subjFilter = document.getElementById('filterSubject').value;
+      const list = document.getElementById('historyList');
+      let filtered = sessions.filter(isActive);
+      if (subjFilter !== 'all') filtered = filtered.filter(function(s) { return s.subject === subjFilter; });
+      const todayKey = jalaliToKey(toJalaliStr());
+      if (range === 'today') {
+        filtered = filtered.filter(function(s) { return jalaliToKey(s.date) === todayKey; });
+      } else if (range === '7' || range === '30') {
+        const days = parseInt(range);
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - days);
+        cutoff.setHours(0, 0, 0, 0);
+        filtered = filtered.filter(function(s) {
+          const d = parseJalali(s.date);
+          return d && d >= cutoff;
+        });
+      }
+      const groups = {};
+      filtered.forEach(function(s) {
+        const key = jalaliToKey(s.date);
+        if (!groups[key]) groups[key] = { date: s.date, items: [], total: 0, tests: 0 };
+        groups[key].items.push(s);
+        groups[key].total += s.minutes;
+        groups[key].tests += (s.tests || 0);
+      });
+      const sortedKeys = Object.keys(groups).sort().reverse();
+      if (sortedKeys.length === 0) {
+        list.innerHTML = '<div class="empty-state"><span>📖</span>هنوز جلسه‌ای ثبت نشده</div>';
+        return;
+      }
+      list.innerHTML = sortedKeys.map(function(key) {
+        const g = groups[key];
+        const isToday = key === todayKey;
+        let weekday = '';
+        try {
+          const d = parseJalali(g.date);
+          if (d) weekday = ' — ' + getWeekdayFa(d);
+        } catch (e) {}
+        const dayLabel = (isToday ? toPersian(g.date) + ' (امروز)' : toPersian(g.date)) + weekday;
+        const testsStr = g.tests > 0 ? ' • 📝 ' + toPersian(g.tests) + ' تست' : '';
+        const sc = calcDayScore(key, g.total, g.tests);
+        const scoreStr = ' • ' + sc.emoji + ' ' + toPersian(sc.score) + '/۱۰';
+        const itemsHtml = g.items.map(function(s) {
+          const badge = isSpecialized(s.subject)
+            ? '<span class="badge badge-spec">تخصصی</span>'
+            : '<span class="badge badge-gen">عمومی</span>';
+          let testsInfo = (s.tests || 0) > 0 ? '<span class="tests-badge" style="background:rgba(244,114,182,0.18);color:#f472b6;border:1px solid #f472b6;">📝 ' + toPersian(s.tests) + ' تست</span>' : '';
+          if (s.videoWatched) {
+            const vh = s.videoHours || 0;
+            const vH = Math.floor(vh); const vM = Math.round((vh - vH) * 60);
+            let vLabel = 'فیلم';
+            if (vH || vM) vLabel = (vH ? toPersian(vH) + 'س' : '') + (vM ? toPersian(vM) + 'د' : '');
+            testsInfo += ' <span class="tests-badge" style="background:rgba(168,85,247,0.2);color:#c084fc;border:1px solid #c084fc;">🎬 ' + vLabel + '</span>';
+          }
+          if (s.descriptive) testsInfo += ' <span class="tests-badge" style="background:rgba(249,115,22,0.2);color:#fb923c;border:1px solid #fb923c;">📄 تشریحی</span>';
+          let metaLines = '';
+          if (s.note) metaLines += '<div class="session-meta">' + escapeHtml(s.note) + '</div>';
+          if (s.testSection) metaLines += '<div class="session-meta" style="margin-top:2px;">📝 تست‌های زده‌شده: ' + escapeHtml(s.testSection) + '</div>';
+          return '<div class="session-item"><div class="session-info"><div class="session-subject">' + badge + escapeHtml(s.subject) + ' ' + testsInfo + '</div>' + metaLines + '</div><div class="session-duration">' + formatDuration(s.minutes) + '</div><button class="edit-btn" onclick="openEditSession(' + s.id + ')" title="ویرایش">✏️</button><button class="session-delete" onclick="deleteSession(' + s.id + ')" title="حذف">×</button></div>';
+        }).join('');
+        const safeKey = key.replace(/'/g, "\\'");
+        return '<div class="day-group"><div class="day-header"><span class="day-title">' + dayLabel + '</span><div class="day-actions"><span class="day-total">' + formatDuration(g.total) + testsStr + scoreStr + '</span><button class="btn btn-sm btn-primary" onclick="downloadDayImage(\'' + safeKey + '\')" title="دانلود تصویر خلاصه روز">🖼️ تصویر روز</button></div></div>' + itemsHtml + '</div>';
+      }).join('');
+    }
+    function escapeHtml(text) {
+      const div = document.createElement('div'); div.textContent = text || ''; return div.innerHTML;
+    }
+
+    // ===== دانلود تصویر خلاصه روز =====
+    async function downloadDayImage(dateKey) {
+      refreshSession();
+      const daySessions = sessions.filter(function(s) {
+        return isActive(s) && jalaliToKey(s.date) === dateKey;
+      });
+      if (daySessions.length === 0) {
+        showToast('جلسه‌ای برای این روز نیست', true);
+        return;
+      }
+      try { await document.fonts.ready; } catch (e) {}
+
+      const totalMin = daySessions.reduce(function(s, x) { return s + x.minutes; }, 0);
+      const totalTests = daySessions.reduce(function(s, x) { return s + (x.tests || 0); }, 0);
+      let totalVideo = 0;
+      daySessions.forEach(function(s) { if (s.videoWatched) totalVideo += (s.videoHours || 0); });
+      // نمره هوشمند نسبت به روزهای قبل
+      const dayScore = calcDayScore(dateKey, totalMin, totalTests);
+
+      let weekday = '';
+      try {
+        const d = parseJalali(daySessions[0].date);
+        if (d) weekday = getWeekdayFa(d);
+      } catch (e) {}
+
+      const isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
+      const bg = isDark ? '#0b1220' : '#eef2f7';
+      const cardBg = isDark ? '#151e2e' : '#ffffff';
+      const textCol = isDark ? '#f1f5f9' : '#0f172a';
+      const muted = isDark ? '#94a3b8' : '#64748b';
+      const accent = isDark ? '#38bdf8' : '#0284c7';
+      const border = isDark ? 'rgba(148,163,184,0.18)' : 'rgba(15,23,42,0.08)';
+      const soft = isDark ? 'rgba(56,189,248,0.08)' : 'rgba(2,132,199,0.06)';
+
+      const bySubj = {};
+      daySessions.forEach(function(s) {
+        if (!bySubj[s.subject]) {
+          bySubj[s.subject] = { minutes: 0, tests: 0, videoHours: 0, notes: [], sections: [], descriptive: false, hasVideo: false, specialized: isSpecialized(s.subject) };
+        }
+        bySubj[s.subject].minutes += s.minutes;
+        bySubj[s.subject].tests += (s.tests || 0);
+        if (s.videoWatched) {
+          bySubj[s.subject].videoHours += (s.videoHours || 0);
+          bySubj[s.subject].hasVideo = true;
+        }
+        if (s.descriptive) bySubj[s.subject].descriptive = true;
+        if (s.note) bySubj[s.subject].notes.push(s.note);
+        if (s.testSection) bySubj[s.subject].sections.push(s.testSection);
+      });
+      const subjList = Object.keys(bySubj).sort(function(a, b) {
+        return bySubj[b].minutes - bySubj[a].minutes;
+      });
+
+      // ارتفاع پویا برای کارت‌ها
+      const cardH = 118;
+      const headerH = 148;
+      const footerH = 56;
+      const pad = 28;
+      const width = 760;
+      const gap = 14;
+      const height = headerH + subjList.length * (cardH + gap) + footerH + pad;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width * 2;
+      canvas.height = height * 2;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+
+      // پس‌زمینه مدرن کلاسیک
+      const g = ctx.createLinearGradient(0, 0, width, height);
+      if (isDark) {
+        g.addColorStop(0, '#0a0a14');
+        g.addColorStop(0.4, '#12101f');
+        g.addColorStop(1, '#0c1520');
+      } else {
+        g.addColorStop(0, '#faf8ff');
+        g.addColorStop(0.5, '#f3eefc');
+        g.addColorStop(1, '#eef2ff');
+      }
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, width, height);
+      // نقاط ظریف پس‌زمینه
+      ctx.fillStyle = isDark ? 'rgba(167,139,250,0.07)' : 'rgba(124,58,237,0.06)';
+      for (let px = 12; px < width; px += 28) {
+        for (let py = 12; py < height; py += 28) {
+          ctx.beginPath();
+          ctx.arc(px, py, 1.1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      // هاله‌های نرم
+      if (isDark) {
+        const rg1 = ctx.createRadialGradient(width * 0.15, 40, 0, width * 0.15, 40, 220);
+        rg1.addColorStop(0, 'rgba(139,92,246,0.22)');
+        rg1.addColorStop(1, 'transparent');
+        ctx.fillStyle = rg1;
+        ctx.fillRect(0, 0, width, height);
+        const rg2 = ctx.createRadialGradient(width * 0.85, height * 0.2, 0, width * 0.85, height * 0.2, 200);
+        rg2.addColorStop(0, 'rgba(34,211,238,0.12)');
+        rg2.addColorStop(1, 'transparent');
+        ctx.fillStyle = rg2;
+        ctx.fillRect(0, 0, width, height);
+      }
+      // کارت اصلی بیرونی با حاشیه واضح‌تر
+      const outerBorder = isDark ? 'rgba(167,139,250,0.5)' : border;
+      roundRect(ctx, 18, 18, width - 36, height - 36, 22, cardBg, outerBorder);
+
+      // هدر
+      ctx.textAlign = 'right';
+      ctx.direction = 'rtl';
+      ctx.fillStyle = accent;
+      ctx.font = '700 24px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('📚 خلاصه مطالعه روز', width - pad - 6, 58);
+
+      ctx.fillStyle = textCol;
+      ctx.font = '500 16px Vazirmatn, Cairo, Tahoma, sans-serif';
+      const dateLabel = toPersian(daySessions[0].date) + (weekday ? '  —  ' + weekday : '');
+      ctx.fillText(dateLabel, width - pad - 6, 86);
+
+      ctx.fillStyle = muted;
+      ctx.font = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+      let summary = 'مجموع  ' + formatDuration(totalMin);
+      if (totalTests > 0) summary += '   ·   📝 ' + toPersian(totalTests) + ' تست';
+      if (totalVideo > 0) summary += '   ·   🎬 ' + toPersian(Math.round(totalVideo * 10) / 10) + ' س فیلم';
+      ctx.fillText(summary, width - pad - 6, 112);
+      // نمره هوشمند با ایموجی — واضح و برجسته
+      const scoreText = dayScore.emoji + '  نمره روز: ' + toPersian(dayScore.score) + ' از ۱۰  —  ' + dayScore.label;
+      ctx.font = '700 16px Vazirmatn, Cairo, Tahoma, sans-serif';
+      const scoreW = ctx.measureText(scoreText).width + 28;
+      const scoreX = width - pad - 6 - scoreW;
+      const scoreY = 120;
+      // پس‌زمینه قرص‌شکل نمره
+      ctx.beginPath();
+      const sr = 12;
+      ctx.moveTo(scoreX + sr, scoreY);
+      ctx.arcTo(scoreX + scoreW, scoreY, scoreX + scoreW, scoreY + 28, sr);
+      ctx.arcTo(scoreX + scoreW, scoreY + 28, scoreX, scoreY + 28, sr);
+      ctx.arcTo(scoreX, scoreY + 28, scoreX, scoreY, sr);
+      ctx.arcTo(scoreX, scoreY, scoreX + scoreW, scoreY, sr);
+      ctx.closePath();
+      ctx.fillStyle = isDark ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.85)';
+      ctx.fill();
+      ctx.strokeStyle = dayScore.color;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = dayScore.color;
+      ctx.textAlign = 'right';
+      ctx.fillText(scoreText, width - pad - 20, scoreY + 19);
+
+      // کارت هر درس
+      function pill(label, bg, bd, tc, x, y) {
+        ctx.font = '600 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+        const tw = ctx.measureText(label).width;
+        const bw = tw + 16, bh = 24, bx = x - bw, by = y - 15, r = 8;
+        ctx.beginPath();
+        ctx.moveTo(bx + r, by);
+        ctx.arcTo(bx + bw, by, bx + bw, by + bh, r);
+        ctx.arcTo(bx + bw, by + bh, bx, by + bh, r);
+        ctx.arcTo(bx, by + bh, bx, by, r);
+        ctx.arcTo(bx, by, bx + bw, by, r);
+        ctx.closePath();
+        ctx.fillStyle = bg;
+        ctx.fill();
+        ctx.strokeStyle = bd;
+        ctx.lineWidth = 1.25;
+        ctx.stroke();
+        ctx.fillStyle = tc;
+        ctx.textAlign = 'right';
+        ctx.fillText(label, x - 8, y + 1);
+        return bw + 8;
+      }
+
+      let y = headerH + 8;
+      subjList.forEach(function(subj, idx) {
+        const info = bySubj[subj];
+        const x0 = pad + 4;
+        const w0 = width - pad * 2 - 8;
+        // کارت درس با حاشیه مناسب تم
+        const innerBg = isDark ? '#1a2436' : '#ffffff';
+        const cardBorder = isDark ? 'rgba(167, 139, 250, 0.55)' : 'rgba(2, 132, 199, 0.28)';
+        roundRect(ctx, x0, y, w0, cardH - 6, 16, innerBg, cardBorder);
+
+        // نام درس + متن رنگی تخصصی/عمومی بدون حاشیه
+        ctx.textAlign = 'right';
+        ctx.font = '700 17px Vazirmatn, Cairo, Tahoma, sans-serif';
+        const subjW = ctx.measureText(subj).width;
+        ctx.fillStyle = textCol;
+        ctx.fillText(subj, x0 + w0 - 18, y + 28);
+        const typeLab = info.specialized ? 'تخصصی' : 'عمومی';
+        const typeCol = info.specialized ? '#4ade80' : '#eab308';
+        ctx.font = '600 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.fillStyle = typeCol;
+        ctx.fillText(typeLab, x0 + w0 - 18 - subjW - 12, y + 28);
+
+        // بج‌ها
+        let bx = x0 + w0 - 18;
+        const by = y + 58;
+        const dur = formatDuration(info.minutes);
+        bx -= pill(dur, 'rgba(56,189,248,0.12)', '#38bdf8', '#38bdf8', bx, by);
+        // برای دروس عمومی اگر تست زده نشده، بج تست نمایش داده نشود
+        const showTests = info.specialized || info.tests > 0;
+        if (showTests) {
+          ctx.fillStyle = muted;
+          ctx.font = '700 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+          ctx.fillText('·', bx - 2, by + 1);
+          bx -= 14;
+          const tLab = info.tests > 0 ? ('📝 ' + toPersian(info.tests) + ' تست') : '📝 بدون تست';
+          bx -= pill(tLab, 'rgba(244,114,182,0.12)', '#f472b6', '#f472b6', bx, by);
+        }
+        ctx.fillStyle = muted;
+        ctx.font = '700 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.fillText('·', bx - 2, by + 1);
+        bx -= 14;
+        let vLab = '🎬 فیلم دیده نشده';
+        if (info.hasVideo) {
+          const vh = info.videoHours || 0;
+          const vH = Math.floor(vh); const vM = Math.round((vh - vH) * 60);
+          vLab = '🎬 ' + (vH ? toPersian(vH) + 'س' : '') + (vM ? toPersian(vM) + 'د' : (vH ? '' : 'فیلم'));
+        }
+        bx -= pill(vLab, 'rgba(168,85,247,0.12)', '#c084fc', '#c084fc', bx, by);
+        if (info.descriptive) {
+          ctx.fillStyle = muted;
+          ctx.font = '700 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+          ctx.fillText('·', bx - 2, by + 1);
+          bx -= 14;
+          bx -= pill('📄 تشریحی', 'rgba(249,115,22,0.12)', '#fb923c', '#fb923c', bx, by);
+        }
+
+        // تست‌های زده‌شده و یادداشت
+        let ly = y + 86;
+        ctx.font = '400 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.fillStyle = muted;
+        ctx.textAlign = 'right';
+        if (info.sections.length) {
+          ctx.fillText('تست‌های زده‌شده: ' + info.sections.join('، '), x0 + w0 - 18, ly);
+          ly += 18;
+        }
+        if (info.notes.length) {
+          const noteStr = info.notes.join(' | ');
+          const maxLen = 75;
+          ctx.fillText('یادداشت: ' + (noteStr.length > maxLen ? noteStr.slice(0, maxLen) + '…' : noteStr), x0 + w0 - 18, ly);
+        }
+
+        y += cardH + gap - 6;
+      });
+
+      // فوتر
+      ctx.fillStyle = muted;
+      ctx.font = '400 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('ثبت‌کننده ساعت مطالعه  ·  ' + toPersian(toJalaliStr()), width / 2, height - 28);
+
+      canvas.toBlob(function(blob) {
+        if (!blob) { showToast('خطا در ساخت تصویر', true); return; }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'study-' + dateKey.replace(/\//g, '-') + '.png';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('تصویر روز دانلود شد ✓');
+      }, 'image/png');
+    }
+
+    function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.5; ctx.stroke(); }
+    }
+
+
+    async function downloadWeekDaysImage() {
+      refreshSession();
+      try { await document.fonts.ready; } catch (e) {}
+      const thisDays = getWeekDayStats(0);
+      const lastDays = getWeekDayStats(-1);
+      const isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
+      const width = 820;
+      const headerH = 110;
+      const rowH = 52;
+      const footerH = 48;
+      const pad = 28;
+      const height = headerH + 7 * rowH + 90 + footerH;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width * 2;
+      canvas.height = height * 2;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+
+      const g = ctx.createLinearGradient(0, 0, width, height);
+      if (isDark) {
+        g.addColorStop(0, '#0a0a14');
+        g.addColorStop(0.5, '#12101f');
+        g.addColorStop(1, '#0c1520');
+      } else {
+        g.addColorStop(0, '#faf8ff');
+        g.addColorStop(1, '#eef2ff');
+      }
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = isDark ? 'rgba(167,139,250,0.07)' : 'rgba(124,58,237,0.05)';
+      for (let px = 12; px < width; px += 28) {
+        for (let py = 12; py < height; py += 28) {
+          ctx.beginPath(); ctx.arc(px, py, 1.1, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+
+      const cardBg = isDark ? '#151e2e' : '#ffffff';
+      const textCol = isDark ? '#f1f5f9' : '#0f172a';
+      const muted = isDark ? '#94a3b8' : '#64748b';
+      const accent = isDark ? '#38bdf8' : '#0284c7';
+      const border = isDark ? 'rgba(167,139,250,0.5)' : 'rgba(2,132,199,0.25)';
+      roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
+
+      ctx.textAlign = 'right';
+      ctx.direction = 'rtl';
+      ctx.fillStyle = accent;
+      ctx.font = '700 22px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('📊 مقایسه روزهای هفته', width - pad, 52);
+      ctx.fillStyle = textCol;
+      ctx.font = '500 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+      const fromJ = thisDays[0].date, toJ = thisDays[6].date;
+      ctx.fillText(toPersian(fromJ) + '  تا  ' + toPersian(toJ), width - pad, 78);
+      ctx.fillStyle = muted;
+      ctx.font = '400 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('این هفته در برابر هفته قبل', width - pad, 98);
+
+      let maxM = 1;
+      thisDays.concat(lastDays).forEach(function(d) { if (d.mins > maxM) maxM = d.mins; });
+
+      let y = headerH + 10;
+      // header row
+      ctx.font = '600 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillStyle = muted;
+      ctx.textAlign = 'right';
+      ctx.fillText('روز', width - pad, y);
+      ctx.textAlign = 'center';
+      ctx.fillText('این هفته', width / 2 + 40, y);
+      ctx.fillText('هفته قبل', width / 2 - 140, y);
+      y += 18;
+
+      thisDays.forEach(function(a, i) {
+        const b = lastDays[i];
+        const rowBg = i % 2 === 0 ? (isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)') : 'transparent';
+        if (rowBg !== 'transparent') {
+          ctx.fillStyle = rowBg;
+          ctx.fillRect(pad - 4, y - 4, width - pad * 2 + 8, rowH - 6);
+        }
+        ctx.textAlign = 'right';
+        ctx.fillStyle = textCol;
+        ctx.font = '600 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.fillText(a.weekday + ' ' + a.dayNum, width - pad, y + 18);
+
+        const barMaxW = 140;
+        const wa = a.mins ? Math.max(6, Math.round((a.mins / maxM) * barMaxW)) : 0;
+        const wb = b.mins ? Math.max(6, Math.round((b.mins / maxM) * barMaxW)) : 0;
+
+        // this week bar
+        const ax = width / 2 + 40 - barMaxW / 2;
+        ctx.fillStyle = isDark ? 'rgba(30,40,60,0.8)' : 'rgba(226,232,240,0.9)';
+        ctx.fillRect(ax, y + 8, barMaxW, 12);
+        if (wa) {
+          const grad = ctx.createLinearGradient(ax, 0, ax + wa, 0);
+          grad.addColorStop(0, '#22d3ee');
+          grad.addColorStop(1, '#a78bfa');
+          ctx.fillStyle = grad;
+          ctx.fillRect(ax, y + 8, wa, 12);
+        }
+        ctx.fillStyle = accent;
+        ctx.font = '500 11px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(a.mins ? formatDuration(a.mins) : '—', ax + barMaxW / 2, y + 36);
+
+        // last week bar
+        const bx = width / 2 - 140 - barMaxW / 2;
+        ctx.fillStyle = isDark ? 'rgba(30,40,60,0.8)' : 'rgba(226,232,240,0.9)';
+        ctx.fillRect(bx, y + 8, barMaxW, 12);
+        if (wb) {
+          ctx.fillStyle = 'rgba(148,163,184,0.65)';
+          ctx.fillRect(bx, y + 8, wb, 12);
+        }
+        ctx.fillStyle = muted;
+        ctx.fillText(b.mins ? formatDuration(b.mins) : '—', bx + barMaxW / 2, y + 36);
+
+        y += rowH;
+      });
+
+      const thisTotal = thisDays.reduce(function(s, d) { return s + d.mins; }, 0);
+      const lastTotal = lastDays.reduce(function(s, d) { return s + d.mins; }, 0);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = textCol;
+      ctx.font = '600 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('مجموع این هفته: ' + formatDuration(thisTotal) + '   ·   هفته قبل: ' + formatDuration(lastTotal), width / 2, height - 40);
+      ctx.fillStyle = muted;
+      ctx.font = '400 11px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('ثبت‌کننده ساعت مطالعه  ·  ' + toPersian(toJalaliStr()), width / 2, height - 22);
+
+      canvas.toBlob(function(blob) {
+        if (!blob) { showToast('خطا در ساخت تصویر', true); return; }
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'week-compare-' + toJalaliStr().replace(/\//g, '-') + '.png';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('تصویر مقایسه هفته دانلود شد ✓');
+      }, 'image/png');
+    }
+
+    const SYNC_KEY = 'study_sync_api';
+    const SYNC_BIN = 'study_sync_bin';
+
+    function loadSyncSettings() {
+      const key = localStorage.getItem(SYNC_KEY) || '';
+      const bin = localStorage.getItem(SYNC_BIN) || '';
+      const kEl = document.getElementById('syncApiKey');
+      const bEl = document.getElementById('syncBinId');
+      if (kEl) kEl.value = key;
+      if (bEl) bEl.value = bin;
+      updateSyncStatus();
+    }
+
+    function updateSyncStatus() {
+      const el = document.getElementById('syncStatus');
+      if (!el) return;
+      const key = localStorage.getItem(SYNC_KEY);
+      const bin = localStorage.getItem(SYNC_BIN);
+      if (key && bin) {
+        el.textContent = '✅ همگام‌سازی فعال است — هر ذخیره به ابر فرستاده می‌شود.';
+        el.style.color = 'var(--success)';
+      } else {
+        el.textContent = 'همگام‌سازی خاموش است. طبق راهنما API Key و Bin ID را وارد کن.';
+        el.style.color = 'var(--text-muted)';
+      }
+    }
+
+    function saveSyncSettings() {
+      const key = (document.getElementById('syncApiKey').value || '').trim();
+      const bin = (document.getElementById('syncBinId').value || '').trim();
+      if (!key || !bin) {
+        showToast('هر دو فیلد را پر کن', true);
+        return;
+      }
+      localStorage.setItem(SYNC_KEY, key);
+      localStorage.setItem(SYNC_BIN, bin);
+      updateSyncStatus();
+      showToast('تنظیمات ذخیره شد — در حال همگام‌سازی...');
+      syncNow();
+    }
+
+    async function pushToCloud() {
+      const key = localStorage.getItem(SYNC_KEY);
+      const bin = localStorage.getItem(SYNC_BIN);
+      if (!key || !bin) return false;
+      try {
+        const payload = {
+          sessions: sessions,
+          tomorrow: getTomorrowPlan(),
+          dailyGoal: getGoal(),
+          updatedAt: new Date().toISOString()
+        };
+        const res = await fetch('https://api.jsonbin.io/v3/b/' + bin, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': key,
+            'X-Bin-Versioning': 'false'
+          },
+          body: JSON.stringify(payload)
+        });
+        return res.ok;
+      } catch (e) {
+        console.error(e);
+        return false;
+      }
+    }
+
+    async function pullFromCloud() {
+      const key = localStorage.getItem(SYNC_KEY);
+      const bin = localStorage.getItem(SYNC_BIN);
+      if (!key || !bin) return null;
+      try {
+        const res = await fetch('https://api.jsonbin.io/v3/b/' + bin + '/latest', {
+          method: 'GET',
+          headers: { 'X-Master-Key': key }
+        });
+        if (!res.ok) return null;
+        const json = await res.json();
+        const data = json.record;
+        // پشتیبانی از فرمت قدیمی (آرایه) و جدید (شیء)
+        if (Array.isArray(data)) return { sessions: data, tomorrow: null, dailyGoal: null };
+        if (data && Array.isArray(data.sessions)) return data;
+        return null;
+      } catch (e) {
+        console.error(e);
+        return null;
+      }
+    }
+
+    async function syncNow() {
+      const key = localStorage.getItem(SYNC_KEY);
+      const bin = localStorage.getItem(SYNC_BIN);
+      if (!key || !bin) {
+        showToast('ابتدا تنظیمات همگام‌سازی را ذخیره کن', true);
+        return;
+      }
+      showToast('در حال همگام‌سازی...');
+      const remote = await pullFromCloud();
+      if (remote === null) {
+        const ok = await pushToCloud();
+        showToast(ok ? 'داده محلی به ابر ارسال شد ✓' : 'خطا در اتصال به ابر', !ok);
+        return;
+      }
+      const remoteSessions = remote.sessions || [];
+      const map = {};
+      function consider(s) {
+        if (!s || s.id == null) return;
+        const existing = map[s.id];
+        if (!existing) {
+          map[s.id] = s;
+          return;
+        }
+        const tNew = s.updatedAt || s.createdAt || '';
+        const tOld = existing.updatedAt || existing.createdAt || '';
+        if (tNew > tOld) map[s.id] = s;
+      }
+      remoteSessions.forEach(consider);
+      sessions.forEach(consider);
+      sessions = Object.keys(map).map(function(k) { return map[k]; });
+      sessions.sort(function(a, b) {
+        return (b.createdAt || '').localeCompare(a.createdAt || '');
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+      // همگام‌سازی برنامه فردا
+      if (Array.isArray(remote.tomorrow)) {
+        const localTm = getTomorrowPlan();
+        // اگر ریموت جدیدتر یا محلی خالی باشد، از ریموت بگیر
+        if (!localTm.length || remote.tomorrow.length >= localTm.length) {
+          localStorage.setItem('study_tomorrow', JSON.stringify(remote.tomorrow));
+        }
+      }
+      if (remote.dailyGoal != null && remote.dailyGoal !== '') {
+        const localGoal = getGoal();
+        if (!localGoal && remote.dailyGoal) {
+          localStorage.setItem('study_daily_goal', String(remote.dailyGoal));
+        }
+      }
+      const ok = await pushToCloud();
+      updateAll();
+      showToast(ok ? 'همگام‌سازی موفق ✓' : 'دریافت شد ولی ارسال به ابر خطا داد', !ok);
+    }
+
+
+
+    // ===== امکانات بیشتر =====
+    function getStudyDateKeys() {
+      const keys = {};
+      sessions.filter(isActive).forEach(function(s) {
+        const k = jalaliToKey(s.date);
+        keys[k] = (keys[k] || 0) + s.minutes;
+      });
+      return keys;
+    }
+    function calcStreak() {
+      const keys = getStudyDateKeys();
+      let streak = 0;
+      for (let i = 0; i < 400; i++) {
+        const k = jalaliToKey(daysAgoJalali(i));
+        if ((keys[k] || 0) > 0) streak++;
+        else if (i > 0) break; // امروز صفر باشد از دیروز بشمار
+        else break;
+      }
+      // اگر امروز صفر بود از دیروز
+      if ((keys[jalaliToKey(toJalaliStr())] || 0) === 0) {
+        streak = 0;
+        for (let i = 1; i < 400; i++) {
+          const k = jalaliToKey(daysAgoJalali(i));
+          if ((keys[k] || 0) > 0) streak++;
+          else break;
+        }
+      }
+      return streak;
+    }
+    function saveGoal() {
+      const v = parseInt(document.getElementById('dailyGoalMin').value) || 0;
+      localStorage.setItem('study_daily_goal', String(v));
+      renderExtras();
+      updateStats();
+      showToast(v > 0 ? 'هدف روزانه ذخیره شد' : 'هدف پاک شد');
+    }
+    function getGoal() {
+      return parseInt(localStorage.getItem('study_daily_goal') || '0') || 0;
+    }
+    function renderExtras() {
+      const goalInput = document.getElementById('dailyGoalMin');
+      if (goalInput && document.activeElement !== goalInput) {
+        const g = getGoal();
+        goalInput.value = g || '';
+      }
+      // last subject
+      const active = sessions.filter(isActive);
+      const last = active[0];
+      const lastEl = document.getElementById('lastSubjectHint');
+      if (lastEl) {
+        lastEl.textContent = last ? (last.subject + ' — ' + formatDuration(last.minutes)) : 'هنوز جلسه‌ای نیست';
+      }
+      // روند نیمه‌ماه شمسی: ۱–۱۴ یا ۱۵ تا آخر ماه
+      const trend = document.getElementById('trendChart');
+      if (trend) {
+        const keys = getStudyDateKeys();
+        const now = new Date();
+        const j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+        const jy = j[0], jm = j[1], jd = j[2];
+        const dim = jalaliDaysInMonth(jy, jm);
+        let startD, endD;
+        if (jd <= 14) {
+          startD = 1; endD = Math.min(14, dim);
+        } else {
+          startD = 15; endD = dim;
+        }
+        const days = [];
+        let maxM = 1;
+        for (let day = startD; day <= endD; day++) {
+          const label = jy + '/' + String(jm).padStart(2, '0') + '/' + String(day).padStart(2, '0');
+          const k = jalaliToKey(label);
+          const m = keys[k] || 0;
+          const tests = getTestsForDate(k);
+          if (m > maxM) maxM = m;
+          days.push({
+            k: k, m: m, tests: tests, label: label,
+            dayNum: toPersian(day),
+            monthNum: toPersian(jm),
+            isToday: day === jd
+          });
+        }
+        if (maxM < 1) maxM = 1;
+        const titleEl = document.getElementById('trendTitle');
+        if (titleEl) {
+          titleEl.textContent = '📊 روند ' + toPersian(startD) + ' تا ' + toPersian(endD) + ' / ' + toPersian(jm);
+        }
+        let html = '<div style="display:flex;align-items:stretch;gap:3px;padding:4px 0;overflow-x:auto;-webkit-overflow-scrolling:touch;">';
+        days.forEach(function(d) {
+          const h = d.m === 0 ? 6 : Math.max(12, Math.round((d.m / maxM) * 100));
+          const short = d.m === 0 ? '—' : (d.m >= 60
+            ? toPersian(Math.floor(d.m/60)) + 'س' + (d.m%60 ? toPersian(d.m%60) + 'د' : '')
+            : toPersian(d.m) + 'د');
+          const barColor = d.isToday
+            ? 'linear-gradient(180deg,#7dd3fc,#0284c7)'
+            : (d.m === 0 ? 'rgba(148,163,184,0.25)' : 'linear-gradient(180deg,var(--accent-soft),var(--accent))');
+          const boxBorder = d.isToday ? '1.5px solid #38bdf8' : '1px solid var(--border)';
+          const bgBox = d.isToday ? 'rgba(56,189,248,0.08)' : 'transparent';
+          const tipText = formatDuration(d.m) + (d.tests > 0 ? ' · 📝 ' + toPersian(d.tests) + ' تست' : ' · بدون تست');
+          html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)" title="' + tipText.replace(/"/g, '&quot;') + '" style="flex:1;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 2px;border-radius:10px;background:' + bgBox + ';border:' + boxBorder + ';position:relative;cursor:pointer;">' +
+            '<div class="chart-bar" style="height:auto;width:100%;max-width:none;background:transparent;min-height:0;filter:none;display:flex;flex-direction:column;align-items:center;gap:6px;">' +
+              '<div class="tooltip" style="white-space:normal;min-width:90px;">' + formatDuration(d.m) + '<br>📝 ' + (d.tests > 0 ? toPersian(d.tests) + ' تست' : 'بدون تست') + '</div>' +
+              '<div style="height:100px;width:100%;display:flex;align-items:flex-end;justify-content:center;">' +
+                '<div style="width:70%;max-width:22px;height:' + h + 'px;border-radius:5px 5px 2px 2px;background:' + barColor + ';"></div>' +
+              '</div>' +
+              '<div style="font-size:0.72rem;font-weight:700;color:var(--accent);text-align:center;line-height:1.2;min-height:1.2em;">' + short + '</div>' +
+              '<div style="font-size:0.7rem;font-weight:600;color:var(--text);text-align:center;">' + d.dayNum + '/' + d.monthNum + '</div>' +
+            '</div>' +
+          '</div>';
+        });
+        html += '</div>';
+        trend.innerHTML = html;
+        const sumP = days.reduce(function(s, d){ return s + d.m; }, 0);
+        const activeDays = days.filter(function(d){ return d.m > 0; }).length;
+      }
+      // avg 7
+      let sum7 = 0;
+      for (let i = 0; i < 7; i++) sum7 += getMinutesForDate(jalaliToKey(daysAgoJalali(i)));
+      const avgEl = document.getElementById('statAvg7');
+      if (avgEl) avgEl.textContent = formatDuration(Math.round(sum7 / 7));
+      // record
+      const keys = getStudyDateKeys();
+      let best = 0, bestDay = '';
+      Object.keys(keys).forEach(function(k) {
+        if (keys[k] > best) { best = keys[k]; bestDay = k; }
+      });
+      const recEl = document.getElementById('statRecord');
+      if (recEl) recEl.textContent = best > 0 ? (formatDuration(best) + (bestDay ? ' (' + toPersian(bestDay) + ')' : '')) : '—';
+      // ranking
+      const thisWeek = getWeekRange(0);
+      const bySubj = getSubjectMinutesInRange(thisWeek.start, thisWeek.end);
+      const rankEl = document.getElementById('weekRanking');
+      if (rankEl) {
+        const sorted = Object.keys(bySubj).sort(function(a,b){ return bySubj[b]-bySubj[a]; });
+        if (!sorted.length) rankEl.innerHTML = '<span style="color:var(--text-muted);font-size:0.85rem;">این هفته هنوز داده‌ای نیست</span>';
+        else {
+          const max = bySubj[sorted[0]] || 1;
+          rankEl.innerHTML = sorted.map(function(s, i) {
+            const pct = Math.round(bySubj[s] / max * 100);
+            return '<div class="subj-row" style="margin-bottom:8px;"><div class="subj-name">' + toPersian(i+1) + '. ' + s + '</div><div class="subj-track"><div class="subj-fill" style="width:' + pct + '%"></div></div><div class="subj-val">' + formatDuration(bySubj[s]) + '</div></div>';
+          }).join('');
+        }
+      }
+      // رتبه‌بندی روزهای این هفته
+      const dayRankEl = document.getElementById('dayRanking');
+      if (dayRankEl) {
+        const days = getWeekDayStats(0).slice().sort(function(a, b) { return b.mins - a.mins; });
+        const hasAny = days.some(function(d) { return d.mins > 0; });
+        if (!hasAny) {
+          dayRankEl.innerHTML = '<span style="color:var(--text-muted);font-size:0.85rem;">این هفته هنوز داده‌ای نیست</span>';
+        } else {
+          const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣', '6️⃣', '7️⃣'];
+          dayRankEl.innerHTML = days.map(function(d, i) {
+            const label = d.weekday + (d.isToday ? ' (امروز)' : '') + ' — ' + toPersian(d.date);
+            const val = d.mins > 0 ? formatDuration(d.mins) : 'صفر';
+            const extra = d.tests > 0 ? ' · 📝 ' + toPersian(d.tests) : '';
+            return '<div class="day-rank-item"><span class="day-rank-num">' + medals[i] + '</span><span class="day-rank-name">' + label + '</span><span class="day-rank-val">' + val + extra + '</span></div>';
+          }).join('');
+        }
+      }
+      // sound label
+      const sl = document.getElementById('soundLabel');
+      if (sl) sl.textContent = localStorage.getItem('study_sound') === '1' ? 'روشن' : 'خاموش';
+      // ساعات این هفته + بازه تاریخ
+      const weekR = getWeekRange(0);
+      let weekMinExtra = getMinutesInRange(weekR.start, weekR.end);
+      let lifeTests = 0;
+      active.forEach(function(s){ lifeTests += (s.tests||0); });
+      const lifeEl = document.getElementById('statLifetime');
+      if (lifeEl) lifeEl.textContent = formatDuration(weekMinExtra);
+      const rangeEl = document.getElementById('statLifetimeRange');
+      if (rangeEl) {
+        const fromJ = toJalaliStr(weekR.start);
+        const toJ = toJalaliStr(weekR.end);
+        rangeEl.textContent = 'از ' + toPersian(fromJ) + ' تا ' + toPersian(toJ);
+      }
+      const ltEl = document.getElementById('statLifeTests');
+      if (ltEl) ltEl.textContent = toPersian(lifeTests);
+      // efficiency
+      const effEl = document.getElementById('statEfficiency');
+      if (effEl) {
+        if (lifeMin < 60) effEl.textContent = '—';
+        else effEl.textContent = toPersian((lifeTests / (lifeMin/60)).toFixed(1));
+      }
+      // today count
+      const todayKey = jalaliToKey(toJalaliStr());
+      const todayCnt = active.filter(function(s){ return jalaliToKey(s.date)===todayKey; }).length;
+      const tc = document.getElementById('statTodayCount');
+      if (tc) tc.textContent = toPersian(todayCnt) + ' جلسه';
+      // best/worst weekday
+      const wdMap = {};
+      WEEKDAYS_FA.forEach(function(w){ wdMap[w] = 0; });
+      active.forEach(function(s){
+        const d = parseJalali(s.date);
+        if (d) wdMap[getWeekdayFa(d)] = (wdMap[getWeekdayFa(d)]||0) + s.minutes;
+      });
+      let bestW = '—', worstW = '—', bestM = -1, worstM = 1e15;
+      WEEKDAYS_FA.forEach(function(w){
+        if (wdMap[w] > bestM) { bestM = wdMap[w]; bestW = w; }
+        if (wdMap[w] < worstM) { worstM = wdMap[w]; worstW = w; }
+      });
+      const bw = document.getElementById('statBestWeekday');
+      if (bw) bw.textContent = bestM > 0 ? (bestW + ' (' + formatDuration(bestM) + ')') : '—';
+      const ww = document.getElementById('statWorstWeekday');
+      if (ww) ww.textContent = bestM > 0 ? (worstW + ' (' + formatDuration(worstM) + ')') : '—';
+      // month compare
+      const now = new Date();
+      const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const lastMonthStart = new Date(now.getFullYear(), now.getMonth()-1, 1);
+      const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59);
+      let thisM = 0, lastM = 0;
+      active.forEach(function(s){
+        const d = parseJalali(s.date);
+        if (!d) return;
+        if (d >= thisMonthStart) thisM += s.minutes;
+        else if (d >= lastMonthStart && d <= lastMonthEnd) lastM += s.minutes;
+      });
+      const mc = document.getElementById('statMonthCompare');
+      if (mc) {
+        if (lastM === 0 && thisM === 0) mc.textContent = '—';
+        else if (lastM === 0) mc.textContent = 'شروع ماه';
+        else {
+          const p = Math.round((thisM - lastM) / lastM * 100);
+          mc.textContent = (p >= 0 ? '+' : '') + toPersian(p) + '٪';
+        }
+      }
+      // zero days this month
+      const dayNum = now.getDate();
+      let zero = 0;
+      const keysZero = getStudyDateKeys();
+      for (let i = 0; i < dayNum; i++) {
+        const dt = new Date(now.getFullYear(), now.getMonth(), i+1);
+        const jk = jalaliToKey(toJalaliStr(dt));
+        if ((keysZero[jk]||0) === 0) zero++;
+      }
+      const zd = document.getElementById('statZeroDays');
+      if (zd) zd.textContent = toPersian(zero) + ' روز';
+      // tomorrow plan
+      renderTomorrowPlan();
+      // compare selects
+      const sa = document.getElementById('cmpSubjA');
+      const sb = document.getElementById('cmpSubjB');
+      if (sa && sb && sa.options.length === 0) {
+        ALL_SUBJECTS.forEach(function(s){
+          sa.innerHTML += '<option value="'+s+'">'+s+'</option>';
+          sb.innerHTML += '<option value="'+s+'">'+s+'</option>';
+        });
+        if (ALL_SUBJECTS[1]) sb.value = ALL_SUBJECTS[1];
+        renderSubjectCompare();
+      }
+      // backup reminder
+      const br = document.getElementById('backupReminder');
+      if (br) {
+        const last = parseInt(localStorage.getItem('study_last_backup')||'0')||0;
+        if (!last) br.textContent = '⚠️ هنوز پشتیبان ثبت‌شده‌ای نداری — از خروجی پشتیبان استفاده کن.';
+        else {
+          const days = Math.floor((Date.now()-last)/86400000);
+          br.textContent = days === 0 ? '✅ امروز پشتیبان گرفتی.' : ('🕒 ' + toPersian(days) + ' روز از آخرین پشتیبان گذشته.');
+        }
+      }
+    }
+    function quickAddLast() {
+      const active = sessions.filter(isActive);
+      if (!active.length) { showToast('جلسه‌ای برای کپی نیست', true); return; }
+      const last = active[0];
+      document.getElementById('subject').value = last.subject;
+      document.getElementById('hours').value = Math.floor((last.minutes||0)/60) || '';
+      document.getElementById('minutes').value = ((last.minutes||0)%60) || '';
+      document.getElementById('tests').value = last.tests || '';
+      if (last.testSection) document.getElementById('testSection').value = last.testSection;
+      document.getElementById('videoWatched').value = last.videoWatched ? 'yes' : 'no';
+      toggleVideoHours();
+      if (last.videoWatched) {
+        const vh = last.videoHours || 0;
+        document.getElementById('videoHours').value = Math.floor(vh) || '';
+        document.getElementById('videoMinutes').value = Math.round((vh - Math.floor(vh))*60) || '';
+      }
+      const ds = document.getElementById('descriptiveStudy');
+      if (ds) ds.checked = !!last.descriptive;
+      showToast('فرم با درس قبلی پر شد — در صورت نیاز ویرایش و ثبت کن');
+      document.getElementById('addForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    function copyTodaySummary() {
+      const todayKey = jalaliToKey(toJalaliStr());
+      const dayS = sessions.filter(function(s){ return isActive(s) && jalaliToKey(s.date)===todayKey; });
+      if (!dayS.length) { showToast('امروز جلسه‌ای نیست', true); return; }
+      let lines = ['📚 خلاصه مطالعه ' + toPersian(toJalaliStr()), ''];
+      let total = 0, tests = 0;
+      dayS.forEach(function(s) {
+        total += s.minutes; tests += (s.tests||0);
+        let line = '• ' + s.subject + ': ' + formatDuration(s.minutes);
+        if (s.tests) line += ' | ' + s.tests + ' تست';
+        if (s.testSection) line += ' | ' + s.testSection;
+        if (s.descriptive) line += ' | تشریحی';
+        if (s.note) line += ' — ' + s.note;
+        lines.push(line);
+      });
+      lines.push(''); lines.push('مجموع: ' + formatDuration(total) + (tests ? ' | ' + tests + ' تست' : ''));
+      const t = lines.join('\\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function(){ showToast('خلاصه امروز کپی شد ✓'); }).catch(function(){ fallbackCopy(t); });
+      } else fallbackCopy(t);
+    }
+    function fallbackCopy(t) {
+      const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); showToast('خلاصه کپی شد ✓'); } catch(e) { showToast('کپی ممکن نشد', true); }
+      document.body.removeChild(ta);
+    }
+    function exportTodayText() {
+      const todayKey = jalaliToKey(toJalaliStr());
+      const dayS = sessions.filter(function(s){ return isActive(s) && jalaliToKey(s.date)===todayKey; });
+      if (!dayS.length) { showToast('امروز جلسه‌ای نیست', true); return; }
+      let lines = ['خلاصه مطالعه ' + toJalaliStr(), ''];
+      dayS.forEach(function(s) {
+        lines.push(s.subject + ' | ' + formatDuration(s.minutes) + (s.tests ? ' | ' + s.tests + ' تست' : '') + (s.testSection ? ' | ' + s.testSection : '') + (s.note ? ' | ' + s.note : ''));
+      });
+      const blob = new Blob([lines.join('\\n')], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'study-' + toJalaliStr().replace(/\\//g,'-') + '.txt'; a.click();
+      URL.revokeObjectURL(url);
+      showToast('فایل متنی دانلود شد');
+    }
+    function toggleMotivSound() {
+      const on = localStorage.getItem('study_sound') === '1';
+      localStorage.setItem('study_sound', on ? '0' : '1');
+      const sl = document.getElementById('soundLabel');
+      if (sl) sl.textContent = on ? 'خاموش' : 'روشن';
+      showToast(on ? 'صدا خاموش شد' : 'صدا روشن شد');
+    }
+    function playSuccessSound() {
+      if (localStorage.getItem('study_sound') !== '1') return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator(); const g = ctx.createGain();
+        o.connect(g); g.connect(ctx.destination);
+        o.frequency.value = 880; g.gain.value = 0.08;
+        o.start(); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+        o.stop(ctx.currentTime + 0.3);
+      } catch(e) {}
+    }
+    function checkGoalCelebration(todayMin) {
+      const goal = getGoal();
+      if (goal > 0 && todayMin >= goal) {
+        const flag = 'goal_done_' + jalaliToKey(toJalaliStr());
+        if (sessionStorage.getItem(flag) !== '1') {
+          sessionStorage.setItem(flag, '1');
+          showToast('🎯 آفرین! به هدف روزانه رسیدی');
+          playSuccessSound();
+        }
+      }
+    }
+
+
+    function saveSticky() {
+      const v = document.getElementById('stickyNote').value || '';
+      localStorage.setItem('study_sticky', v);
+      showToast('یادداشت ذخیره شد');
+    }
+    function getTomorrowPlan() {
+      try { return JSON.parse(localStorage.getItem('study_tomorrow') || '[]'); } catch(e) { return []; }
+    }
+    function saveTomorrowPlan(arr) {
+      localStorage.setItem('study_tomorrow', JSON.stringify(arr));
+      if (localStorage.getItem(SYNC_KEY) && localStorage.getItem(SYNC_BIN)) {
+        pushToCloud();
+      }
+    }
+    function priorityLabel(p) {
+      if (p === 'high') return 'بالا';
+      if (p === 'low') return 'پایین';
+      return 'عادی';
+    }
+    function renderTomorrowPlan() {
+      const el = document.getElementById('tomorrowPlan');
+      if (!el) return;
+      let items = getTomorrowPlan();
+      // مرتب‌سازی: انجام‌نشده اول، بعد اولویت بالا
+      const order = { high: 0, normal: 1, low: 2 };
+      items = items.slice().sort(function(a, b) {
+        if (!!a.done !== !!b.done) return a.done ? 1 : -1;
+        return (order[a.priority] || 1) - (order[b.priority] || 1);
+      });
+      // برای index درست، از id استفاده می‌کنیم
+      const raw = getTomorrowPlan();
+      if (!raw.length) {
+        el.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:0.88rem;border:1px dashed var(--border);border-radius:var(--radius-sm);">هنوز کاری برای فردا نداری — یکی اضافه کن ✨</div>';
+        return;
+      }
+      const doneCount = raw.filter(function(it){ return it.done; }).length;
+      let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;">';
+      html += '<div style="font-size:0.82rem;color:var(--text-muted);">' + toPersian(doneCount) + ' از ' + toPersian(raw.length) + ' انجام‌شده</div>';
+      const pct = raw.length ? Math.round(doneCount / raw.length * 100) : 0;
+      html += '<div style="font-size:0.82rem;color:var(--accent);font-weight:600;">' + toPersian(pct) + '٪</div></div>';
+      html += '<div style="height:6px;background:var(--bg-input);border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid var(--border);">';
+      html += '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width 0.3s;"></div></div>';
+      html += items.map(function(it) {
+        const idx = raw.indexOf(it);
+        const realIdx = raw.findIndex(function(x){ return x === it || (x.text === it.text && x.createdAt === it.createdAt); });
+        const i = realIdx >= 0 ? realIdx : idx;
+        const pr = it.priority || 'normal';
+        const subj = it.subject ? '<span class="tm-subj-tag">' + escapeHtml(it.subject) + '</span>' : '';
+        return '<div class="tomorrow-item' + (it.done ? ' done' : '') + '">' +
+          '<input type="checkbox" ' + (it.done ? 'checked' : '') + ' onchange="toggleTomorrowItem(' + i + ')" style="width:auto;accent-color:var(--accent);" />' +
+          '<span class="tm-text">' + escapeHtml(it.text) + '</span>' +
+          subj +
+          '<span class="tm-priority ' + pr + '">' + priorityLabel(pr) + '</span>' +
+          '<button type="button" class="session-delete" onclick="removeTomorrowItem(' + i + ')" title="حذف">×</button></div>';
+      }).join('');
+      el.innerHTML = html;
+    }
+    function addTomorrowItem() {
+      const input = document.getElementById('tomorrowInput');
+      let text = input ? input.value.trim() : '';
+      if (!text) {
+        text = prompt('چه کاری برای فردا؟');
+      }
+      if (!text || !text.trim()) return;
+      const subjEl = document.getElementById('tomorrowSubject');
+      const priEl = document.getElementById('tomorrowPriority');
+      const arr = getTomorrowPlan();
+      arr.push({
+        text: text.trim(),
+        done: false,
+        subject: subjEl ? (subjEl.value || '') : '',
+        priority: priEl ? (priEl.value || 'normal') : 'normal',
+        createdAt: new Date().toISOString()
+      });
+      saveTomorrowPlan(arr);
+      if (input) input.value = '';
+      if (subjEl) subjEl.value = '';
+      if (priEl) priEl.value = 'normal';
+      renderTomorrowPlan();
+      showToast('کار به برنامه فردا اضافه شد ✓');
+    }
+    function toggleTomorrowItem(i) {
+      const arr = getTomorrowPlan();
+      if (!arr[i]) return;
+      arr[i].done = !arr[i].done;
+      saveTomorrowPlan(arr);
+      renderTomorrowPlan();
+    }
+    function removeTomorrowItem(i) {
+      const arr = getTomorrowPlan();
+      arr.splice(i, 1);
+      saveTomorrowPlan(arr);
+      renderTomorrowPlan();
+    }
+    function clearDoneTomorrow() {
+      let arr = getTomorrowPlan();
+      const before = arr.length;
+      arr = arr.filter(function(it){ return !it.done; });
+      if (arr.length === before) { showToast('کار انجام‌شده‌ای نیست'); return; }
+      saveTomorrowPlan(arr);
+      renderTomorrowPlan();
+      showToast('انجام‌شده‌ها پاک شدند');
+    }
+    function renderSubjectCompare() {
+      const a = (document.getElementById('cmpSubjA') || {}).value;
+      const b = (document.getElementById('cmpSubjB') || {}).value;
+      const el = document.getElementById('subjectCompareResult');
+      if (!el || !a || !b) return;
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), 1);
+      let ma = 0, mb = 0, ta = 0, tb = 0;
+      sessions.filter(isActive).forEach(function(s) {
+        const d = parseJalali(s.date);
+        if (!d || d < start) return;
+        if (s.subject === a) { ma += s.minutes; ta += (s.tests||0); }
+        if (s.subject === b) { mb += s.minutes; tb += (s.tests||0); }
+      });
+      el.innerHTML = '<strong>' + a + '</strong>: ' + formatDuration(ma) + ' / ' + toPersian(ta) + ' تست &nbsp;|&nbsp; <strong>' + b + '</strong>: ' + formatDuration(mb) + ' / ' + toPersian(tb) + ' تست';
+    }
+    function duplicateLastSession() {
+      const active = sessions.filter(isActive);
+      if (!active.length) { showToast('جلسه‌ای نیست', true); return; }
+      const last = active[0];
+      if (!confirm('آخرین جلسه («' + last.subject + '») دوباره برای امروز ثبت شود؟')) return;
+      const copy = Object.assign({}, last, {
+        id: Date.now() + Math.random(),
+        date: toJalaliStr(),
+        dateKey: jalaliToKey(toJalaliStr()),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        deleted: false
+      });
+      sessions.unshift(copy);
+      saveData(); updateAll();
+      showToast('جلسه تکرار و ثبت شد ✓');
+      playSuccessSound();
+    }
+    function exportWeekReport() {
+      const range = getWeekRange(0);
+      const list = sessions.filter(function(s) {
+        if (!isActive(s)) return false;
+        const d = parseJalali(s.date);
+        return d && d >= range.start && d <= range.end;
+      });
+      let lines = ['گزارش هفتگی مطالعه', ''];
+      let total = 0, tests = 0;
+      list.forEach(function(s) {
+        total += s.minutes; tests += (s.tests||0);
+        lines.push(s.date + ' | ' + s.subject + ' | ' + formatDuration(s.minutes) + (s.tests ? ' | ' + s.tests + ' تست' : ''));
+      });
+      lines.push(''); lines.push('مجموع هفته: ' + formatDuration(total) + ' | تست: ' + tests);
+      const blob = new Blob([lines.join('\\n')], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url;
+      a.download = 'week-report-' + toJalaliStr().replace(/\\//g,'-') + '.txt';
+      a.click(); URL.revokeObjectURL(url);
+      showToast('گزارش هفتگی دانلود شد');
+    }
+    function undoLastDelete() {
+      let best = null, bestT = '';
+      sessions.forEach(function(s) {
+        if (s.deleted && s.updatedAt && s.updatedAt > bestT) { bestT = s.updatedAt; best = s; }
+      });
+      if (!best) { showToast('حذف اخیری برای بازگردانی نیست', true); return; }
+      best.deleted = false;
+      best.updatedAt = new Date().toISOString();
+      saveData(); updateAll();
+      showToast('جلسه «' + best.subject + '» بازگردانی شد ✓');
+    }
+    function showRecycleBin() {
+      const del = sessions.filter(function(s){ return s && s.deleted; });
+      if (!del.length) { showToast('سطل خالی است'); return; }
+      const names = del.slice(0, 15).map(function(s){ return s.subject + ' (' + s.date + ')'; }).join('\\n');
+      if (!confirm('تعداد حذف‌شده‌ها: ' + del.length + '\\n\\n' + names + '\\n\\nهمه بازگردانی شوند؟')) return;
+      const nowIso = new Date().toISOString();
+      sessions.forEach(function(s){ if (s.deleted) { s.deleted = false; s.updatedAt = nowIso; } });
+      saveData(); updateAll();
+      showToast('همه جلسات حذف‌شده بازگردانی شدند');
+    }
+    function mergeImportClick() {
+      document.getElementById('mergeImportFile').click();
+    }
+    function mergeImportData(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!Array.isArray(data)) { showToast('فایل نامعتبر', true); return; }
+          const map = {};
+          sessions.forEach(function(s){ if (s && s.id != null) map[s.id] = s; });
+          let added = 0;
+          data.forEach(function(s){
+            if (!s || s.id == null) return;
+            if (!map[s.id]) { map[s.id] = s; added++; }
+          });
+          sessions = Object.keys(map).map(function(k){ return map[k]; });
+          sessions.sort(function(a,b){ return (b.createdAt||'').localeCompare(a.createdAt||''); });
+          saveData(); updateAll();
+          showToast(toPersian(added) + ' جلسه جدید ادغام شد ✓');
+        } catch(err) { showToast('خطا در خواندن فایل', true); }
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    }
+    function filterHistoryTestsOnly() {
+      const sel = document.getElementById('filterRange');
+      // expand history card
+      const card = document.getElementById('historyCard');
+      if (card) card.classList.remove('collapsed');
+      const list = document.getElementById('historyList');
+      const filtered = sessions.filter(function(s){ return isActive(s) && (s.tests||0) > 0; });
+      if (!filtered.length) { showToast('جلسه‌ای با تست نیست', true); return; }
+      // temporary render
+      const groups = {};
+      filtered.forEach(function(s){
+        const key = jalaliToKey(s.date);
+        if (!groups[key]) groups[key] = { date: s.date, items: [], total: 0, tests: 0 };
+        groups[key].items.push(s);
+        groups[key].total += s.minutes;
+        groups[key].tests += (s.tests||0);
+      });
+      showToast(toPersian(filtered.length) + ' جلسه با تست — تاریخچه را ببین');
+      if (typeof renderHistory === 'function') {
+        // set a data flag via filter - just scroll
+        document.getElementById('filterSubject').value = 'all';
+        renderHistory();
+        // highlight by re-filter in render - simple approach: filter client
+        const original = sessions.slice();
+        // override list HTML briefly by calling custom
+        const keys = Object.keys(groups).sort().reverse();
+        list.innerHTML = keys.map(function(key){
+          const g = groups[key];
+          return '<div class="day-group"><div class="day-header"><span class="day-title">' + toPersian(g.date) + '</span><span class="day-total">' + formatDuration(g.total) + ' • 📝 ' + toPersian(g.tests) + '</span></div>' +
+            g.items.map(function(s){
+              return '<div class="session-item"><div class="session-info"><div class="session-subject">' + escapeHtml(s.subject) + ' <span class="tests-badge" style="color:#f472b6;">📝 ' + toPersian(s.tests) + '</span></div></div><div class="session-duration">' + formatDuration(s.minutes) + '</div></div>';
+            }).join('') + '</div>';
+        }).join('');
+      }
+    }
+    function markBackupDone() {
+      localStorage.setItem('study_last_backup', String(Date.now()));
+      renderExtras();
+      showToast('زمان پشتیبان ثبت شد ✓');
+    }
+
+    function openEditSession(id) {
+      const s = sessions.find(function(x) { return x.id === id; });
+      if (!s) return;
+      document.getElementById('editId').value = s.id;
+      const sel = document.getElementById('editSubject');
+      sel.innerHTML = ALL_SUBJECTS.map(function(sub) {
+        return '<option value="' + sub + '"' + (sub === s.subject ? ' selected' : '') + '>' + sub + '</option>';
+      }).join('');
+      document.getElementById('editDate').value = s.date;
+      document.getElementById('editHours').value = Math.floor((s.minutes || 0) / 60);
+      document.getElementById('editMinutes').value = (s.minutes || 0) % 60;
+      document.getElementById('editTests').value = s.tests || 0;
+      document.getElementById('editTestSection').value = s.testSection || '';
+      document.getElementById('editVideo').value = s.videoWatched ? 'yes' : 'no';
+      const vh = s.videoHours || 0;
+      document.getElementById('editVideoH').value = Math.floor(vh);
+      document.getElementById('editVideoM').value = Math.round((vh - Math.floor(vh)) * 60);
+      document.getElementById('editVideoTimeWrap').style.display = s.videoWatched ? '' : 'none';
+      document.getElementById('editDescriptive').checked = !!s.descriptive;
+      document.getElementById('editNote').value = s.note || '';
+      document.getElementById('editModal').style.display = 'flex';
+    }
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+    function saveEditSession() {
+      const id = parseFloat(document.getElementById('editId').value);
+      const idx = sessions.findIndex(function(x) { return x.id === id; });
+      if (idx < 0) return;
+      const h = parseInt(document.getElementById('editHours').value) || 0;
+      const m = parseInt(document.getElementById('editMinutes').value) || 0;
+      const watched = document.getElementById('editVideo').value === 'yes';
+      const vH = parseInt(document.getElementById('editVideoH').value) || 0;
+      const vM = parseInt(document.getElementById('editVideoM').value) || 0;
+      sessions[idx].subject = document.getElementById('editSubject').value;
+      sessions[idx].date = document.getElementById('editDate').value.trim();
+      sessions[idx].dateKey = jalaliToKey(sessions[idx].date);
+      sessions[idx].minutes = h * 60 + m;
+      sessions[idx].tests = parseInt(document.getElementById('editTests').value) || 0;
+      sessions[idx].testSection = document.getElementById('editTestSection').value.trim();
+      sessions[idx].videoWatched = watched;
+      sessions[idx].videoHours = watched ? (vH + vM / 60) : 0;
+      sessions[idx].descriptive = document.getElementById('editDescriptive').checked;
+      sessions[idx].note = document.getElementById('editNote').value.trim();
+      sessions[idx].updatedAt = new Date().toISOString();
+      saveData();
+      closeEditModal();
+      updateAll();
+      showToast('جلسه ویرایش شد ✓');
+    }
+
+    function exportData() {
+      refreshSession();
+      const data = JSON.stringify(sessions, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'study-backup-' + toJalaliStr().replace(/\//g, '-') + '.json';
+      a.click(); URL.revokeObjectURL(url);
+      localStorage.setItem('study_last_backup', String(Date.now()));
+      showToast('فایل پشتیبان دانلود شد');
+    }
+    function importData(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!Array.isArray(data)) { showToast('فایل نامعتبر است', true); return; }
+          if (!confirm('اطلاعات فعلی با فایل پشتیبان جایگزین شود؟\nتعداد جلسات فایل: ' + data.length)) return;
+          sessions = data;
+          saveData();
+          updateAll();
+          showToast('پشتیبان با موفقیت وارد شد ✓');
+        } catch (err) {
+          showToast('خطا در خواندن فایل', true);
+        }
+        event.target.value = '';
+      };
+      reader.readAsText(file);
+    }
+    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') tryLogin();
+    });
+
+    // ===== PWA: نصب پایدار روی گوشی و کامپیوتر =====
+    let deferredInstallPrompt = null;
+
+    function makeAppIcon(size) {
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      // پس‌زمینه
+      const g = ctx.createLinearGradient(0, 0, size, size);
+      g.addColorStop(0, '#0a0a12');
+      g.addColorStop(1, '#1a1030');
+      ctx.fillStyle = g;
+      // گوشه‌های گرد
+      const r = size * 0.2;
+      ctx.beginPath();
+      ctx.moveTo(r, 0); ctx.lineTo(size - r, 0);
+      ctx.quadraticCurveTo(size, 0, size, r);
+      ctx.lineTo(size, size - r);
+      ctx.quadraticCurveTo(size, size, size - r, size);
+      ctx.lineTo(r, size);
+      ctx.quadraticCurveTo(0, size, 0, size - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.fill();
+      // هاله
+      const rg = ctx.createRadialGradient(size * 0.3, size * 0.3, 0, size * 0.5, size * 0.5, size * 0.6);
+      rg.addColorStop(0, 'rgba(34,211,238,0.35)');
+      rg.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg;
+      ctx.fillRect(0, 0, size, size);
+      // کتاب
+      ctx.font = (size * 0.45) + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('📚', size / 2, size / 2 + size * 0.04);
+      return c.toDataURL('image/png');
+    }
+
+    function triggerInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then(function(choice) {
+          if (choice.outcome === 'accepted') {
+            showToast('در حال نصب اپ...');
+            localStorage.setItem('study_installed', '1');
+            const banner = document.getElementById('installBanner');
+            if (banner) banner.classList.remove('show');
+          }
+          deferredInstallPrompt = null;
+        });
+        return;
+      }
+      showInstallHelp();
+    }
+
+    function showInstallHelp() {
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isAndroid = /android/i.test(navigator.userAgent);
+      const isFile = location.protocol === 'file:';
+      let msg = '';
+      if (isFile) {
+        msg = '⚠️ الان فایل را مستقیم باز کرده‌ای (file://).\n\n' +
+          'برای نصب واقعی به‌صورت اپ:\n' +
+          '۱) فایل را روی یک هاست رایگان بگذار (مثل GitHub Pages یا Netlify)\n' +
+          '۲) با آدرس https بازش کن\n' +
+          '۳) از منوی مرورگر «Install app» یا «Add to Home Screen» را بزن\n\n' +
+          'تا آن موقع داده‌ها روی همین دستگاه در مرورگر ذخیره می‌مانند.';
+      } else if (isIOS) {
+        msg = 'نصب روی آیفون/آیپد:\n' +
+          '۱) در Safari دکمه Share را بزن\n' +
+          '۲) گزینه Add to Home Screen را انتخاب کن\n' +
+          '۳) Add را بزن — آیکون روی صفحه اصلی می‌آید\n\n' +
+          'بعد از این، اپ را از صفحه اصلی باز کن (نه از تب Safari).';
+      } else if (isAndroid) {
+        msg = 'نصب روی اندروید:\n' +
+          '۱) منوی کروم را باز کن\n' +
+          '۲) Install app یا Add to Home screen را بزن\n' +
+          '۳) تأیید کن\n\n' +
+          'اپ را از صفحه اصلی یا کشوی برنامه‌ها باز کن.';
+      } else {
+        msg = 'نصب روی کامپیوتر (Chrome / Edge):\n' +
+          '۱) آیکون نصب در نوار آدرس را بزن\n' +
+          '   یا منوی مرورگر → Install app\n' +
+          '۲) Install را تأیید کن\n' +
+          '۳) اپ در منوی استارت / Applications ظاهر می‌شود\n\n' +
+          'از آن به بعد مثل برنامه عادی باز می‌شود و با بستن کروم از بین نمی‌رود.';
+      }
+      alert(msg);
+    }
+
+    (function setupPWA() {
+      try {
+        const icon192 = makeAppIcon(192);
+        const icon512 = makeAppIcon(512);
+
+        // آیکون برای iOS
+        let touch = document.querySelector('link[rel="apple-touch-icon"]');
+        if (!touch) {
+          touch = document.createElement('link');
+          touch.rel = 'apple-touch-icon';
+          document.head.appendChild(touch);
+        }
+        touch.href = icon192;
+
+        const manifest = {
+          name: 'ثبت‌کننده ساعت مطالعه',
+          short_name: 'مطالعه',
+          description: 'ثبت و پیگیری ساعت مطالعه روزانه',
+          start_url: './',
+          scope: './',
+          display: 'standalone',
+          display_override: ['standalone', 'minimal-ui'],
+          orientation: 'any',
+          background_color: '#0a0a12',
+          theme_color: '#0a0a12',
+          lang: 'fa',
+          dir: 'rtl',
+          icons: [
+            { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'maskable' }
+          ],
+          categories: ['education', 'productivity'],
+          prefer_related_applications: false
+        };
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.getElementById('appManifest');
+        if (link) link.href = url;
+      } catch (e) { console.warn('manifest', e); }
+
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        if (localStorage.getItem('study_installed') === '1') return;
+        const banner = document.getElementById('installBanner');
+        if (banner) banner.classList.add('show');
+      });
+
+      window.addEventListener('appinstalled', function() {
+        deferredInstallPrompt = null;
+        localStorage.setItem('study_installed', '1');
+        const banner = document.getElementById('installBanner');
+        if (banner) banner.classList.remove('show');
+        showToast('اپ با موفقیت نصب شد ✓ از صفحه اصلی بازش کن');
+      });
+
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true ||
+        document.referrer.includes('android-app://');
+
+      if (isStandalone) {
+        localStorage.setItem('study_installed', '1');
+        const banner = document.getElementById('installBanner');
+        if (banner) banner.classList.remove('show');
+      } else if (localStorage.getItem('study_installed') !== '1') {
+        setTimeout(function() {
+          const banner = document.getElementById('installBanner');
+          if (banner && !window.matchMedia('(display-mode: standalone)').matches) {
+            banner.classList.add('show');
+          }
+        }, 1800);
+      }
+
+      // Service Worker — فقط روی http/https (نه file://)
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+        const pageUrl = location.href.split('#')[0];
+        const swCode = [
+          "const CACHE='study-app-v3';",
+          "const PAGE=" + JSON.stringify(pageUrl) + ";",
+          "self.addEventListener('install',e=>{",
+          "  e.waitUntil(caches.open(CACHE).then(c=>c.addAll([PAGE,'./']).catch(()=>c.add(PAGE).catch(()=>{}))).then(()=>self.skipWaiting()));",
+          "});",
+          "self.addEventListener('activate',e=>{",
+          "  e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));",
+          "});",
+          "self.addEventListener('fetch',e=>{",
+          "  if(e.request.method!=='GET')return;",
+          "  e.respondWith(",
+          "    caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{",
+          "      if(resp&&resp.ok&&resp.type==='basic'){const copy=resp.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));}",
+          "      return resp;",
+          "    }).catch(()=>caches.match(PAGE)))",
+          "  );",
+          "});"
+        ].join('');
+        try {
+          const swBlob = new Blob([swCode], { type: 'text/javascript' });
+          const swUrl = URL.createObjectURL(swBlob);
+          navigator.serviceWorker.register(swUrl, { scope: './' }).catch(function(){});
+        } catch (e) {}
+      }
+    })();
+
+    // Enter روی input برنامه فردا
+    (function bindTomorrowInput() {
+      const tmInput = document.getElementById('tomorrowInput');
+      if (tmInput && !tmInput._bound) {
+        tmInput._bound = true;
+        tmInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') { e.preventDefault(); addTomorrowItem(); }
+        });
+      }
+    })();
+
+    // چک اولیه — ورود ماندگار با localStorage
+    if (isSessionValid()) {
+      showApp();
+    }
+  </script>
+</body>
+</html>
