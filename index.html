@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>ثبت‌کننده ساعت مطالعه</title>
-  <meta name="theme-color" content="#0a0a12" />
+  <meta name="theme-color" content="#060a0f" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,47 +16,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root, [data-theme="dark"] {
-      --form-label: #a5f3fc;
-      --greeting: #a5f3fc;
-      --bg: #0a0a12;
-      --bg-card: rgba(24, 24, 40, 0.85);
-      --bg-input: rgba(15, 15, 28, 0.9);
-      --border: rgba(167, 139, 250, 0.45);
-      --border-light: rgba(196, 181, 253, 0.55);
-      --text: #f5f3ff;
-      --text-muted: #c4b5fd;
-      --text-dim: #8b7cb8;
-      --accent: #22d3ee;
-      --accent-soft: #67e8f9;
-      --accent-dim: rgba(34, 211, 238, 0.12);
-      --success: #34d399;
+      --form-label: #5eead4;
+      --greeting: #99f6e4;
+      --bg: #060a0f;
+      --bg-card: rgba(15, 23, 32, 0.82);
+      --bg-input: rgba(10, 16, 24, 0.95);
+      --border: rgba(45, 212, 191, 0.22);
+      --border-light: rgba(94, 234, 212, 0.38);
+      --text: #f0fdfa;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent: #2dd4bf;
+      --accent-soft: #5eead4;
+      --accent-dim: rgba(45, 212, 191, 0.12);
+      --success: #4ade80;
       --danger: #fb7185;
       --radius: 18px;
       --radius-sm: 12px;
-      --shadow: 0 8px 32px rgba(88, 28, 135, 0.25), 0 0 0 1px rgba(139, 92, 246, 0.08);
-      --ai-bg: rgba(76, 29, 149, 0.25);
-      --glow: 0 0 40px rgba(34, 211, 238, 0.08);
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(45, 212, 191, 0.06);
+      --ai-bg: rgba(15, 40, 40, 0.35);
+      --glow: 0 0 60px rgba(45, 212, 191, 0.07);
     }
     [data-theme="light"] #todayShamsi { color: #0f172a !important; }
     [data-theme="light"] {
-      --form-label: #6d28d9;
-      --greeting: #7c3aed;
-      --bg: #f5f3ff;
+      --form-label: #0f766e;
+      --greeting: #0d9488;
+      --bg: #f0fdfa;
       --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-input: #faf8ff;
-      --border: rgba(124, 58, 237, 0.15);
-      --border-light: rgba(124, 58, 237, 0.25);
-      --text: #1e1b4b;
-      --text-muted: #6b7280;
-      --text-dim: #9ca3af;
-      --accent: #7c3aed;
-      --accent-soft: #a78bfa;
-      --accent-dim: rgba(124, 58, 237, 0.1);
+      --bg-input: #f8fffe;
+      --border: rgba(13, 148, 136, 0.18);
+      --border-light: rgba(13, 148, 136, 0.3);
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --accent: #0d9488;
+      --accent-soft: #14b8a6;
+      --accent-dim: rgba(13, 148, 136, 0.1);
       --success: #059669;
       --danger: #e11d48;
-      --shadow: 0 8px 30px rgba(124, 58, 237, 0.1), 0 0 0 1px rgba(124, 58, 237, 0.06);
-      --ai-bg: rgba(237, 233, 254, 0.8);
-      --glow: 0 0 40px rgba(124, 58, 237, 0.06);
+      --shadow: 0 8px 30px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(13, 148, 136, 0.06);
+      --ai-bg: rgba(240, 253, 250, 0.9);
+      --glow: 0 0 40px rgba(13, 148, 136, 0.06);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -78,14 +78,13 @@
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      background-color: #06060e;
+      background-color: #05080d;
       background-image:
-        radial-gradient(circle 600px at 15% 20%, rgba(139, 92, 246, 0.55), transparent 70%),
-        radial-gradient(circle 500px at 85% 15%, rgba(34, 211, 238, 0.4), transparent 65%),
-        radial-gradient(circle 450px at 70% 75%, rgba(192, 132, 252, 0.35), transparent 70%),
-        radial-gradient(circle 400px at 20% 85%, rgba(56, 189, 248, 0.25), transparent 65%),
-        radial-gradient(circle 300px at 50% 50%, rgba(99, 102, 241, 0.12), transparent 70%),
-        linear-gradient(160deg, #06060e 0%, #0c0820 35%, #081018 70%, #0a0a14 100%);
+        radial-gradient(circle 650px at 15% 20%, rgba(45, 212, 191, 0.18), transparent 65%),
+        radial-gradient(circle 500px at 85% 15%, rgba(56, 189, 248, 0.12), transparent 60%),
+        radial-gradient(circle 480px at 70% 78%, rgba(16, 185, 129, 0.1), transparent 65%),
+        radial-gradient(circle 380px at 25% 85%, rgba(14, 165, 233, 0.08), transparent 60%),
+        linear-gradient(165deg, #05080d 0%, #0a1219 40%, #071018 100%);
     }
     body::after {
       content: '';
@@ -94,25 +93,54 @@
       z-index: -1;
       pointer-events: none;
       background-image:
-        radial-gradient(circle at 1px 1px, rgba(167, 139, 250, 0.18) 1px, transparent 0);
-      background-size: 28px 28px;
+        radial-gradient(circle at 1px 1px, rgba(45, 212, 191, 0.12) 1px, transparent 0);
+      background-size: 30px 30px;
       opacity: 0.35;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 10%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 30%, #000 10%, transparent 70%);
+      mask-image: radial-gradient(ellipse 90% 75% at 50% 25%, #000 15%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 25%, #000 15%, transparent 70%);
+    }
+    /* پس‌زمینه کلاسیک */
+    body[data-bg="classic"]::before {
+      background-color: #0d0b09;
+      background-image:
+        radial-gradient(ellipse 120% 80% at 50% -10%, rgba(180, 140, 90, 0.15), transparent 55%),
+        radial-gradient(ellipse 80% 50% at 100% 100%, rgba(80, 60, 40, 0.2), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 0% 80%, rgba(60, 50, 40, 0.15), transparent 50%),
+        linear-gradient(180deg, #12100e 0%, #0d0b09 50%, #0a0908 100%);
+    }
+    body[data-bg="classic"]::after {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(180,150,100,0.015) 2px, rgba(180,150,100,0.015) 3px),
+        radial-gradient(circle at 1px 1px, rgba(200, 170, 120, 0.06) 1px, transparent 0);
+      background-size: 100% 3px, 28px 28px;
+      opacity: 0.5;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    body[data-theme="light"][data-bg="classic"]::before {
+      background-color: #f3efe6;
+      background-image:
+        radial-gradient(ellipse 100% 70% at 50% 0%, rgba(212, 175, 106, 0.2), transparent 55%),
+        linear-gradient(180deg, #faf6ee 0%, #f0ebe0 100%);
+    }
+    body[data-theme="light"][data-bg="classic"]::after {
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(120,100,70,0.03) 2px, rgba(120,100,70,0.03) 3px);
+      background-size: 100% 3px;
+      opacity: 0.6;
     }
     body[data-theme="light"]::before {
-      background-color: #f8f5ff;
+      background-color: #f0fdfa;
       background-image:
-        radial-gradient(circle 600px at 10% 15%, rgba(167, 139, 250, 0.65), transparent 70%),
-        radial-gradient(circle 500px at 90% 10%, rgba(165, 243, 252, 0.45), transparent 65%),
-        radial-gradient(circle 450px at 75% 80%, rgba(196, 181, 253, 0.5), transparent 70%),
-        radial-gradient(circle 400px at 15% 80%, rgba(233, 213, 255, 0.55), transparent 65%),
-        linear-gradient(160deg, #faf8ff 0%, #f3e8ff 40%, #ede9fe 100%);
+        radial-gradient(circle 600px at 12% 15%, rgba(45, 212, 191, 0.2), transparent 70%),
+        radial-gradient(circle 500px at 90% 10%, rgba(56, 189, 248, 0.12), transparent 65%),
+        radial-gradient(circle 450px at 75% 80%, rgba(16, 185, 129, 0.1), transparent 70%),
+        linear-gradient(160deg, #f8fffe 0%, #f0fdfa 45%, #ecfeff 100%);
     }
     body[data-theme="light"]::after {
       background-image:
-        radial-gradient(circle at 1px 1px, rgba(124, 58, 237, 0.2) 1px, transparent 0);
-      background-size: 28px 28px;
+        radial-gradient(circle at 1px 1px, rgba(13, 148, 136, 0.1) 1px, transparent 0);
+      background-size: 30px 30px;
       opacity: 0.4;
     }
     @media (max-width: 600px) {
@@ -205,7 +233,7 @@
     .login-box input:focus { border-color: var(--accent); }
     .login-box button {
       width: 100%;
-      background: linear-gradient(135deg, rgba(56,189,248,0.8) 0%, rgba(14,165,233,0.7) 100%);
+      background: linear-gradient(135deg, rgba(212,175,106,0.85) 0%, rgba(184,146,58,0.75) 100%);
       color: #fff;
       border: 1px solid rgba(125,211,252,0.4);
       border-radius: var(--radius-sm);
@@ -217,7 +245,7 @@
       font-family: inherit;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 18px rgba(56,189,248,0.25), inset 0 1px 0 rgba(255,255,255,0.25);
+      box-shadow: 0 4px 18px rgba(212,175,106,0.25), inset 0 1px 0 rgba(255,255,255,0.25);
     }
     .login-box button:hover {
       filter: none;
@@ -226,7 +254,7 @@
       transform: translateY(-1px);
     }
     .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; min-height: 20px; }
-    #app { display: none; max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; position: relative; z-index: 1; }
+    #app { display: block; max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; position: relative; z-index: 1; }
     header {
       display: flex; justify-content: space-between; align-items: flex-start;
       margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
@@ -257,24 +285,24 @@
       box-shadow: 0 6px 20px rgba(56,189,248,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .btn-primary {
-      background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #c084fc 100%);
-      border: 1px solid rgba(167, 139, 250, 0.5);
-      color: #0f0a1a;
+      background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 50%, #5eead4 100%);
+      border: 1px solid rgba(94, 234, 212, 0.4);
+      color: #042f2e;
       font-weight: 700;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35), inset 0 1px 0 rgba(255,255,255,0.35);
+      box-shadow: 0 4px 22px rgba(45, 212, 191, 0.3), inset 0 1px 0 rgba(255,255,255,0.35);
     }
     .btn-primary:hover {
-      filter: brightness(1.08);
-      box-shadow: 0 6px 28px rgba(34, 211, 238, 0.35), inset 0 1px 0 rgba(255,255,255,0.4);
+      filter: brightness(1.06);
+      box-shadow: 0 6px 28px rgba(45, 212, 191, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
       transform: translateY(-1px);
     }
     [data-theme="light"] .btn-primary {
-      background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 55%, #14b8a6 100%);
       color: #fff;
-      border-color: rgba(124, 58, 237, 0.4);
-      box-shadow: 0 4px 18px rgba(124, 58, 237, 0.3);
+      border-color: rgba(13, 148, 136, 0.4);
+      box-shadow: 0 4px 18px rgba(13, 148, 136, 0.28);
     }
     .btn-danger {
       color: var(--danger);
@@ -710,19 +738,83 @@
     [data-theme="dark"] .subj-track { border-color: rgba(167, 139, 250, 0.35); }
     [data-theme="dark"] .ai-box { border-color: rgba(56, 189, 248, 0.45); }
 
+
+    /* تایمر مطالعه */
+    .timer-card {
+      text-align: center;
+      padding: 20px 18px;
+    }
+    .timer-display {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      margin: 8px 0 16px;
+      text-shadow: 0 0 24px rgba(34, 211, 238, 0.25);
+    }
+    [data-theme="light"] .timer-display {
+      text-shadow: 0 0 16px rgba(124, 58, 237, 0.2);
+    }
+    .timer-controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .timer-controls .btn {
+      min-width: 100px;
+    }
+    .timer-status {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      min-height: 1.2em;
+    }
+    .timer-running .timer-display {
+      color: var(--success);
+    }
+    /* تاریخچه بهبودیافته */
+    .history-summary {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .history-summary .pill {
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .history-summary .pill strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .filter-row input[type="search"] {
+      min-width: 140px;
+      flex: 1;
+    }
+
+    .tasks-tabs { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .tasks-tabs .tab { cursor: pointer; }
+    .tasks-progress-wrap { margin-bottom: 12px; }
+    .task-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 12px; border-radius: var(--radius-sm);
+      background: var(--bg-input); border: 1px solid var(--border);
+      margin-bottom: 8px; transition: opacity 0.2s, border-color 0.2s;
+    }
+    .task-item.done { opacity: 0.55; }
+    .task-item .task-text { flex: 1; font-size: 0.92rem; word-break: break-word; }
+    .task-item.done .task-text { text-decoration: line-through; }
+    .task-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   </style>
 </head>
-<body data-theme="dark">
-  <div id="loginScreen">
-    <div class="login-box">
-      <h1>📚 ثبت‌کننده مطالعه</h1>
-      <p>برای ورود رمز عبور را وارد کنید</p>
-      <input type="password" id="passwordInput" placeholder="رمز عبور" maxlength="20" autocomplete="off" />
-      <button onclick="tryLogin()">ورود</button>
-      <div class="login-error" id="loginError"></div>
-    </div>
-  </div>
-  <div id="app">
+<body data-theme="dark" data-bg="classic">
+  <div id="app" style="display:block;">
     <header>
       <div>
         <h1>📚 ثبت‌کننده ساعت مطالعه</h1>
@@ -731,23 +823,12 @@
       <div class="header-actions">
         <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا به پلنت خوش اومدی</span>
         <div class="top-row">
-          <button type="button" class="btn btn-icon theme-btn active" id="themeToggleBtn" onclick="toggleTheme()" title="تغییر تم">🌙</button>
-          <button class="btn btn-danger" onclick="logout()">خروج</button>
+          <button type="button" class="btn btn-sm" id="styleToggleBtn" onclick="toggleStyleMode()" title="کلاسیک / مدرن">🏛️ کلاسیک</button>
         </div>
         
       </div>
     </header>
-    <div class="install-banner" id="installBanner">
-      <div style="flex:1;min-width:0;">
-        <p style="margin:0 0 4px;font-weight:600;">📱 نصب به‌صورت اپلیکیشن</p>
-        <p style="margin:0;font-size:0.82rem;opacity:0.9;">بعد از نصب، از صفحه اصلی گوشی/دسکتاپ باز می‌شود و با بستن کروم از بین نمی‌رود.</p>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button type="button" class="btn btn-primary btn-sm" id="installBtn" onclick="triggerInstall()">نصب اپ</button>
-        <button type="button" class="btn btn-sm" onclick="showInstallHelp()">راهنما</button>
-      </div>
-    </div>
-    <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="stat-card"><div class="label">📅 امروز</div><div class="value" id="statToday">۰ دقیقه</div></div>
       <div class="stat-card"><div class="label">📆 این هفته</div><div class="value" id="statWeek">۰ دقیقه</div></div>
       <div class="stat-card" id="statCompareCard">
@@ -771,7 +852,41 @@
         <div class="sub" id="statGoalSub"></div>
       </div>
     </div>
-<div class="card" style="display:none;">    <h2>✍️ ثبت مطالعه</h2>
+
+    <!-- تایمر مطالعه -->
+    <div class="card timer-card" id="timerCard">
+      <h2 style="justify-content:center;cursor:default;">⏱️ تایمر مطالعه</h2>
+      <div style="max-width:280px;margin:0 auto 10px;">
+        <label for="timerSubject" style="text-align:center;display:block;margin-bottom:6px;">📖 درس این جلسه</label>
+        <select id="timerSubject">
+          <option value="">انتخاب درس...</option>
+          <optgroup label="دروس تخصصی">
+            <option value="زیست">زیست</option>
+            <option value="شیمی">شیمی</option>
+            <option value="فیزیک">فیزیک</option>
+            <option value="ریاضی">ریاضی</option>
+            <option value="زمین‌شناسی">زمین‌شناسی</option>
+          </optgroup>
+          <optgroup label="دروس عمومی">
+            <option value="دینی">دینی</option>
+            <option value="زبان">زبان</option>
+            <option value="فارسی">فارسی</option>
+            <option value="عربی">عربی</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="timer-status" id="timerStatus">درس را انتخاب کن و شروع بزن</div>
+      <div class="timer-display" id="timerDisplay">00:00:00</div>
+      <div class="timer-controls">
+        <button type="button" class="btn btn-primary" id="timerStartBtn" onclick="timerStart()">▶ شروع</button>
+        <button type="button" class="btn" id="timerPauseBtn" onclick="timerPause()" style="display:none;">⏸ توقف</button>
+        <button type="button" class="btn" id="timerResumeBtn" onclick="timerResume()" style="display:none;">▶ ادامه</button>
+        <button type="button" class="btn btn-danger" id="timerResetBtn" onclick="timerReset()">↺ ریست</button>
+        <button type="button" class="btn" id="timerToFormBtn" onclick="timerFillForm()" title="زمان و درس را به فرم ببر">⬇️ به فرم</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>✍️ ثبت مطالعه</h2>
       <p class="hint">می‌تونی چند درس مختلف در یک روز ثبت کنی. سال و ماه قفل هستن، فقط روز رو تغییر بده.</p>
       <form id="addForm" onsubmit="addSession(event)">
         <div class="form-grid">
@@ -855,6 +970,53 @@
     </div>
 
 
+
+    <!-- کارهای امروز / فردا / دیروز -->
+    <div class="card collapsible collapsed" id="tasksCard">
+      <h2 onclick="toggleCollapse('tasksCard')">✅ کارها و برنامه مطالعه <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <p class="hint">هر روز خودکار جابه‌جا می‌شود: کارهای «فردا» می‌شوند «امروز»، و «امروز» می‌شوند «دیروز».</p>
+        <div class="tasks-tabs">
+          <button type="button" class="tab active" data-task-tab="today" onclick="switchTaskTab('today')">📅 امروز</button>
+          <button type="button" class="tab" data-task-tab="tomorrow" onclick="switchTaskTab('tomorrow')">🌅 فردا</button>
+          <button type="button" class="tab" data-task-tab="yesterday" onclick="switchTaskTab('yesterday')">🕓 دیروز</button>
+        </div>
+        <div id="tasksProgress" class="tasks-progress-wrap"></div>
+        <div id="tasksList"></div>
+        <div class="tomorrow-input-row" style="flex-direction:column;align-items:stretch;margin-top:12px;" id="tasksAddRow">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input type="text" id="taskInput" placeholder="مثلاً: زیست فصل ۳ + ۲۰ تست" maxlength="140" style="flex:2;min-width:160px;" />
+            <select id="taskSubject" style="flex:1;min-width:110px;">
+              <option value="">بدون درس</option>
+              <optgroup label="تخصصی">
+                <option value="زیست">زیست</option>
+                <option value="شیمی">شیمی</option>
+                <option value="فیزیک">فیزیک</option>
+                <option value="ریاضی">ریاضی</option>
+                <option value="زمین‌شناسی">زمین‌شناسی</option>
+              </optgroup>
+              <optgroup label="عمومی">
+                <option value="دینی">دینی</option>
+                <option value="زبان">زبان</option>
+                <option value="فارسی">فارسی</option>
+                <option value="عربی">عربی</option>
+              </optgroup>
+            </select>
+            <select id="taskPriority" style="width:110px;">
+              <option value="normal">اولویت عادی</option>
+              <option value="high">اولویت بالا</option>
+              <option value="low">اولویت پایین</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-sm btn-primary" onclick="addTaskItem()">＋ افزودن</button>
+            <button type="button" class="btn btn-sm" onclick="clearDoneTasks()">پاک کردن انجام‌شده‌ها</button>
+            <button type="button" class="btn btn-sm" onclick="moveUndoneToTomorrow()" id="btnMoveToTomorrow">انتقال ناتمام‌ها به فردا</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- امکانات بیشتر -->
     <div class="card collapsible collapsed" id="extraCard">
       <h2 onclick="toggleCollapse('extraCard')">✨ امکانات بیشتر <span class="toggle-icon">▼</span></h2>
@@ -887,11 +1049,11 @@
             <div class="stat-card" style="padding:12px;margin:0;"><span id="statLifeTests">—</span></div>
           </div>
           <div>
-            <label>🌟 بهترین روز هفته</label>
+            <label>🌟 بهترین روز این هفته</label>
             <div class="stat-card" style="padding:12px;margin:0;"><span id="statBestWeekday">—</span></div>
           </div>
           <div>
-            <label>😴 ضعیف‌ترین روز هفته</label>
+            <label>😴 ضعیف‌ترین روز این هفته</label>
             <div class="stat-card" style="padding:12px;margin:0;"><span id="statWorstWeekday">—</span></div>
           </div>
           <div>
@@ -911,41 +1073,6 @@
           <label>🏆 رتبه‌بندی روزهای این هفته</label>
           <div id="dayRanking" class="day-rank-list" style="margin-top:8px;"></div>
         </div>
-        <div style="margin-top:16px;">
-          <label>📋 کارهای فردا / برنامه مطالعه</label>
-          <p class="hint" style="margin-bottom:8px;">کارها روی دستگاه ذخیره می‌شوند و با همگام‌سازی ابری بین گوشی و کامپیوتر یکی می‌شوند. می‌تونی اولویت و درس مشخص کنی.</p>
-          <div id="tomorrowPlan" style="margin-top:8px;"></div>
-          <div class="tomorrow-input-row" style="flex-direction:column;align-items:stretch;">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <input type="text" id="tomorrowInput" placeholder="مثلاً: زیست فصل ۳ + ۲۰ تست" maxlength="120" style="flex:2;min-width:160px;" />
-              <select id="tomorrowSubject" style="flex:1;min-width:110px;">
-                <option value="">بدون درس</option>
-                <optgroup label="تخصصی">
-                  <option value="زیست">زیست</option>
-                  <option value="شیمی">شیمی</option>
-                  <option value="فیزیک">فیزیک</option>
-                  <option value="ریاضی">ریاضی</option>
-                  <option value="زمین‌شناسی">زمین‌شناسی</option>
-                </optgroup>
-                <optgroup label="عمومی">
-                  <option value="دینی">دینی</option>
-                  <option value="زبان">زبان</option>
-                  <option value="فارسی">فارسی</option>
-                  <option value="عربی">عربی</option>
-                </optgroup>
-              </select>
-              <select id="tomorrowPriority" style="width:110px;">
-                <option value="normal">اولویت عادی</option>
-                <option value="high">اولویت بالا</option>
-                <option value="low">اولویت پایین</option>
-              </select>
-            </div>
-            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-              <button type="button" class="btn btn-sm btn-primary" onclick="addTomorrowItem()">＋ افزودن کار</button>
-              <button type="button" class="btn btn-sm" onclick="clearDoneTomorrow()">پاک کردن انجام‌شده‌ها</button>
-            </div>
-          </div>
-        </div>
         <div style="margin-top:16px;" class="form-grid">
           <div>
             <label>🔍 مقایسه دو درس (این ماه)</label>
@@ -957,19 +1084,6 @@
           </div>
         </div>
         <div id="subjectCompareResult" style="margin-top:8px;font-size:0.9rem;color:var(--text-muted);"></div>
-      </div>
-    </div>
-
-    <!-- AI Analysis (collapsible) -->
-    <div class="card collapsible collapsed" id="aiCard">
-      <h2 onclick="toggleCollapse('aiCard')">🤖 تحلیل هوشمند <span class="toggle-icon">▼</span></h2>
-      <div class="collapsible-body">
-        <div class="ai-box">
-          <div class="ai-title">✨ تحلیل خودکار عملکردت</div>
-          <div class="ai-content" id="aiAnalysis">
-            هنوز داده‌ای برای تحلیل وجود نداره. چند جلسه ثبت کن تا تحلیل برات آماده بشه.
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1032,68 +1146,45 @@
       </div>
     </div>
 
-   <div class="card">
-      <h2>☁️ همگام‌سازی خودکار (گوشی ↔ کامپیوتر)</h2>
-      <p class="hint">یک‌بار تنظیم کن؛ بعد از آن هر ثبت یا حذف روی یک دستگاه، با زدن «همگام‌سازی الان» یا هنگام باز کردن برنامه روی دستگاه دیگر، به صورت خودکار یکی می‌شود.</p>
-      <div class="form-grid">
-        <div>
-          <label>🔑 API Key (از JSONBin)</label>
-          <input type="password" id="syncApiKey" placeholder="آی‌پی‌آی کی JSONBin" />
-        </div>
-        <div>
-          <label>📦 Bin ID</label>
-          <input type="text" id="syncBinId" placeholder="شناسه Bin" />
-        </div>
-      </div>
-      <div class="form-actions" style="margin-top:12px;">
-        <button type="button" class="btn btn-primary" onclick="saveSyncSettings()">💾 ذخیره تنظیمات همگام‌سازی</button>
-        <button type="button" class="btn" onclick="syncNow()">🔄 همگام‌سازی الان</button>
-      </div>
-      <p class="hint" style="margin-top:12px;" id="syncStatus">همگام‌سازی خاموش است.</p>
-
-      <div style="margin-top:16px;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-input);font-size:0.85rem;color:var(--text-muted);line-height:1.8;">
-        <strong style="color:var(--accent);">🛡️ اگر اینترنت ملی / قطع شد:</strong><br>
-        ۱) همیشه از «خروجی پشتیبان» فایل JSON بگیر و توی گوشی یا فلش نگه دار<br>
-        ۲) داده اصلی روی خود دستگاه می‌ماند و بدون اینترنت کار می‌کند<br>
-        ۳) همگام‌سازی ابری فقط با اینترنت بین‌الملل کار می‌کند<br>
-        ۴) برای ماندگاری بهتر روی گوشی: فایل را جایی مثل GitHub Pages بگذار و Add to Home Screen کن
-      </div>
-
-    </div>
-
     <!-- History (collapsible) -->
     <div class="card collapsible collapsed" id="historyCard">
       <h2 onclick="toggleCollapse('historyCard')">📋 تاریخچه مطالعه <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-        <div class="filter-row">
-          <select id="filterRange" onchange="renderHistory()">
-            <option value="all">همه روزها</option>
-            <option value="today">فقط امروز</option>
-            <option value="7">۷ روز اخیر (شامل امروز)</option>
-            <option value="30">۳۰ روز اخیر (شامل امروز)</option>
-          </select>
-          <select id="filterSubject" onchange="renderHistory()">
-            <option value="all">همه دروس</option>
-            <optgroup label="تخصصی">
-              <option value="زیست">زیست</option>
-              <option value="شیمی">شیمی</option>
-              <option value="فیزیک">فیزیک</option>
-              <option value="ریاضی">ریاضی</option>
-              <option value="زمین‌شناسی">زمین‌شناسی</option>
-            </optgroup>
-            <optgroup label="عمومی">
-              <option value="دینی">دینی</option>
-              <option value="زبان">زبان</option>
-              <option value="فارسی">فارسی</option>
-              <option value="عربی">عربی</option>
-            </optgroup>
-          </select>
-          <button class="btn" onclick="exportData()">💾 خروجی پشتیبان</button>
-          <button class="btn" onclick="document.getElementById('importFile').click()">📥 ورود پشتیبان</button>
-          <input type="file" id="importFile" accept=".json,application/json" style="display:none;" onchange="importData(event)" />
-        </div>
-        <p class="hint" style="margin-top:8px;">💡 اطلاعات فقط روی همین دستگاه ذخیره می‌شود. برای انتقال بین گوشی و کامپیوتر از «خروجی / ورود پشتیبان» استفاده کن.<br>🖼️ برای هر روز می‌تونی تصویر خلاصه روز رو دانلود کنی.</p>
-        <div id="historyList"></div>
+      <div class="history-summary" id="historySummary">
+        <span class="pill">جلسات: <strong id="histCount">۰</strong></span>
+        <span class="pill">مجموع: <strong id="histTotal">۰ دقیقه</strong></span>
+        <span class="pill">تست‌ها: <strong id="histTests">۰</strong></span>
+      </div>
+      <div class="filter-row">
+        <select id="filterRange" onchange="renderHistory()">
+          <option value="all">همه روزها</option>
+          <option value="today">فقط امروز</option>
+          <option value="7" selected>۷ روز اخیر</option>
+          <option value="30">۳۰ روز اخیر</option>
+        </select>
+        <select id="filterSubject" onchange="renderHistory()">
+          <option value="all">همه دروس</option>
+          <optgroup label="تخصصی">
+            <option value="زیست">زیست</option>
+            <option value="شیمی">شیمی</option>
+            <option value="فیزیک">فیزیک</option>
+            <option value="ریاضی">ریاضی</option>
+            <option value="زمین‌شناسی">زمین‌شناسی</option>
+          </optgroup>
+          <optgroup label="عمومی">
+            <option value="دینی">دینی</option>
+            <option value="زبان">زبان</option>
+            <option value="فارسی">فارسی</option>
+            <option value="عربی">عربی</option>
+          </optgroup>
+        </select>
+        <input type="search" id="filterSearch" placeholder="🔍 جستجو در یادداشت / بخش تست..." oninput="renderHistory()" />
+        <button class="btn" onclick="exportData()">💾 خروجی پشتیبان</button>
+        <button class="btn" onclick="document.getElementById('importFile').click()">📥 ورود پشتیبان</button>
+        <input type="file" id="importFile" accept=".json,application/json" style="display:none;" onchange="importData(event)" />
+      </div>
+      <p class="hint" style="margin-top:8px;">💡 داده روی همین دستگاه ذخیره می‌شود. برای گوشی و کامپیوتر از پشتیبان JSON استفاده کن. 🖼️ برای هر روز می‌تونی تصویر خلاصه بگیری.</p>
+      <div id="historyList"></div>
       </div>
     </div>
   </div>
@@ -1160,7 +1251,6 @@
 
   <div class="toast" id="toast"></div>
   <script>
-    const PASSWORD = '0950144691';
     const SPECIALIZED = ['زیست', 'شیمی', 'فیزیک', 'ریاضی', 'زمین‌شناسی'];
     const ALL_SUBJECTS = ['زیست', 'شیمی', 'فیزیک', 'ریاضی', 'زمین‌شناسی', 'دینی', 'زبان', 'فارسی', 'عربی'];
     const WEEKDAYS_FA = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
@@ -1345,9 +1435,7 @@
     }
 
     // ===== Session timeout (۵ دقیقه) =====
-    function isSessionValid() {
-      return localStorage.getItem('study_logged_in') === '1' || sessionStorage.getItem('study_logged_in') === '1';
-    }
+    function isSessionValid() { return true; }
     function refreshSession() {
       if (isSessionValid()) {
         localStorage.setItem('study_login_time', String(Date.now()));
@@ -1370,37 +1458,8 @@
     function startSessionTimer() { /* غیرفعال */ }
     function updateSessionHint() { /* غیرفعال */ }
 
-    function tryLogin() {
-      const input = document.getElementById('passwordInput');
-      const err = document.getElementById('loginError');
-      // تبدیل ارقام فارسی و عربی به انگلیسی
-      let val = input.value.trim()
-        .replace(/[۰-۹]/g, function(d) { return String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); })
-        .replace(/[٠-٩]/g, function(d) { return String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)); })
-        .replace(/\s+/g, '');
-      if (val === PASSWORD) {
-        // ورود ماندگار — حتی بعد از بستن مرورگر/اپ
-        localStorage.setItem('study_logged_in', '1');
-        localStorage.setItem('study_login_time', String(Date.now()));
-        sessionStorage.setItem('study_logged_in', '1');
-        sessionStorage.setItem('study_login_time', String(Date.now()));
-        showApp();
-      } else {
-        err.textContent = 'رمز عبور اشتباه است — دوباره امتحان کن';
-        input.value = ''; input.focus();
-      }
-    }
-    function logout() {
-      localStorage.removeItem('study_logged_in');
-      localStorage.removeItem('study_login_time');
-      sessionStorage.removeItem('study_logged_in');
-      sessionStorage.removeItem('study_login_time');
-      if (sessionCheckTimer) { clearInterval(sessionCheckTimer); sessionCheckTimer = null; }
-      document.getElementById('app').style.display = 'none';
-      document.getElementById('loginScreen').style.display = 'flex';
-      document.getElementById('passwordInput').value = '';
-      document.getElementById('loginError').textContent = '';
-    }
+    function tryLogin() { showApp(); }
+    function logout() { /* حذف شده */ }
     function setTheme(next) {
       document.body.setAttribute('data-theme', next);
       localStorage.setItem('study_theme', next);
@@ -1411,16 +1470,42 @@
         btn.classList.add('active');
       }
     }
+    
+
+    /** فقط دو حالت: classic و modern — پیش‌فرض کلاسیک */
+    function getStyleMode() {
+      return localStorage.getItem('study_style') || 'classic';
+    }
+    function applyStyleMode() {
+      var mode = getStyleMode();
+      document.body.setAttribute('data-bg', mode);
+      // تم رنگی همیشه تیرهٔ هماهنگ با سبک
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('study_theme', 'dark');
+      var btn = document.getElementById('styleToggleBtn');
+      if (btn) {
+        btn.textContent = mode === 'classic' ? '✨ مدرن' : '🏛️ کلاسیک';
+        btn.title = mode === 'classic' ? 'رفتن به تم مدرن' : 'رفتن به تم کلاسیک';
+      }
+    }
+    function toggleStyleMode() {
+      var next = getStyleMode() === 'classic' ? 'modern' : 'classic';
+      localStorage.setItem('study_style', next);
+      applyStyleMode();
+      showToast(next === 'classic' ? 'تم کلاسیک' : 'تم مدرن');
+    }
+    function toggleBgStyle() { toggleStyleMode(); }
+    function applyBgStyle() { applyStyleMode(); }
+
     function toggleTheme() {
       const current = document.body.getAttribute('data-theme') || 'dark';
       setTheme(current === 'dark' ? 'light' : 'dark');
     }
     function showApp() {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      const savedTheme = localStorage.getItem('study_theme') || 'dark';
-      document.body.setAttribute('data-theme', savedTheme);
-      setTheme(savedTheme);
+      var appEl = document.getElementById('app');
+      if (appEl) appEl.style.display = 'block';
+      try { applyStyleMode(); } catch (e) {}
+      try { rolloverTasksIfNeeded(); } catch (e) {}
 
       const now = new Date();
       const j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
@@ -1634,7 +1719,7 @@
       });
       return map;
     }
-    function updateAll() { updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderAI(); renderExtras(); }
+    function updateAll() { updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderExtras(); try { renderTasks(); } catch(e) {} }
     function updateStats() {
       const todayKey = jalaliToKey(toJalaliStr());
       const todayMin = getMinutesForDate(todayKey);
@@ -1944,88 +2029,26 @@
       el.innerHTML = html;
     }
 
-    function renderAI() {
-      const el = document.getElementById('aiAnalysis');
-      const activeCount = sessions.filter(isActive).length;
-      if (activeCount === 0) {
-        el.innerHTML = '<p>هنوز داده‌ای برای تحلیل وجود نداره. چند جلسه ثبت کن تا تحلیل برات آماده بشه.</p>';
-        return;
-      }
-      const todayKey = jalaliToKey(toJalaliStr());
-      const yesterdayKey = jalaliToKey(daysAgoJalali(1));
-      const todayMin = getMinutesForDate(todayKey);
-      const yesterdayMin = getMinutesForDate(yesterdayKey);
-      const thisWeek = getWeekRange(0);
-      const lastWeek = getWeekRange(-1);
-      const thisWeekMin = getMinutesInRange(thisWeek.start, thisWeek.end);
-      const lastWeekMin = getMinutesInRange(lastWeek.start, lastWeek.end);
-      const bySubjToday = getMinutesBySubjectForDate(todayKey);
-      const weekTests = getTestsInRange(thisWeek.start, thisWeek.end);
-      const thisWeekSubj = getSubjectMinutesInRange(thisWeek.start, thisWeek.end);
-
-      let lines = [];
-
-      if (todayMin === 0) {
-        lines.push('<p>📭 <strong>امروز</strong> هنوز مطالعه‌ای ثبت نکردی. یه شروع کوچک هم خوبه!</p>');
-      } else {
-        const subjList = Object.keys(bySubjToday).map(function(s) {
-          return s + ' (' + formatDuration(bySubjToday[s]) + ')';
-        }).join('، ');
-        lines.push('<p>📖 <strong>امروز</strong> ' + formatDuration(todayMin) + ' مطالعه کردی: ' + subjList + '</p>');
-        if (yesterdayMin > 0) {
-          if (todayMin > yesterdayMin) lines.push('<p>📈 نسبت به دیروز <strong>پیشرفت</strong> داشتی (' + formatDuration(todayMin - yesterdayMin) + ' بیشتر).</p>');
-          else if (todayMin < yesterdayMin) lines.push('<p>📉 نسبت به دیروز کمی کمتر خوندی (' + formatDuration(yesterdayMin - todayMin) + ' کمتر). مشکلی نیست، فردا جبران کن.</p>');
-          else lines.push('<p>➡️ امروز و دیروز تقریباً مساوی بودن.</p>');
-        }
-      }
-
-      if (thisWeekMin > 0 || lastWeekMin > 0) {
-        if (lastWeekMin === 0 && thisWeekMin > 0) {
-          lines.push('<p>🚀 <strong>این هفته</strong> شروع خوبی داشتی: ' + formatDuration(thisWeekMin) + '</p>');
-        } else if (thisWeekMin > lastWeekMin) {
-          const pct = Math.round(((thisWeekMin - lastWeekMin) / lastWeekMin) * 100);
-          lines.push('<p>🔥 <strong>این هفته</strong> نسبت به هفته قبل <strong>+' + toPersian(pct) + '٪ پیشرفت</strong> داشتی. عالی!</p>');
-        } else if (thisWeekMin < lastWeekMin) {
-          const pct = Math.round(((lastWeekMin - thisWeekMin) / lastWeekMin) * 100);
-          lines.push('<p>⚠️ <strong>این هفته</strong> نسبت به هفته قبل حدود ' + toPersian(pct) + '٪ کمتر خوندی. سعی کن روزهای باقی‌مانده رو پر کنی.</p>');
-        } else if (thisWeekMin > 0) {
-          lines.push('<p>➡️ هفته جاری و هفته قبل تقریباً مساوی بودن.</p>');
-        }
-      }
-
-      const sortedSubj = Object.keys(thisWeekSubj).sort(function(a, b) { return thisWeekSubj[b] - thisWeekSubj[a]; });
-      if (sortedSubj.length > 0) {
-        lines.push('<p>🏆 بیشترین مطالعه این هفته: <strong>' + sortedSubj[0] + '</strong> با ' + formatDuration(thisWeekSubj[sortedSubj[0]]) + '</p>');
-        if (sortedSubj.length > 1) {
-          const least = sortedSubj[sortedSubj.length - 1];
-          if (thisWeekSubj[least] < thisWeekSubj[sortedSubj[0]] * 0.3) {
-            lines.push('<p>💡 پیشنهاد: به درس <strong>' + least + '</strong> هم بیشتر برس.</p>');
-          }
-        }
-      }
-
-      const missing = ALL_SUBJECTS.filter(function(s) { return !thisWeekSubj[s]; });
-      if (missing.length > 0 && thisWeekMin > 0) {
-        lines.push('<p>📌 این هفته هنوز این دروس رو کار نکردی: ' + missing.slice(0, 4).join('، ') + (missing.length > 4 ? '...' : '') + '</p>');
-      }
-
-      if (weekTests > 0) {
-        lines.push('<p>📝 این هفته مجموعاً <strong>' + toPersian(weekTests) + ' تست</strong> زدی. ادامه بده!</p>');
-      }
-
-      if (thisWeekMin >= 600) lines.push('<p>🌟 هفته خیلی قوی‌ای داشتی. همین روند رو حفظ کن.</p>');
-      else if (thisWeekMin >= 300) lines.push('<p>👍 هفته‌ی قابل قبولی داشتی. اگه کمی بیشتر بذاری عالی می‌شه.</p>');
-      else if (thisWeekMin > 0) lines.push('<p>🌱 هنوز جا برای پیشرفت هست. هر روز حتی ۳۰ دقیقه هم اثر داره.</p>');
-
-      el.innerHTML = lines.join('');
-    }
+    function renderAI() { /* حذف شده */ }
 
     function renderHistory() {
-      const range = document.getElementById('filterRange').value;
-      const subjFilter = document.getElementById('filterSubject').value;
+      const rangeEl = document.getElementById('filterRange');
+      const subjEl = document.getElementById('filterSubject');
+      const searchEl = document.getElementById('filterSearch');
+      if (!rangeEl || !subjEl) return;
+      const range = rangeEl.value;
+      const subjFilter = subjEl.value;
+      const q = (searchEl && searchEl.value ? searchEl.value.trim() : '').toLowerCase();
       const list = document.getElementById('historyList');
+      if (!list) return;
       let filtered = sessions.filter(isActive);
       if (subjFilter !== 'all') filtered = filtered.filter(function(s) { return s.subject === subjFilter; });
+      if (q) {
+        filtered = filtered.filter(function(s) {
+          const blob = ((s.subject||'') + ' ' + (s.note||'') + ' ' + (s.testSection||'') + ' ' + (s.date||'')).toLowerCase();
+          return blob.indexOf(q) !== -1;
+        });
+      }
       const todayKey = jalaliToKey(toJalaliStr());
       if (range === 'today') {
         filtered = filtered.filter(function(s) { return jalaliToKey(s.date) === todayKey; });
@@ -2039,6 +2062,23 @@
           return d && d >= cutoff;
         });
       }
+
+      // خلاصه فیلترشده
+      (function() {
+        var cnt = filtered.length;
+        var tot = 0, tests = 0;
+        for (var i = 0; i < filtered.length; i++) {
+          tot += (filtered[i].minutes || 0);
+          tests += (filtered[i].tests || 0);
+        }
+        var hc = document.getElementById('histCount');
+        var ht = document.getElementById('histTotal');
+        var hts = document.getElementById('histTests');
+        if (hc) hc.textContent = toPersian(cnt);
+        if (ht) ht.textContent = formatDuration(tot);
+        if (hts) hts.textContent = toPersian(tests);
+      })();
+
       const groups = {};
       filtered.forEach(function(s) {
         const key = jalaliToKey(s.date);
@@ -2047,7 +2087,7 @@
         groups[key].total += s.minutes;
         groups[key].tests += (s.tests || 0);
       });
-      const sortedKeys = Object.keys(groups).sort().reverse();
+      let sortedKeys = Object.keys(groups).sort().reverse();
       if (sortedKeys.length === 0) {
         list.innerHTML = '<div class="empty-state"><span>📖</span>هنوز جلسه‌ای ثبت نشده</div>';
         return;
@@ -2116,13 +2156,14 @@
       } catch (e) {}
 
       const isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
-      const bg = isDark ? '#0b1220' : '#eef2f7';
-      const cardBg = isDark ? '#151e2e' : '#ffffff';
-      const textCol = isDark ? '#f1f5f9' : '#0f172a';
+      const isClassic = (document.body.getAttribute('data-bg') || 'modern') === 'classic';
+      const bg = isClassic ? (isDark ? '#100e0c' : '#f3efe6') : (isDark ? '#060a0f' : '#f0fdfa');
+      const cardBg = isClassic ? (isDark ? '#1a1714' : '#fffcf7') : (isDark ? '#0f1720' : '#ffffff');
+      const textCol = isDark ? '#f0fdfa' : '#0f172a';
       const muted = isDark ? '#94a3b8' : '#64748b';
-      const accent = isDark ? '#38bdf8' : '#0284c7';
-      const border = isDark ? 'rgba(148,163,184,0.18)' : 'rgba(15,23,42,0.08)';
-      const soft = isDark ? 'rgba(56,189,248,0.08)' : 'rgba(2,132,199,0.06)';
+      const accent = isClassic ? (isDark ? '#d4af6a' : '#b8923a') : (isDark ? '#2dd4bf' : '#0d9488');
+      const border = isClassic ? (isDark ? 'rgba(212,175,106,0.25)' : 'rgba(180,150,90,0.2)') : (isDark ? 'rgba(45,212,191,0.2)' : 'rgba(13,148,136,0.15)');
+      const soft = isClassic ? (isDark ? 'rgba(212,175,106,0.08)' : 'rgba(184,146,58,0.06)') : (isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)');
 
       const bySubj = {};
       daySessions.forEach(function(s) {
@@ -2172,7 +2213,7 @@
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
       // نقاط ظریف پس‌زمینه
-      ctx.fillStyle = isDark ? 'rgba(167,139,250,0.07)' : 'rgba(124,58,237,0.06)';
+      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath();
@@ -2194,7 +2235,7 @@
         ctx.fillRect(0, 0, width, height);
       }
       // کارت اصلی بیرونی با حاشیه واضح‌تر
-      const outerBorder = isDark ? 'rgba(167,139,250,0.5)' : border;
+      const outerBorder = isDark ? 'rgba(45,212,191,0.4)' : border;
       roundRect(ctx, 18, 18, width - 36, height - 36, 22, cardBg, outerBorder);
 
       // هدر
@@ -2269,7 +2310,7 @@
         const w0 = width - pad * 2 - 8;
         // کارت درس با حاشیه مناسب تم
         const innerBg = isDark ? '#1a2436' : '#ffffff';
-        const cardBorder = isDark ? 'rgba(167, 139, 250, 0.55)' : 'rgba(2, 132, 199, 0.28)';
+        const cardBorder = isDark ? 'rgba(45, 212, 191, 0.4)' : 'rgba(2, 132, 199, 0.28)';
         roundRect(ctx, x0, y, w0, cardH - 6, 16, innerBg, cardBorder);
 
         // نام درس + متن رنگی تخصصی/عمومی بدون حاشیه
@@ -2397,7 +2438,7 @@
       }
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = isDark ? 'rgba(167,139,250,0.07)' : 'rgba(124,58,237,0.05)';
+      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.05)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath(); ctx.arc(px, py, 1.1, 0, Math.PI * 2); ctx.fill();
@@ -2408,7 +2449,7 @@
       const textCol = isDark ? '#f1f5f9' : '#0f172a';
       const muted = isDark ? '#94a3b8' : '#64748b';
       const accent = isDark ? '#38bdf8' : '#0284c7';
-      const border = isDark ? 'rgba(167,139,250,0.5)' : 'rgba(2,132,199,0.25)';
+      const border = isDark ? 'rgba(45,212,191,0.4)' : 'rgba(2,132,199,0.25)';
       roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
 
       ctx.textAlign = 'right';
@@ -2840,21 +2881,19 @@
       const tc = document.getElementById('statTodayCount');
       if (tc) tc.textContent = toPersian(todayCnt) + ' جلسه';
       // best/worst weekday
-      const wdMap = {};
-      WEEKDAYS_FA.forEach(function(w){ wdMap[w] = 0; });
-      active.forEach(function(s){
-        const d = parseJalali(s.date);
-        if (d) wdMap[getWeekdayFa(d)] = (wdMap[getWeekdayFa(d)]||0) + s.minutes;
-      });
+      // بهترین / ضعیف‌ترین روز — فقط همین هفته (شنبه تا جمعه)
+      const weekDaysStats = getWeekDayStats(0);
       let bestW = '—', worstW = '—', bestM = -1, worstM = 1e15;
-      WEEKDAYS_FA.forEach(function(w){
-        if (wdMap[w] > bestM) { bestM = wdMap[w]; bestW = w; }
-        if (wdMap[w] < worstM) { worstM = wdMap[w]; worstW = w; }
+      let anyStudy = false;
+      weekDaysStats.forEach(function(d) {
+        if (d.mins > 0) anyStudy = true;
+        if (d.mins > bestM) { bestM = d.mins; bestW = d.weekday; }
+        if (d.mins < worstM) { worstM = d.mins; worstW = d.weekday; }
       });
       const bw = document.getElementById('statBestWeekday');
-      if (bw) bw.textContent = bestM > 0 ? (bestW + ' (' + formatDuration(bestM) + ')') : '—';
+      if (bw) bw.textContent = anyStudy ? (bestW + ' (' + formatDuration(bestM) + ') — این هفته') : '— این هفته';
       const ww = document.getElementById('statWorstWeekday');
-      if (ww) ww.textContent = bestM > 0 ? (worstW + ' (' + formatDuration(worstM) + ')') : '—';
+      if (ww) ww.textContent = anyStudy ? (worstW + ' (' + formatDuration(worstM) + ') — این هفته') : '— این هفته';
       // month compare
       const now = new Date();
       const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -3008,104 +3047,174 @@
       localStorage.setItem('study_sticky', v);
       showToast('یادداشت ذخیره شد');
     }
+
+    // ===== سیستم کارها: امروز / فردا / دیروز با جابه‌جایی خودکار =====
+    var currentTaskTab = 'today';
+    var TASKS_KEY = 'study_tasks_v2';
+
+    function getTasksData() {
+      try {
+        var raw = JSON.parse(localStorage.getItem(TASKS_KEY) || 'null');
+        if (!raw || typeof raw !== 'object') {
+          // مهاجرت از نسخه قدیمی
+          var old = [];
+          try { old = JSON.parse(localStorage.getItem('study_tomorrow') || '[]'); } catch(e) {}
+          raw = { dateKey: jalaliToKey(toJalaliStr()), today: [], tomorrow: old || [], yesterday: [] };
+          localStorage.setItem(TASKS_KEY, JSON.stringify(raw));
+        }
+        if (!Array.isArray(raw.today)) raw.today = [];
+        if (!Array.isArray(raw.tomorrow)) raw.tomorrow = [];
+        if (!Array.isArray(raw.yesterday)) raw.yesterday = [];
+        return raw;
+      } catch (e) {
+        return { dateKey: jalaliToKey(toJalaliStr()), today: [], tomorrow: [], yesterday: [] };
+      }
+    }
+    function saveTasksData(data) {
+      localStorage.setItem(TASKS_KEY, JSON.stringify(data));
+    }
+    /** اگر روز عوض شده: فردا→امروز، امروز→دیروز، فردا خالی */
+    function rolloverTasksIfNeeded() {
+      var data = getTasksData();
+      var todayKey = jalaliToKey(toJalaliStr());
+      if (data.dateKey === todayKey) return data;
+      // روز جدید
+      data.yesterday = (data.today || []).slice();
+      data.today = (data.tomorrow || []).slice();
+      data.tomorrow = [];
+      data.dateKey = todayKey;
+      saveTasksData(data);
+      return data;
+    }
     function getTomorrowPlan() {
-      try { return JSON.parse(localStorage.getItem('study_tomorrow') || '[]'); } catch(e) { return []; }
+      // سازگاری با کدهای قدیمی
+      return rolloverTasksIfNeeded().tomorrow || [];
     }
     function saveTomorrowPlan(arr) {
-      localStorage.setItem('study_tomorrow', JSON.stringify(arr));
-      if (localStorage.getItem(SYNC_KEY) && localStorage.getItem(SYNC_BIN)) {
-        pushToCloud();
-      }
+      var data = rolloverTasksIfNeeded();
+      data.tomorrow = arr;
+      saveTasksData(data);
     }
     function priorityLabel(p) {
       if (p === 'high') return 'بالا';
       if (p === 'low') return 'پایین';
       return 'عادی';
     }
-    function renderTomorrowPlan() {
-      const el = document.getElementById('tomorrowPlan');
+    function switchTaskTab(tab) {
+      currentTaskTab = tab || 'today';
+      document.querySelectorAll('[data-task-tab]').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-task-tab') === currentTaskTab);
+      });
+      var addRow = document.getElementById('tasksAddRow');
+      if (addRow) addRow.style.display = currentTaskTab === 'yesterday' ? 'none' : '';
+      var moveBtn = document.getElementById('btnMoveToTomorrow');
+      if (moveBtn) moveBtn.style.display = currentTaskTab === 'today' ? '' : 'none';
+      renderTasks();
+    }
+    function renderTomorrowPlan() { renderTasks(); }
+    function renderTasks() {
+      rolloverTasksIfNeeded();
+      var data = getTasksData();
+      var list = data[currentTaskTab] || [];
+      var el = document.getElementById('tasksList');
+      var prog = document.getElementById('tasksProgress');
       if (!el) return;
-      let items = getTomorrowPlan();
-      // مرتب‌سازی: انجام‌نشده اول، بعد اولویت بالا
-      const order = { high: 0, normal: 1, low: 2 };
-      items = items.slice().sort(function(a, b) {
+      var order = { high: 0, normal: 1, low: 2 };
+      var items = list.slice().sort(function(a, b) {
         if (!!a.done !== !!b.done) return a.done ? 1 : -1;
         return (order[a.priority] || 1) - (order[b.priority] || 1);
       });
-      // برای index درست، از id استفاده می‌کنیم
-      const raw = getTomorrowPlan();
-      if (!raw.length) {
-        el.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:0.88rem;border:1px dashed var(--border);border-radius:var(--radius-sm);">هنوز کاری برای فردا نداری — یکی اضافه کن ✨</div>';
+      var doneCount = list.filter(function(it){ return it.done; }).length;
+      var pct = list.length ? Math.round(doneCount / list.length * 100) : 0;
+      if (prog) {
+        var title = currentTaskTab === 'today' ? 'امروز' : (currentTaskTab === 'tomorrow' ? 'فردا' : 'دیروز');
+        prog.innerHTML = '<div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.82rem;color:var(--text-muted);"><span>' + toPersian(doneCount) + ' از ' + toPersian(list.length) + ' انجام‌شده — ' + title + '</span><span style="color:var(--accent);font-weight:600;">' + toPersian(pct) + '٪</span></div>' +
+          '<div style="height:7px;background:var(--bg-input);border-radius:4px;overflow:hidden;border:1px solid var(--border);"><div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width 0.3s;"></div></div>';
+      }
+      if (!list.length) {
+        var emptyMsg = currentTaskTab === 'yesterday' ? 'دیروز کاری ثبت نشده بود.' : 'هنوز کاری نیست — یکی اضافه کن ✨';
+        el.innerHTML = '<div style="padding:14px;text-align:center;color:var(--text-muted);font-size:0.88rem;border:1px dashed var(--border);border-radius:var(--radius-sm);">' + emptyMsg + '</div>';
         return;
       }
-      const doneCount = raw.filter(function(it){ return it.done; }).length;
-      let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;">';
-      html += '<div style="font-size:0.82rem;color:var(--text-muted);">' + toPersian(doneCount) + ' از ' + toPersian(raw.length) + ' انجام‌شده</div>';
-      const pct = raw.length ? Math.round(doneCount / raw.length * 100) : 0;
-      html += '<div style="font-size:0.82rem;color:var(--accent);font-weight:600;">' + toPersian(pct) + '٪</div></div>';
-      html += '<div style="height:6px;background:var(--bg-input);border-radius:4px;overflow:hidden;margin-bottom:12px;border:1px solid var(--border);">';
-      html += '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));transition:width 0.3s;"></div></div>';
-      html += items.map(function(it) {
-        const idx = raw.indexOf(it);
-        const realIdx = raw.findIndex(function(x){ return x === it || (x.text === it.text && x.createdAt === it.createdAt); });
-        const i = realIdx >= 0 ? realIdx : idx;
-        const pr = it.priority || 'normal';
-        const subj = it.subject ? '<span class="tm-subj-tag">' + escapeHtml(it.subject) + '</span>' : '';
-        return '<div class="tomorrow-item' + (it.done ? ' done' : '') + '">' +
-          '<input type="checkbox" ' + (it.done ? 'checked' : '') + ' onchange="toggleTomorrowItem(' + i + ')" style="width:auto;accent-color:var(--accent);" />' +
-          '<span class="tm-text">' + escapeHtml(it.text) + '</span>' +
-          subj +
+      el.innerHTML = items.map(function(it) {
+        var i = list.indexOf(it);
+        if (i < 0) i = list.findIndex(function(x){ return x.createdAt === it.createdAt && x.text === it.text; });
+        var pr = it.priority || 'normal';
+        var subj = it.subject ? '<span class="tm-subj-tag">' + escapeHtml(it.subject) + '</span>' : '';
+        var readonly = currentTaskTab === 'yesterday';
+        return '<div class="task-item' + (it.done ? ' done' : '') + '">' +
+          (readonly ? '' : '<input type="checkbox" ' + (it.done ? 'checked' : '') + ' onchange="toggleTaskItem(' + i + ')" style="width:auto;accent-color:var(--accent);" />') +
+          '<span class="task-text">' + escapeHtml(it.text) + '</span>' +
+          '<span class="task-meta">' + subj +
           '<span class="tm-priority ' + pr + '">' + priorityLabel(pr) + '</span>' +
-          '<button type="button" class="session-delete" onclick="removeTomorrowItem(' + i + ')" title="حذف">×</button></div>';
+          (readonly ? '' : '<button type="button" class="session-delete" onclick="removeTaskItem(' + i + ')" title="حذف">×</button>') +
+          '</span></div>';
       }).join('');
-      el.innerHTML = html;
     }
-    function addTomorrowItem() {
-      const input = document.getElementById('tomorrowInput');
-      let text = input ? input.value.trim() : '';
-      if (!text) {
-        text = prompt('چه کاری برای فردا؟');
-      }
-      if (!text || !text.trim()) return;
-      const subjEl = document.getElementById('tomorrowSubject');
-      const priEl = document.getElementById('tomorrowPriority');
-      const arr = getTomorrowPlan();
-      arr.push({
+    function addTaskItem() {
+      if (currentTaskTab === 'yesterday') { showToast('کارهای دیروز فقط مشاهده‌ای است', true); return; }
+      var input = document.getElementById('taskInput');
+      var text = input ? input.value.trim() : '';
+      if (!text) { text = prompt('چه کاری؟') || ''; }
+      if (!text.trim()) return;
+      var data = rolloverTasksIfNeeded();
+      var bucket = currentTaskTab === 'tomorrow' ? 'tomorrow' : 'today';
+      data[bucket].push({
         text: text.trim(),
         done: false,
-        subject: subjEl ? (subjEl.value || '') : '',
-        priority: priEl ? (priEl.value || 'normal') : 'normal',
+        subject: (document.getElementById('taskSubject') || {}).value || '',
+        priority: (document.getElementById('taskPriority') || {}).value || 'normal',
         createdAt: new Date().toISOString()
       });
-      saveTomorrowPlan(arr);
+      saveTasksData(data);
       if (input) input.value = '';
-      if (subjEl) subjEl.value = '';
-      if (priEl) priEl.value = 'normal';
-      renderTomorrowPlan();
-      showToast('کار به برنامه فردا اضافه شد ✓');
+      var s = document.getElementById('taskSubject'); if (s) s.value = '';
+      var p = document.getElementById('taskPriority'); if (p) p.value = 'normal';
+      renderTasks();
+      showToast('کار اضافه شد ✓');
     }
-    function toggleTomorrowItem(i) {
-      const arr = getTomorrowPlan();
-      if (!arr[i]) return;
-      arr[i].done = !arr[i].done;
-      saveTomorrowPlan(arr);
-      renderTomorrowPlan();
+    function toggleTaskItem(i) {
+      var data = rolloverTasksIfNeeded();
+      var list = data[currentTaskTab];
+      if (!list || !list[i]) return;
+      list[i].done = !list[i].done;
+      saveTasksData(data);
+      renderTasks();
     }
-    function removeTomorrowItem(i) {
-      const arr = getTomorrowPlan();
-      arr.splice(i, 1);
-      saveTomorrowPlan(arr);
-      renderTomorrowPlan();
+    function removeTaskItem(i) {
+      var data = rolloverTasksIfNeeded();
+      var list = data[currentTaskTab];
+      if (!list) return;
+      list.splice(i, 1);
+      saveTasksData(data);
+      renderTasks();
     }
-    function clearDoneTomorrow() {
-      let arr = getTomorrowPlan();
-      const before = arr.length;
-      arr = arr.filter(function(it){ return !it.done; });
-      if (arr.length === before) { showToast('کار انجام‌شده‌ای نیست'); return; }
-      saveTomorrowPlan(arr);
-      renderTomorrowPlan();
+    function clearDoneTasks() {
+      var data = rolloverTasksIfNeeded();
+      var list = data[currentTaskTab] || [];
+      var before = list.length;
+      data[currentTaskTab] = list.filter(function(it){ return !it.done; });
+      if (data[currentTaskTab].length === before) { showToast('کار انجام‌شده‌ای نیست'); return; }
+      saveTasksData(data);
+      renderTasks();
       showToast('انجام‌شده‌ها پاک شدند');
     }
+    function moveUndoneToTomorrow() {
+      var data = rolloverTasksIfNeeded();
+      var undone = (data.today || []).filter(function(it){ return !it.done; });
+      if (!undone.length) { showToast('کار ناتمامی برای انتقال نیست'); return; }
+      data.today = (data.today || []).filter(function(it){ return it.done; });
+      data.tomorrow = (data.tomorrow || []).concat(undone);
+      saveTasksData(data);
+      renderTasks();
+      showToast(toPersian(undone.length) + ' کار به فردا منتقل شد');
+    }
+    // سازگاری نام‌های قدیمی
+    function addTomorrowItem() { currentTaskTab = 'tomorrow'; switchTaskTab('tomorrow'); addTaskItem(); }
+    function toggleTomorrowItem(i) { currentTaskTab = 'tomorrow'; toggleTaskItem(i); }
+    function removeTomorrowItem(i) { currentTaskTab = 'tomorrow'; removeTaskItem(i); }
+    function clearDoneTomorrow() { currentTaskTab = 'tomorrow'; clearDoneTasks(); }
+
     function renderSubjectCompare() {
       const a = (document.getElementById('cmpSubjA') || {}).value;
       const b = (document.getElementById('cmpSubjB') || {}).value;
@@ -3333,9 +3442,126 @@
       };
       reader.readAsText(file);
     }
-    document.getElementById('passwordInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') tryLogin();
-    });
+
+
+    // ===== تایمر مطالعه =====
+    var timerState = { running: false, startedAt: 0, elapsed: 0, interval: null, subject: "" };
+
+    function timerPad(n) {
+      n = Math.floor(Math.abs(n));
+      return (n < 10 ? '0' : '') + n;
+    }
+    function timerFormat(ms) {
+      var total = Math.floor(ms / 1000);
+      var h = Math.floor(total / 3600);
+      var m = Math.floor((total % 3600) / 60);
+      var s = total % 60;
+      return timerPad(h) + ':' + timerPad(m) + ':' + timerPad(s);
+    }
+    function timerTick() {
+      if (!timerState.running) return;
+      var now = Date.now();
+      var ms = timerState.elapsed + (now - timerState.startedAt);
+      var el = document.getElementById('timerDisplay');
+      if (el) el.textContent = timerFormat(ms);
+    }
+    function timerUpdateButtons() {
+      var start = document.getElementById('timerStartBtn');
+      var pause = document.getElementById('timerPauseBtn');
+      var resume = document.getElementById('timerResumeBtn');
+      var card = document.getElementById('timerCard');
+      var st = document.getElementById('timerStatus');
+      if (!start) return;
+      if (timerState.running) {
+        start.style.display = 'none';
+        pause.style.display = '';
+        resume.style.display = 'none';
+        if (card) card.classList.add('timer-running');
+        if (st) st.textContent = 'در حال مطالعه «' + (timerState.subject || '…') + '» ... تمرکز کن 💪';
+      } else if (timerState.elapsed > 0) {
+        start.style.display = 'none';
+        pause.style.display = 'none';
+        resume.style.display = '';
+        if (card) card.classList.remove('timer-running');
+        if (st) st.textContent = 'متوقف — «' + (timerState.subject || '') + '» — می‌تونی ادامه بدی';
+      } else {
+        start.style.display = '';
+        pause.style.display = 'none';
+        resume.style.display = 'none';
+        if (card) card.classList.remove('timer-running');
+        if (st) st.textContent = 'درس را انتخاب کن و شروع بزن';
+      }
+    }
+    function timerStart() {
+      var subjEl = document.getElementById('timerSubject');
+      var subj = subjEl ? subjEl.value : '';
+      if (!subj) {
+        showToast('اول درس این جلسه را انتخاب کن', true);
+        if (subjEl) subjEl.focus();
+        return;
+      }
+      timerState.subject = subj;
+      timerState.running = true;
+      timerState.startedAt = Date.now();
+      timerState.elapsed = 0;
+      if (timerState.interval) clearInterval(timerState.interval);
+      timerState.interval = setInterval(timerTick, 250);
+      timerUpdateButtons();
+      timerTick();
+      var st = document.getElementById('timerStatus');
+      if (st) st.textContent = 'در حال مطالعه «' + subj + '» ... تمرکز کن 💪';
+    }
+    function timerPause() {
+      if (!timerState.running) return;
+      timerState.elapsed += Date.now() - timerState.startedAt;
+      timerState.running = false;
+      if (timerState.interval) { clearInterval(timerState.interval); timerState.interval = null; }
+      timerUpdateButtons();
+      timerTick();
+    }
+    function timerResume() {
+      if (timerState.running) return;
+      timerState.running = true;
+      timerState.startedAt = Date.now();
+      if (timerState.interval) clearInterval(timerState.interval);
+      timerState.interval = setInterval(timerTick, 250);
+      timerUpdateButtons();
+    }
+    function timerReset() {
+      timerState.running = false;
+      timerState.elapsed = 0;
+      timerState.startedAt = 0;
+      if (timerState.interval) { clearInterval(timerState.interval); timerState.interval = null; }
+      var el = document.getElementById('timerDisplay');
+      if (el) el.textContent = '00:00:00';
+      timerUpdateButtons();
+    }
+    function timerGetMinutes() {
+      var ms = timerState.elapsed;
+      if (timerState.running) ms += Date.now() - timerState.startedAt;
+      return Math.floor(ms / 60000);
+    }
+    function timerFillForm() {
+      var totalMin = timerGetMinutes();
+      if (totalMin <= 0) {
+        var ms = timerState.elapsed + (timerState.running ? Date.now() - timerState.startedAt : 0);
+        if (ms < 1000) { showToast('اول تایمر را شروع کن', true); return; }
+        totalMin = Math.max(1, Math.round(ms / 60000));
+      }
+      var h = Math.floor(totalMin / 60);
+      var m = totalMin % 60;
+      var hoursEl = document.getElementById('hours');
+      var minsEl = document.getElementById('minutes');
+      if (hoursEl) hoursEl.value = h;
+      if (minsEl) minsEl.value = m;
+      var subj = timerState.subject || (document.getElementById('timerSubject') && document.getElementById('timerSubject').value) || '';
+      var formSubj = document.getElementById('subject');
+      if (formSubj && subj) formSubj.value = subj;
+      var formCard = document.getElementById('addForm');
+      if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showToast((subj ? ('درس «' + subj + '» — ') : '') + 'زمان: ' + formatDuration(totalMin));
+    }
+
 
     // ===== PWA: نصب پایدار روی گوشی و کامپیوتر =====
     let deferredInstallPrompt = null;
@@ -3533,20 +3759,18 @@
     })();
 
     // Enter روی input برنامه فردا
-    (function bindTomorrowInput() {
-      const tmInput = document.getElementById('tomorrowInput');
+    (function bindTaskInput() {
+      const tmInput = document.getElementById('taskInput');
       if (tmInput && !tmInput._bound) {
         tmInput._bound = true;
         tmInput.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter') { e.preventDefault(); addTomorrowItem(); }
+          if (e.key === 'Enter') { e.preventDefault(); addTaskItem(); }
         });
       }
     })();
 
-    // چک اولیه — ورود ماندگار با localStorage
-    if (isSessionValid()) {
-      showApp();
-    }
+    // بدون رمز — مستقیم ورود به اپ
+    try { showApp(); } catch (e) { console.error(e); }
   </script>
 </body>
 </html>
