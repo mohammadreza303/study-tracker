@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>ثبت‌کننده ساعت مطالعه</title>
-  <meta name="theme-color" content="#120c0c" />
+  <meta name="theme-color" content="#0f0a08" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,26 +16,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root, [data-theme="dark"] {
-      --form-label: #e8c4a0;
-      --greeting: #f0d5b8;
-      --bg: #120c0c;
-      --bg-card: rgba(32, 22, 22, 0.88);
-      --bg-input: rgba(22, 15, 15, 0.95);
-      --border: rgba(196, 140, 110, 0.32);
-      --border-light: rgba(224, 180, 150, 0.45);
-      --text: #faf3eb;
-      --text-muted: #c4b0a0;
-      --text-dim: #8a7568;
-      --accent: #c4785a;
-      --accent-soft: #e0a88a;
-      --accent-dim: rgba(196, 120, 90, 0.15);
-      --success: #7dba8a;
-      --danger: #e07a7a;
+      --form-label: #f0d5b8;
+      --greeting: #f5e6d3;
+      --bg: #0f0a08;
+      --bg-card: rgba(42, 28, 24, 0.94);
+      --bg-input: rgba(30, 20, 16, 0.98);
+      --border: rgba(220, 160, 120, 0.5);
+      --border-light: rgba(240, 190, 150, 0.65);
+      --text: #fff8f0;
+      --text-muted: #d4c0b0;
+      --text-dim: #a89080;
+      --accent: #e09060;
+      --accent-soft: #f0b890;
+      --accent-dim: rgba(224, 144, 96, 0.2);
+      --success: #6dca8a;
+      --danger: #f08080;
       --radius: 16px;
       --radius-sm: 11px;
-      --shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(196, 140, 110, 0.08);
-      --ai-bg: rgba(50, 30, 28, 0.4);
-      --glow: 0 0 50px rgba(196, 120, 90, 0.08);
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(220, 160, 120, 0.15);
+      --ai-bg: rgba(60, 36, 28, 0.55);
+      --glow: 0 0 50px rgba(224, 144, 96, 0.12);
     }
     [data-theme="light"] #todayShamsi { color: #2a1f1a !important; }
     [data-theme="light"] {
@@ -71,19 +71,19 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-    /* پس‌زمینه کلاسیک همیشه فعال */
+    /* پس‌زمینه کلاسیک — کنتراست بهتر */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      background-color: #120c0c;
+      background-color: #0f0a08;
       background-image:
-        radial-gradient(ellipse 120% 80% at 50% -10%, rgba(180, 100, 70, 0.18), transparent 55%),
-        radial-gradient(ellipse 80% 50% at 100% 100%, rgba(90, 40, 35, 0.25), transparent 50%),
-        radial-gradient(ellipse 60% 40% at 0% 80%, rgba(70, 35, 30, 0.2), transparent 50%),
-        linear-gradient(180deg, #1a1210 0%, #120c0c 50%, #0e0909 100%);
+        radial-gradient(ellipse 110% 70% at 50% -5%, rgba(200, 120, 80, 0.28), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 95% 90%, rgba(120, 55, 40, 0.3), transparent 50%),
+        radial-gradient(ellipse 55% 40% at 5% 75%, rgba(90, 45, 35, 0.25), transparent 50%),
+        linear-gradient(180deg, #1c1210 0%, #120c0a 45%, #0c0806 100%);
     }
     body::after {
       content: '';
@@ -92,10 +92,10 @@
       z-index: -1;
       pointer-events: none;
       background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(180,120,90,0.02) 2px, rgba(180,120,90,0.02) 3px),
-        radial-gradient(circle at 1px 1px, rgba(200, 150, 120, 0.07) 1px, transparent 0);
-      background-size: 100% 3px, 28px 28px;
-      opacity: 0.55;
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(200,140,100,0.03) 3px, rgba(200,140,100,0.03) 4px),
+        radial-gradient(circle at 1px 1px, rgba(220, 170, 130, 0.1) 1px, transparent 0);
+      background-size: 100% 4px, 32px 32px;
+      opacity: 0.5;
     }
     body[data-theme="light"]::before {
       background-color: #f5efe6;
@@ -168,7 +168,11 @@
       transform: translateY(-1px);
     }
     .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; min-height: 20px; }
-    #app { display: block; max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; position: relative; z-index: 1; }
+    #app { display: block; max-width: 1100px; margin: 0 auto; padding: 24px 20px 70px; position: relative; z-index: 1; }
+    @media (min-width: 1200px) {
+      #app { max-width: 1180px; padding: 28px 24px 80px; }
+      body { font-size: 17px; }
+    }
     header {
       display: flex; justify-content: space-between; align-items: flex-start;
       margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
@@ -328,7 +332,7 @@
       font-size: 0.95rem; outline: none; transition: border 0.2s; font-family: inherit;
     }
     input:focus, select:focus, textarea:focus {
-      border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+      border-color: var(--accent); box-shadow: 0 0 0 2px rgba(224, 144, 96, 0.25);
     }
     select {
       cursor: pointer; appearance: none;
@@ -432,11 +436,11 @@
     .week-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
     @media (max-width: 500px) { .week-compare { grid-template-columns: 1fr; } }
     .week-box {
-      background: rgba(15, 23, 42, 0.4);
+      background: var(--bg-card);
       border-radius: var(--radius-sm);
       padding: 16px;
       text-align: center;
-      border: 1px solid rgba(167, 139, 250, 0.4);
+      border: 1px solid var(--border);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -454,10 +458,10 @@
     .day-header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 10px 14px;
-      background: rgba(15, 23, 42, 0.4);
+      background: var(--bg-card);
       border-radius: var(--radius-sm);
       margin-bottom: 8px;
-      border: 1px solid rgba(167, 139, 250, 0.4);
+      border: 1px solid var(--border);
       gap: 8px; flex-wrap: wrap;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -471,7 +475,7 @@
     .day-header .day-actions { display: flex; gap: 6px; align-items: center; }
     .session-item {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 14px; border-bottom: 1px solid rgba(167, 139, 250, 0.28); gap: 10px;
+      padding: 12px 14px; border-bottom: 1px solid var(--border); gap: 10px;
     }
     [data-theme="light"] .session-item { border-bottom-color: var(--border); }
     .session-item:last-child { border-bottom: none; }
@@ -598,11 +602,11 @@
     .day-rank-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
     .day-rank-item {
       display: flex; align-items: center; gap: 10px; padding: 10px 12px;
-      background: rgba(15, 23, 42, 0.35); border: 1px solid rgba(167, 139, 250, 0.35);
+      background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius-sm);
     }
     [data-theme="light"] .day-rank-item {
-      background: rgba(255,255,255,0.5); border-color: var(--border);
+      background: var(--bg-card); border-color: var(--border);
     }
     .day-rank-num { font-weight: 700; color: var(--accent); min-width: 28px; }
     .day-rank-name { flex: 1; font-weight: 500; }
@@ -614,22 +618,27 @@
       .week-days-grid { grid-template-columns: repeat(4, 1fr); }
     }
     .week-day-cell {
-      text-align: center; padding: 12px 6px; border-radius: var(--radius-sm);
-      background: rgba(15, 23, 42, 0.4); border: 1px solid rgba(167, 139, 250, 0.35);
+      text-align: center; padding: 14px 8px; border-radius: var(--radius-sm);
+      background: var(--bg-card); border: 1px solid var(--border);
+      box-shadow: var(--shadow); transition: transform 0.15s, border-color 0.2s;
     }
+    .week-day-cell:hover { border-color: var(--border-light); transform: translateY(-2px); }
     [data-theme="light"] .week-day-cell {
-      background: rgba(255,255,255,0.5); border-color: var(--border);
+      background: var(--bg-card); border-color: var(--border);
     }
-    .week-day-cell .wd-name { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
-    .week-day-cell .wd-val { font-size: 0.85rem; font-weight: 700; color: var(--accent); }
-    .week-day-cell.today-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .week-day-cell .wd-name { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; line-height: 1.4; }
+    .week-day-cell .wd-val { font-size: 0.92rem; font-weight: 700; color: var(--accent); }
+    .week-day-cell.today-cell {
+      border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow);
+      background: var(--accent-dim);
+    }
     .tomorrow-item {
       display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 8px;
-      background: rgba(15, 23, 42, 0.35); border: 1px solid rgba(167, 139, 250, 0.35);
+      background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius-sm); transition: opacity 0.2s;
     }
     [data-theme="light"] .tomorrow-item {
-      background: rgba(255,255,255,0.55); border-color: var(--border);
+      background: var(--bg-card); border-color: var(--border);
     }
     .tomorrow-item.done { opacity: 0.55; }
     .tomorrow-item .tm-text { flex: 1; font-size: 0.92rem; }
@@ -644,13 +653,13 @@
     }
     .install-banner.show { display: flex; }
     .install-banner p { font-size: 0.9rem; color: var(--text); margin: 0; }
-    [data-theme="dark"] .card { border-color: rgba(167, 139, 250, 0.4); }
-    [data-theme="dark"] .stat-card { border-color: rgba(167, 139, 250, 0.4); }
+    [data-theme="dark"] .card { border-color: rgba(220, 160, 120, 0.45); }
+    [data-theme="dark"] .stat-card { border-color: rgba(220, 160, 120, 0.45); }
     [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea {
-      border-color: rgba(167, 139, 250, 0.4);
+      border-color: rgba(220, 160, 120, 0.4);
     }
-    [data-theme="dark"] .subj-track { border-color: rgba(167, 139, 250, 0.35); }
-    [data-theme="dark"] .ai-box { border-color: rgba(56, 189, 248, 0.45); }
+    [data-theme="dark"] .subj-track { border-color: rgba(220, 160, 120, 0.35); }
+    [data-theme="dark"] .ai-box { border-color: rgba(224, 144, 96, 0.45); }
 
 
     /* تایمر دایره‌ای پیشرفته */
@@ -805,6 +814,10 @@
     }
     .cal-day.empty { background: transparent; cursor: default; }
     .cal-day.has-study { border-color: var(--border-light); }
+    .cal-day.has-note::after {
+      content: '📌'; position: absolute; top: 2px; left: 3px; font-size: 0.65rem;
+    }
+    .cal-day { position: relative; }
     .cal-day.today {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px var(--accent);
@@ -936,7 +949,7 @@
         <div id="todayShamsi" style="margin-top:6px;font-size:0.9rem;color:#ffffff;font-weight:500;"></div>
       </div>
       <div class="header-actions">
-        <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا به پلنت خوش اومدی</span>
+        <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام پریا، به پلنت خوش اومدی</span>
         <div class="top-row">
           <button type="button" class="btn btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="تم روشن / تیره">🌙</button>
           <button type="button" class="btn btn-sm" id="calendarBtn" onclick="openCalendar()" title="تقویم شمسی">📅 تقویم</button>
@@ -967,6 +980,12 @@
         <div class="value" id="statGoal">—</div>
         <div class="sub" id="statGoalSub"></div>
       </div>
+    </div>
+
+    <!-- برنامه امروز مشاور (نمایش سریع) -->
+    <div id="todayPlanBanner" class="card" style="display:none;padding:14px 18px;margin-bottom:16px;border-color:var(--accent);">
+      <div style="font-weight:600;color:var(--accent);margin-bottom:6px;">📋 برنامه امروز از مشاور</div>
+      <div id="todayPlanBannerText" style="font-size:0.95rem;line-height:1.7;"></div>
     </div>
 
     <!-- تایمر مطالعه -->
@@ -1027,8 +1046,9 @@
         <label><input type="checkbox" id="timerSound" checked style="width:auto;" /> 🔔 صدا وقتی تموم شد</label>
       </div>
     </div>
-    <div class="card">
-      <h2>✍️ ثبت مطالعه</h2>
+    <div class="card collapsible collapsed" id="addFormCard">
+      <h2 onclick="toggleCollapse('addFormCard')">✍️ ثبت مطالعه <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
       <p class="hint">می‌تونی چند درس مختلف در یک روز ثبت کنی. سال و ماه قفل هستن، فقط روز رو تغییر بده.</p>
       <form id="addForm" onsubmit="addSession(event)">
         <div class="form-grid">
@@ -1109,6 +1129,7 @@
           <button type="submit" class="btn btn-primary">✅ ثبت جلسه</button>
         </div>
       </form>
+      </div>
     </div>
 
 
@@ -1157,6 +1178,68 @@
             <button type="button" class="btn btn-sm" onclick="moveUndoneToTomorrow()" id="btnMoveToTomorrow">انتقال ناتمام‌ها به فردا</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- برنامه مشاور -->
+    <div class="card collapsible collapsed" id="consultantCard">
+      <h2 onclick="toggleCollapse('consultantCard')">📋 برنامه مشاور <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <p class="hint">برنامهٔ مطالعه‌ای که مشاورت برات نوشته رو اینجا وارد کن. وقتی وارد سایت می‌شی، برنامهٔ امروز بالای صفحه هم نشون داده می‌شه.</p>
+        <div id="todayConsultantPlan" style="margin-bottom:14px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--accent-dim);"></div>
+        <div class="form-grid">
+          <div>
+            <label>📅 تاریخ برنامه</label>
+            <input type="text" id="consultantDate" placeholder="مثلاً ۱۴۰۴/۰۷/۲۸" />
+          </div>
+          <div>
+            <label>📖 درس‌ها / برنامه آن روز</label>
+            <input type="text" id="consultantPlanText" placeholder="مثلاً زیست فصل ۳ + شیمی تست + فیزیک فیلم" />
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:10px;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveConsultantPlan()">💾 ذخیره برنامه این روز</button>
+          <button type="button" class="btn btn-sm" onclick="deleteConsultantPlan()">حذف برنامه این تاریخ</button>
+        </div>
+        <div id="consultantPlanList" style="margin-top:14px;"></div>
+      </div>
+    </div>
+
+    <!-- منابع آزمون ماز -->
+    <div class="card collapsible collapsed" id="mazCard">
+      <h2 onclick="toggleCollapse('mazCard')">📝 منابع آزمون ماز (هر دو هفته) <span class="toggle-icon">▼</span></h2>
+      <div class="collapsible-body">
+        <p class="hint">منابع هر درس تا کجا در آزمون جمعهٔ هر دو هفته می‌آید + تاریخ آزمون‌ها را اینجا نگه دار.</p>
+        <div class="form-grid">
+          <div>
+            <label>📅 تاریخ آزمون بعدی</label>
+            <input type="text" id="mazExamDate" placeholder="مثلاً ۱۴۰۴/۰۸/۰۲" />
+          </div>
+          <div>
+            <label>📌 توضیح / یادداشت آزمون</label>
+            <input type="text" id="mazExamNote" placeholder="مثلاً آزمون جامع نیم‌سال" />
+          </div>
+        </div>
+        <div style="margin-top:12px;">
+          <label>📚 منابع به تفکیک درس</label>
+          <div id="mazSubjects" class="form-grid" style="margin-top:8px;">
+            <div><label>زیست</label><input type="text" id="maz_زیست" placeholder="تا فصل / صفحه..." /></div>
+            <div><label>شیمی</label><input type="text" id="maz_شیمی" placeholder="تا فصل / صفحه..." /></div>
+            <div><label>فیزیک</label><input type="text" id="maz_فیزیک" placeholder="تا فصل / صفحه..." /></div>
+            <div><label>ریاضی</label><input type="text" id="maz_ریاضی" placeholder="تا فصل / صفحه..." /></div>
+            <div><label>زمین‌شناسی</label><input type="text" id="maz_زمین‌شناسی" placeholder="تا فصل / صفحه..." /></div>
+            <div><label>دینی</label><input type="text" id="maz_دینی" placeholder="تا درس..." /></div>
+            <div><label>زبان</label><input type="text" id="maz_زبان" placeholder="تا درس..." /></div>
+            <div><label>فارسی</label><input type="text" id="maz_فارسی" placeholder="تا درس..." /></div>
+            <div><label>عربی</label><input type="text" id="maz_عربی" placeholder="تا درس..." /></div>
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:12px;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveMazData()">💾 ذخیره منابع ماز</button>
+          <button type="button" class="btn btn-sm" onclick="addMazExamDate()">＋ افزودن تاریخ آزمون</button>
+        </div>
+        <div id="mazExamDatesList" style="margin-top:12px;"></div>
+        <div id="mazSummary" style="margin-top:12px;font-size:0.9rem;color:var(--text-muted);"></div>
       </div>
     </div>
 
@@ -1858,7 +1941,13 @@
       });
       return map;
     }
-    function updateAll() { updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderExtras(); try { renderTasks(); } catch(e) {} }
+    function updateAll() {
+      updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderExtras();
+      try { renderTasks(); } catch(e) {}
+      try { renderConsultantPlans(); } catch(e) {}
+      try { renderMazData(); } catch(e) {}
+      try { renderTodayPlanBanner(); } catch(e) {}
+    }
     function updateStats() {
       const todayKey = jalaliToKey(toJalaliStr());
       const todayMin = getMinutesForDate(todayKey);
@@ -2257,6 +2346,7 @@
           }
           if (s.descriptive) testsInfo += ' <span class="tests-badge" style="background:rgba(249,115,22,0.2);color:#fb923c;border:1px solid #fb923c;">📄 تشریحی</span>';
           let metaLines = '';
+          if (s.timeFrom && s.timeTo) metaLines += '<div class="session-meta">⏰ ' + toPersian(s.timeFrom) + ' تا ' + toPersian(s.timeTo) + '</div>';
           if (s.note) metaLines += '<div class="session-meta">' + escapeHtml(s.note) + '</div>';
           if (s.testSection) metaLines += '<div class="session-meta" style="margin-top:2px;">📝 تست‌های زده‌شده: ' + escapeHtml(s.testSection) + '</div>';
           return '<div class="session-item"><div class="session-info"><div class="session-subject">' + badge + escapeHtml(s.subject) + ' ' + testsInfo + '</div>' + metaLines + '</div><div class="session-duration">' + formatDuration(s.minutes) + '</div><button class="edit-btn" onclick="openEditSession(' + s.id + ')" title="ویرایش">✏️</button><button class="session-delete" onclick="deleteSession(' + s.id + ')" title="حذف">×</button></div>';
@@ -2306,7 +2396,7 @@
       const bySubj = {};
       daySessions.forEach(function(s) {
         if (!bySubj[s.subject]) {
-          bySubj[s.subject] = { minutes: 0, tests: 0, videoHours: 0, notes: [], sections: [], descriptive: false, hasVideo: false, specialized: isSpecialized(s.subject) };
+          bySubj[s.subject] = { minutes: 0, tests: 0, videoHours: 0, notes: [], sections: [], timeRanges: [], descriptive: false, hasVideo: false, specialized: isSpecialized(s.subject) };
         }
         bySubj[s.subject].minutes += s.minutes;
         bySubj[s.subject].tests += (s.tests || 0);
@@ -2317,6 +2407,7 @@
         if (s.descriptive) bySubj[s.subject].descriptive = true;
         if (s.note) bySubj[s.subject].notes.push(s.note);
         if (s.testSection) bySubj[s.subject].sections.push(s.testSection);
+        if (s.timeFrom && s.timeTo) bySubj[s.subject].timeRanges.push(s.timeFrom + '–' + s.timeTo);
       });
       const subjList = Object.keys(bySubj).sort(function(a, b) {
         return bySubj[b].minutes - bySubj[a].minutes;
@@ -2337,21 +2428,21 @@
       const ctx = canvas.getContext('2d');
       ctx.scale(2, 2);
 
-      // پس‌زمینه مدرن کلاسیک
+      // پس‌زمینه کلاسیک قهوه‌ای
       const g = ctx.createLinearGradient(0, 0, width, height);
       if (isDark) {
-        g.addColorStop(0, '#0a0a14');
-        g.addColorStop(0.4, '#12101f');
-        g.addColorStop(1, '#0c1520');
+        g.addColorStop(0, '#1a1210');
+        g.addColorStop(0.4, '#140e0c');
+        g.addColorStop(1, '#0f0a08');
       } else {
-        g.addColorStop(0, '#faf8ff');
-        g.addColorStop(0.5, '#f3eefc');
-        g.addColorStop(1, '#eef2ff');
+        g.addColorStop(0, '#faf6f0');
+        g.addColorStop(0.5, '#f5efe6');
+        g.addColorStop(1, '#f0e8dc');
       }
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
       // نقاط ظریف پس‌زمینه
-      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
+      ctx.fillStyle = isDark ? 'rgba(220,160,120,0.09)' : 'rgba(166,93,63,0.07)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath();
@@ -2467,7 +2558,7 @@
         let bx = x0 + w0 - 18;
         const by = y + 58;
         const dur = formatDuration(info.minutes);
-        bx -= pill(dur, 'rgba(56,189,248,0.12)', '#38bdf8', '#38bdf8', bx, by);
+        bx -= pill(dur, 'rgba(224,144,96,0.15)', '#e09060', '#e09060', bx, by);
         // برای دروس عمومی اگر تست زده نشده، بج تست نمایش داده نشود
         const showTests = info.specialized || info.tests > 0;
         if (showTests) {
@@ -2497,11 +2588,17 @@
           bx -= pill('📄 تشریحی', 'rgba(249,115,22,0.12)', '#fb923c', '#fb923c', bx, by);
         }
 
-        // تست‌های زده‌شده و یادداشت
+        // بازه زمانی تایمر + تست‌ها + یادداشت
         let ly = y + 86;
         ctx.font = '400 12px Vazirmatn, Cairo, Tahoma, sans-serif';
         ctx.fillStyle = muted;
         ctx.textAlign = 'right';
+        if (info.timeRanges && info.timeRanges.length) {
+          ctx.fillStyle = accent;
+          ctx.fillText('⏰ ' + info.timeRanges.map(function(t){ return t.replace(/\d/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; }); }).join(' · '), x0 + w0 - 18, ly);
+          ly += 16;
+          ctx.fillStyle = muted;
+        }
         if (info.sections.length) {
           ctx.fillText('تست‌های زده‌شده: ' + info.sections.join('، '), x0 + w0 - 18, ly);
           ly += 18;
@@ -2567,27 +2664,27 @@
 
       const g = ctx.createLinearGradient(0, 0, width, height);
       if (isDark) {
-        g.addColorStop(0, '#0a0a14');
-        g.addColorStop(0.5, '#12101f');
-        g.addColorStop(1, '#0c1520');
+        g.addColorStop(0, '#1a1210');
+        g.addColorStop(0.5, '#140e0c');
+        g.addColorStop(1, '#0f0a08');
       } else {
-        g.addColorStop(0, '#faf8ff');
-        g.addColorStop(1, '#eef2ff');
+        g.addColorStop(0, '#faf6f0');
+        g.addColorStop(1, '#f3ebe0');
       }
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.05)';
+      ctx.fillStyle = isDark ? 'rgba(220,160,120,0.08)' : 'rgba(166,93,63,0.06)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath(); ctx.arc(px, py, 1.1, 0, Math.PI * 2); ctx.fill();
         }
       }
 
-      const cardBg = isDark ? '#151e2e' : '#ffffff';
-      const textCol = isDark ? '#f1f5f9' : '#0f172a';
-      const muted = isDark ? '#94a3b8' : '#64748b';
-      const accent = isDark ? '#38bdf8' : '#0284c7';
-      const border = isDark ? 'rgba(45,212,191,0.4)' : 'rgba(2,132,199,0.25)';
+      const cardBg = isDark ? '#2a1c18' : '#fffbf6';
+      const textCol = isDark ? '#fff8f0' : '#2a1f1a';
+      const muted = isDark ? '#d4c0b0' : '#6b5a50';
+      const accent = isDark ? '#e09060' : '#a65d3f';
+      const border = isDark ? 'rgba(220,160,120,0.5)' : 'rgba(160,110,80,0.3)';
       roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
 
       ctx.textAlign = 'right';
@@ -2639,8 +2736,8 @@
         ctx.fillRect(ax, y + 8, barMaxW, 12);
         if (wa) {
           const grad = ctx.createLinearGradient(ax, 0, ax + wa, 0);
-          grad.addColorStop(0, '#22d3ee');
-          grad.addColorStop(1, '#a78bfa');
+          grad.addColorStop(0, '#e09060');
+          grad.addColorStop(1, '#c4785a');
           ctx.fillStyle = grad;
           ctx.fillRect(ax, y + 8, wa, 12);
         }
@@ -3782,7 +3879,12 @@
       timerState.subject = subj;
       timerState.running = true;
       timerState.startedAt = Date.now();
-      if (!timerState.elapsed) timerState.elapsed = 0;
+      if (!timerState.elapsed) {
+        timerState.elapsed = 0;
+        // ساعت شروع واقعی (فقط اولین بار)
+        var d0 = new Date();
+        timerState.clockStart = String(d0.getHours()).padStart(2,'0') + ':' + String(d0.getMinutes()).padStart(2,'0');
+      }
       timerState.goalNotified = false;
       if (timerState.interval) clearInterval(timerState.interval);
       timerState.interval = setInterval(timerTick, 250);
@@ -3839,6 +3941,9 @@
       var subj = timerState.subject || (document.getElementById('timerSubject') && document.getElementById('timerSubject').value) || '';
       var formSubj = document.getElementById('subject');
       if (formSubj && subj) formSubj.value = subj;
+      // باز کردن بخش ثبت مطالعه
+      var addCard = document.getElementById('addFormCard');
+      if (addCard) addCard.classList.remove('collapsed');
       var formCard = document.getElementById('addForm');
       if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       showToast((subj ? ('درس «' + subj + '» — ') : '') + 'زمان: ' + formatDuration(totalMin));
@@ -3854,6 +3959,9 @@
       if (!subj) { showToast('درس را انتخاب کن', true); return; }
       if (timerState.running) timerPause();
       var dateStr = toJalaliStr();
+      var dEnd = new Date();
+      var clockEnd = String(dEnd.getHours()).padStart(2,'0') + ':' + String(dEnd.getMinutes()).padStart(2,'0');
+      var clockStart = timerState.clockStart || clockEnd;
       var sess = {
         id: Date.now() + Math.random(),
         subject: subj,
@@ -3866,14 +3974,17 @@
         date: dateStr,
         dateKey: jalaliToKey(dateStr),
         note: 'ثبت از تایمر',
+        timeFrom: clockStart,
+        timeTo: clockEnd,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
       sessions.unshift(sess);
       saveData();
       updateAll();
+      timerState.clockStart = null;
       timerReset();
-      showToast('جلسه «' + subj + '» — ' + formatDuration(totalMin) + ' ثبت شد ✓');
+      showToast('جلسه «' + subj + '» — ' + formatDuration(totalMin) + ' (' + toPersian(clockStart) + ' تا ' + toPersian(clockEnd) + ') ثبت شد ✓');
     }
 
     // ===== تقویم شمسی =====
@@ -3889,11 +4000,31 @@
       if (ov) ov.classList.add('show');
     }
     function calDayTap(ev, key) {
-      // موبایل: با لمس، تصویر روز
-      if (window.matchMedia('(hover: none)').matches || (ev && ev.type === 'click' && window.innerWidth < 700)) {
-        if (key && confirm('دانلود تصویر روز ' + toPersian(key) + '؟')) {
-          downloadDayImage(key);
-        }
+      if (!key) return;
+      openCalDayDetail(key);
+    }
+    function getDayNotes() {
+      try { return JSON.parse(localStorage.getItem('study_day_notes') || '{}'); } catch(e) { return {}; }
+    }
+    function saveDayNote(key, text) {
+      var notes = getDayNotes();
+      if (text && text.trim()) notes[key] = text.trim();
+      else delete notes[key];
+      localStorage.setItem('study_day_notes', JSON.stringify(notes));
+      showToast('یادداشت روز ذخیره شد');
+      renderCalendar();
+    }
+    function openCalDayDetail(key) {
+      var mins = getMinutesForDate(key);
+      var tests = getTestsForDate(key);
+      var notes = getDayNotes();
+      var note = notes[key] || '';
+      var detail = 'تاریخ: ' + toPersian(key) + '\nزمان مطالعه: ' + formatDuration(mins) + (tests ? '\nتست: ' + toPersian(tests) : '');
+      var newNote = prompt(detail + '\n\nیادداشت این روز (خالی = حذف):\n', note);
+      if (newNote === null) return; // انصراف
+      saveDayNote(key, newNote);
+      if (confirm('دانلود تصویر خلاصه این روز؟')) {
+        downloadDayImage(key);
       }
     }
     function closeCalendar() {
@@ -3927,9 +4058,11 @@
         var key = jalaliToKey(label);
         var mins = getMinutesForDate(key);
         var tests = getTestsForDate(key);
+        var hasNote = !!(getDayNotes()[key]);
         var cls = 'cal-day';
         if (mins > 0) cls += ' has-study';
         if (key === todayKey) cls += ' today';
+        if (hasNote) cls += ' has-note';
         var tip = '<div class="cal-tooltip" onclick="event.stopPropagation()"><strong>' + toPersian(label) + '</strong>';
         if (mins > 0 || tests > 0) {
           tip += formatDuration(mins);
@@ -3937,6 +4070,8 @@
         } else {
           tip += 'بدون مطالعه';
         }
+        if (hasNote) tip += '<br>📌 دارد یادداشت';
+        tip += '<br><button type="button" class="cal-tip-btn" onclick="event.stopPropagation();openCalDayDetail(\'' + key + '\');">جزئیات / یادداشت</button>';
         tip += '<br><button type="button" class="cal-tip-btn" onclick="event.stopPropagation();downloadDayImage(\'' + key + '\');">🖼️ تصویر روز</button>';
         tip += '</div>';
         var dot = mins > 0 ? '<span class="cal-dot"></span>' : '';
@@ -4150,6 +4285,139 @@
         });
       }
     })();
+
+    // ===== برنامه مشاور =====
+    function getConsultantPlans() {
+      try { return JSON.parse(localStorage.getItem('study_consultant_plans') || '{}'); } catch(e) { return {}; }
+    }
+    function saveConsultantPlan() {
+      var dateEl = document.getElementById('consultantDate');
+      var textEl = document.getElementById('consultantPlanText');
+      var dateStr = (dateEl && dateEl.value || '').trim();
+      var text = (textEl && textEl.value || '').trim();
+      if (!dateStr || !text) { showToast('تاریخ و برنامه را وارد کن', true); return; }
+      var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+      var plans = getConsultantPlans();
+      plans[key] = text;
+      localStorage.setItem('study_consultant_plans', JSON.stringify(plans));
+      if (dateEl) dateEl.value = '';
+      if (textEl) textEl.value = '';
+      renderConsultantPlans();
+      renderTodayPlanBanner();
+      showToast('برنامه مشاور ذخیره شد ✓');
+    }
+    function deleteConsultantPlan() {
+      var dateEl = document.getElementById('consultantDate');
+      var dateStr = (dateEl && dateEl.value || '').trim();
+      if (!dateStr) { showToast('تاریخ را وارد کن', true); return; }
+      var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+      var plans = getConsultantPlans();
+      if (!plans[key]) { showToast('برنامه‌ای برای این تاریخ نیست', true); return; }
+      delete plans[key];
+      localStorage.setItem('study_consultant_plans', JSON.stringify(plans));
+      renderConsultantPlans();
+      renderTodayPlanBanner();
+      showToast('برنامه حذف شد');
+    }
+    function renderConsultantPlans() {
+      var el = document.getElementById('consultantPlanList');
+      var todayEl = document.getElementById('todayConsultantPlan');
+      if (!el) return;
+      var plans = getConsultantPlans();
+      var todayKey = jalaliToKey(toJalaliStr());
+      if (todayEl) {
+        if (plans[todayKey]) {
+          todayEl.innerHTML = '<strong>امروز:</strong> ' + escapeHtml(plans[todayKey]);
+          todayEl.style.display = '';
+        } else {
+          todayEl.innerHTML = '<span style="color:var(--text-muted);">برای امروز برنامه‌ای ثبت نشده</span>';
+        }
+      }
+      var keys = Object.keys(plans).sort().reverse();
+      if (!keys.length) {
+        el.innerHTML = '<div style="color:var(--text-muted);font-size:0.88rem;padding:8px;">هنوز برنامه‌ای ذخیره نشده</div>';
+        return;
+      }
+      el.innerHTML = keys.slice(0, 20).map(function(k) {
+        var isToday = k === todayKey;
+        return '<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">' +
+          '<div><div style="font-weight:600;color:var(--accent);">' + toPersian(k) + (isToday ? ' (امروز)' : '') + '</div>' +
+          '<div style="font-size:0.9rem;margin-top:4px;">' + escapeHtml(plans[k]) + '</div></div></div>';
+      }).join('');
+    }
+    function renderTodayPlanBanner() {
+      var banner = document.getElementById('todayPlanBanner');
+      var textEl = document.getElementById('todayPlanBannerText');
+      if (!banner || !textEl) return;
+      var plans = getConsultantPlans();
+      var todayKey = jalaliToKey(toJalaliStr());
+      if (plans[todayKey]) {
+        textEl.textContent = plans[todayKey];
+        banner.style.display = '';
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    // ===== منابع ماز =====
+    function getMazData() {
+      try { return JSON.parse(localStorage.getItem('study_maz_data') || '{"subjects":{},"exams":[]}'); } catch(e) { return { subjects: {}, exams: [] }; }
+    }
+    function saveMazData() {
+      var data = getMazData();
+      var subjects = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی','دینی','زبان','فارسی','عربی'];
+      subjects.forEach(function(s) {
+        var inp = document.getElementById('maz_' + s);
+        if (inp) data.subjects[s] = (inp.value || '').trim();
+      });
+      var examDate = (document.getElementById('mazExamDate') || {}).value || '';
+      var examNote = (document.getElementById('mazExamNote') || {}).value || '';
+      if (examDate.trim()) {
+        data.exams = data.exams || [];
+        data.exams.push({ date: examDate.trim(), note: examNote.trim() });
+        document.getElementById('mazExamDate').value = '';
+        document.getElementById('mazExamNote').value = '';
+      }
+      localStorage.setItem('study_maz_data', JSON.stringify(data));
+      renderMazData();
+      showToast('منابع ماز ذخیره شد ✓');
+    }
+    function addMazExamDate() {
+      var examDate = (document.getElementById('mazExamDate') || {}).value || '';
+      if (!examDate.trim()) { showToast('تاریخ آزمون را وارد کن', true); return; }
+      saveMazData();
+    }
+    function removeMazExam(idx) {
+      var data = getMazData();
+      data.exams.splice(idx, 1);
+      localStorage.setItem('study_maz_data', JSON.stringify(data));
+      renderMazData();
+    }
+    function renderMazData() {
+      var data = getMazData();
+      var subjects = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی','دینی','زبان','فارسی','عربی'];
+      subjects.forEach(function(s) {
+        var inp = document.getElementById('maz_' + s);
+        if (inp && document.activeElement !== inp) inp.value = data.subjects[s] || '';
+      });
+      var listEl = document.getElementById('mazExamDatesList');
+      if (listEl) {
+        var exams = data.exams || [];
+        if (!exams.length) listEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;">تاریخ آزمونی ثبت نشده</div>';
+        else {
+          listEl.innerHTML = exams.map(function(ex, i) {
+            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">' +
+              '<span>📅 ' + toPersian(ex.date) + (ex.note ? ' — ' + escapeHtml(ex.note) : '') + '</span>' +
+              '<button type="button" class="session-delete" onclick="removeMazExam(' + i + ')">×</button></div>';
+          }).join('');
+        }
+      }
+      var sumEl = document.getElementById('mazSummary');
+      if (sumEl) {
+        var parts = subjects.filter(function(s){ return data.subjects[s]; }).map(function(s){ return s + ': ' + data.subjects[s]; });
+        sumEl.innerHTML = parts.length ? ('<strong>خلاصه منابع:</strong> ' + parts.map(escapeHtml).join(' · ')) : '';
+      }
+    }
 
     // بدون رمز — مستقیم ورود به اپ
     try { showApp(); } catch (e) { console.error(e); }
