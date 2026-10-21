@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>ثبت‌کننده ساعت مطالعه</title>
-  <meta name="theme-color" content="#0f0a08" />
+  <meta name="theme-color" content="#0a1018" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -16,47 +16,51 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root, [data-theme="dark"] {
-      --form-label: #f0d5b8;
-      --greeting: #f5e6d3;
-      --bg: #0f0a08;
-      --bg-card: rgba(42, 28, 24, 0.94);
-      --bg-input: rgba(30, 20, 16, 0.98);
-      --border: rgba(220, 160, 120, 0.5);
-      --border-light: rgba(240, 190, 150, 0.65);
-      --text: #fff8f0;
-      --text-muted: #d4c0b0;
-      --text-dim: #a89080;
-      --accent: #e09060;
-      --accent-soft: #f0b890;
-      --accent-dim: rgba(224, 144, 96, 0.2);
-      --success: #6dca8a;
-      --danger: #f08080;
-      --radius: 16px;
-      --radius-sm: 11px;
-      --shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(220, 160, 120, 0.15);
-      --ai-bg: rgba(60, 36, 28, 0.55);
-      --glow: 0 0 50px rgba(224, 144, 96, 0.12);
+      --form-label: #5eead4;
+      --greeting: #f0d78c;
+      --bg: #0a1018;
+      --bg-card: rgba(16, 28, 36, 0.94);
+      --bg-input: rgba(12, 22, 30, 0.98);
+      --border: rgba(45, 212, 191, 0.32);
+      --border-light: rgba(212, 168, 75, 0.45);
+      --text: #f5f0e6;
+      --text-muted: #a8c5c0;
+      --text-dim: #6b8a85;
+      --accent: #2dd4bf;
+      --accent-soft: #5eead4;
+      --accent-dim: rgba(45, 212, 191, 0.14);
+      --gold: #d4a84b;
+      --gold-soft: #e8c76a;
+      --success: #4ade80;
+      --danger: #f87171;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(45, 212, 191, 0.1);
+      --ai-bg: rgba(20, 40, 45, 0.55);
+      --glow: 0 0 50px rgba(45, 212, 191, 0.1);
     }
-    [data-theme="light"] #todayShamsi { color: #2a1f1a !important; }
+    [data-theme="light"] #todayShamsi { color: #0f3d3a !important; }
     [data-theme="light"] {
-      --form-label: #8b4518;
-      --greeting: #6b3a22;
-      --bg: #f7f0e8;
-      --bg-card: rgba(255, 251, 246, 0.95);
-      --bg-input: #fffaf5;
-      --border: rgba(160, 110, 80, 0.22);
-      --border-light: rgba(140, 90, 60, 0.35);
-      --text: #2a1f1a;
-      --text-muted: #6b5a50;
-      --text-dim: #9a8a7e;
-      --accent: #a65d3f;
-      --accent-soft: #c4785a;
-      --accent-dim: rgba(166, 93, 63, 0.12);
-      --success: #2d7a4f;
-      --danger: #c43c3c;
-      --shadow: 0 8px 28px rgba(60, 35, 25, 0.08), 0 0 0 1px rgba(160, 110, 80, 0.1);
-      --ai-bg: rgba(255, 245, 235, 0.9);
-      --glow: 0 0 40px rgba(166, 93, 63, 0.06);
+      --form-label: #0f766e;
+      --greeting: #92640a;
+      --bg: #f7f3ea;
+      --bg-card: rgba(255, 252, 245, 0.95);
+      --bg-input: #fffef9;
+      --border: rgba(13, 148, 136, 0.28);
+      --border-light: rgba(180, 120, 40, 0.4);
+      --text: #1a2e2c;
+      --text-muted: #3d6b66;
+      --text-dim: #6b8f8a;
+      --accent: #0d9488;
+      --accent-soft: #14b8a6;
+      --accent-dim: rgba(13, 148, 136, 0.12);
+      --gold: #b8860b;
+      --gold-soft: #d4a017;
+      --success: #15803d;
+      --danger: #dc2626;
+      --shadow: 0 10px 32px rgba(20, 60, 55, 0.1), 0 0 0 1px rgba(13, 148, 136, 0.12);
+      --ai-bg: rgba(240, 253, 250, 0.92);
+      --glow: 0 0 40px rgba(13, 148, 136, 0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -71,19 +75,19 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-    /* پس‌زمینه کلاسیک — کنتراست بهتر */
+    /* پس‌زمینه هخامنشی — فیروزه و طلا */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      background-color: #0f0a08;
+      background-color: #0a1018;
       background-image:
-        radial-gradient(ellipse 110% 70% at 50% -5%, rgba(200, 120, 80, 0.28), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 95% 90%, rgba(120, 55, 40, 0.3), transparent 50%),
-        radial-gradient(ellipse 55% 40% at 5% 75%, rgba(90, 45, 35, 0.25), transparent 50%),
-        linear-gradient(180deg, #1c1210 0%, #120c0a 45%, #0c0806 100%);
+        radial-gradient(ellipse 100% 60% at 50% -5%, rgba(45, 212, 191, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 45% at 100% 100%, rgba(212, 168, 75, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(20, 184, 166, 0.1), transparent 50%),
+        linear-gradient(180deg, #0e1a22 0%, #0a1018 45%, #070d12 100%);
     }
     body::after {
       content: '';
@@ -91,24 +95,59 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
+      /* نقش هندسی الهام از نقوش تخت‌جمشید */
       background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(200,140,100,0.03) 3px, rgba(200,140,100,0.03) 4px),
-        radial-gradient(circle at 1px 1px, rgba(220, 170, 130, 0.1) 1px, transparent 0);
-      background-size: 100% 4px, 32px 32px;
-      opacity: 0.5;
+        linear-gradient(90deg, rgba(212,168,75,0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(45,212,191,0.04) 1px, transparent 1px),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(212,168,75,0.03) 18px, rgba(212,168,75,0.03) 19px),
+        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(45,212,191,0.025) 18px, rgba(45,212,191,0.025) 19px);
+      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
+      opacity: 0.7;
     }
     body[data-theme="light"]::before {
-      background-color: #f5efe6;
+      background-color: #f7f3ea;
       background-image:
-        radial-gradient(ellipse 100% 70% at 50% 0%, rgba(196, 120, 90, 0.18), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 100% 100%, rgba(180, 140, 110, 0.12), transparent 50%),
-        linear-gradient(180deg, #faf6f0 0%, #f3ebe0 100%);
+        radial-gradient(ellipse 110% 65% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 55%),
+        radial-gradient(ellipse 65% 50% at 100% 95%, rgba(212, 168, 75, 0.14), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(13, 148, 136, 0.1), transparent 50%),
+        linear-gradient(180deg, #faf6ee 0%, #f0ebe0 50%, #e8f5f2 100%);
     }
     body[data-theme="light"]::after {
       background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(140,100,70,0.035) 2px, rgba(140,100,70,0.035) 3px);
-      background-size: 100% 3px;
-      opacity: 0.65;
+        linear-gradient(90deg, rgba(180,134,11,0.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(13,148,136,0.05) 1px, transparent 1px),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(180,134,11,0.04) 18px, rgba(180,134,11,0.04) 19px),
+        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(13,148,136,0.035) 18px, rgba(13,148,136,0.035) 19px);
+      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
+      opacity: 0.75;
+    }
+    [data-theme="light"] .card {
+      background: rgba(255, 252, 245, 0.92);
+      border-color: rgba(13, 148, 136, 0.22);
+      box-shadow: 0 8px 28px rgba(20, 60, 55, 0.08), 0 0 0 1px rgba(212, 168, 75, 0.12);
+    }
+    [data-theme="light"] .stat-card {
+      background: rgba(255, 252, 245, 0.9);
+      border-color: rgba(13, 148, 136, 0.2);
+    }
+    [data-theme="light"] header h1 {
+      background: linear-gradient(135deg, #b8860b, #0d9488);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+    [data-theme="light"] .btn-primary {
+      background: linear-gradient(135deg, #0f766e 0%, #14b8a6 45%, #d4a017 100%);
+      border-color: rgba(180, 134, 11, 0.4);
+      box-shadow: 0 4px 18px rgba(13, 148, 136, 0.22);
+    }
+    /* حاشیه کارت‌ها با حس طلایی-فیروزه‌ای */
+    .card {
+      border-image: none;
+    }
+    header {
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(90deg, transparent, rgba(212,168,75,0.5), rgba(45,212,191,0.5), transparent) 1;
     }
 
     #loginScreen {
@@ -168,9 +207,13 @@
       transform: translateY(-1px);
     }
     .login-error { color: var(--danger); font-size: 0.85rem; margin-top: 12px; min-height: 20px; }
-    #app { display: block; max-width: 1100px; margin: 0 auto; padding: 24px 20px 70px; position: relative; z-index: 1; }
-    @media (min-width: 1200px) {
-      #app { max-width: 1180px; padding: 28px 24px 80px; }
+    #app { display: block; max-width: 1280px; margin: 0 auto; padding: 28px 28px 80px; position: relative; z-index: 1; }
+    @media (min-width: 1400px) {
+      #app { max-width: 1400px; padding: 32px 36px 90px; }
+      body { font-size: 17.5px; }
+    }
+    @media (min-width: 1100px) and (max-width: 1399px) {
+      #app { max-width: 1200px; padding: 28px 28px 80px; }
       body { font-size: 17px; }
     }
     header {
@@ -178,7 +221,13 @@
       margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
       flex-wrap: wrap; gap: 12px;
     }
-    header h1 { font-size: 1.35rem; font-weight: 600; color: var(--accent); }
+    header h1 {
+      font-size: 1.35rem; font-weight: 600;
+      background: linear-gradient(135deg, #e8c76a, #2dd4bf);
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
     .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
     .header-actions .top-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .btn {
@@ -203,24 +252,24 @@
       box-shadow: 0 6px 20px rgba(56,189,248,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .btn-primary {
-      background: linear-gradient(135deg, #a65d3f 0%, #c4785a 50%, #e0a88a 100%);
-      border: 1px solid rgba(224, 168, 138, 0.4);
-      color: #1a0f0c;
+      background: linear-gradient(135deg, #0f766e 0%, #14b8a6 40%, #d4a84b 100%);
+      border: 1px solid rgba(212, 168, 75, 0.45);
+      color: #fff;
       font-weight: 700;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 22px rgba(196, 120, 90, 0.3), inset 0 1px 0 rgba(255,255,255,0.35);
+      box-shadow: 0 4px 22px rgba(45, 212, 191, 0.25), inset 0 1px 0 rgba(255,255,255,0.25);
     }
     .btn-primary:hover {
-      filter: brightness(1.06);
-      box-shadow: 0 6px 28px rgba(196, 120, 90, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 28px rgba(212, 168, 75, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
       transform: translateY(-1px);
     }
     [data-theme="light"] .btn-primary {
-      background: linear-gradient(135deg, #8b4518 0%, #a65d3f 55%, #c4785a 100%);
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 50%, #b45309 100%);
       color: #fff;
-      border-color: rgba(166, 93, 63, 0.4);
-      box-shadow: 0 4px 18px rgba(166, 93, 63, 0.28);
+      border-color: rgba(180, 83, 9, 0.35);
+      box-shadow: 0 4px 18px rgba(13, 148, 136, 0.25);
     }
     .btn-danger {
       color: var(--danger);
@@ -662,40 +711,96 @@
     [data-theme="dark"] .ai-box { border-color: rgba(224, 144, 96, 0.45); }
 
 
-    /* تایمر دایره‌ای پیشرفته */
+    /* تایمر دایره‌ای لوکس — فیروزه و طلا */
     .timer-card {
       text-align: center;
-      padding: 22px 18px 20px;
+      padding: 26px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .timer-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(45,212,191,0.08), transparent 55%),
+        radial-gradient(circle at 50% 60%, rgba(212,168,75,0.06), transparent 50%);
+      pointer-events: none;
     }
     .timer-ring-wrap {
       position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 14px auto 18px;
+      width: 260px;
+      height: 260px;
+      margin: 18px auto 22px;
+      z-index: 1;
+    }
+    .timer-hour {
+      position: absolute;
+      z-index: 3;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #5eead4;
+      text-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+      pointer-events: none;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .timer-h12 { top: 0; left: 50%; transform: translateX(-50%); }
+    .timer-h3  { top: 50%; right: 0; transform: translateY(-50%); }
+    .timer-h6  { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .timer-h9  { top: 50%; left: 0; transform: translateY(-50%); }
+    [data-theme="light"] .timer-hour {
+      color: #0f766e;
+      text-shadow: 0 1px 3px rgba(255,255,255,0.95);
+      font-weight: 800;
+    }
+    .timer-ring-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,212,191,0.06) 0%, transparent 70%);
+      animation: timerPulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .timer-running .timer-ring-wrap::before {
+      animation: timerPulseFast 1.6s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(212,168,75,0.12) 0%, rgba(45,212,191,0.08) 40%, transparent 70%);
+    }
+    @keyframes timerPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+    @keyframes timerPulseFast {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.08); opacity: 1; }
     }
     .timer-ring-wrap svg {
       width: 100%;
       height: 100%;
       transform: rotate(-90deg);
-      filter: drop-shadow(0 4px 20px rgba(196, 120, 90, 0.2));
+      filter: drop-shadow(0 8px 32px rgba(45, 212, 191, 0.35));
+    }
+    .timer-running .timer-ring-wrap svg {
+      filter: drop-shadow(0 0 20px rgba(212, 168, 75, 0.45)) drop-shadow(0 8px 28px rgba(45, 212, 191, 0.3));
     }
     .timer-ring-bg {
       fill: none;
-      stroke: var(--border);
-      stroke-width: 10;
-      opacity: 0.55;
+      stroke: rgba(45, 212, 191, 0.18);
+      stroke-width: 14;
+      opacity: 1;
     }
     .timer-ring-fg {
       fill: none;
       stroke: url(#timerGrad);
-      stroke-width: 10;
+      stroke-width: 14;
       stroke-linecap: round;
       stroke-dasharray: 565.5;
       stroke-dashoffset: 565.5;
-      transition: stroke-dashoffset 0.3s linear;
+      transition: stroke-dashoffset 0.2s linear;
     }
     .timer-running .timer-ring-fg {
-      filter: drop-shadow(0 0 12px rgba(125, 186, 138, 0.45));
+      filter: drop-shadow(0 0 10px rgba(94, 234, 212, 0.7));
     }
     .timer-display {
       position: absolute;
@@ -704,22 +809,74 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.9rem;
+      font-size: 2.15rem;
       font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--accent);
+      letter-spacing: 3px;
+      color: var(--gold-soft, #e8c76a);
       font-variant-numeric: tabular-nums;
-      line-height: 1.2;
+      line-height: 1.15;
       pointer-events: none;
+      text-shadow: 0 0 30px rgba(45, 212, 191, 0.35), 0 2px 8px rgba(0,0,0,0.25);
+      z-index: 2;
     }
     .timer-display .timer-sub {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0;
-      margin-top: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-soft);
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+      opacity: 0.9;
     }
-    .timer-running .timer-display { color: var(--success); }
+    .timer-running .timer-display {
+      color: #5eead4;
+      text-shadow: 0 0 28px rgba(45, 212, 191, 0.55), 0 0 12px rgba(212, 168, 75, 0.3);
+    }
+    .timer-running .timer-display .timer-sub { color: #e8c76a; }
+
+    /* تایمر در تم روز — کنتراست بالاتر */
+    [data-theme="light"] .timer-ring-bg {
+      stroke: rgba(13, 148, 136, 0.32);
+      stroke-width: 14;
+    }
+    [data-theme="light"] .timer-ring-fg {
+      filter: drop-shadow(0 0 6px rgba(13, 148, 136, 0.4));
+    }
+    [data-theme="light"] .timer-running .timer-ring-fg {
+      filter: drop-shadow(0 0 10px rgba(180, 134, 11, 0.5));
+    }
+    [data-theme="light"] .timer-ring-wrap svg {
+      filter: drop-shadow(0 6px 20px rgba(13, 148, 136, 0.25));
+    }
+    [data-theme="light"] .timer-running .timer-ring-wrap svg {
+      filter: drop-shadow(0 0 16px rgba(180, 134, 11, 0.35)) drop-shadow(0 6px 18px rgba(13, 148, 136, 0.22));
+    }
+    [data-theme="light"] .timer-display {
+      color: #0f766e;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.9), 0 0 14px rgba(13, 148, 136, 0.18);
+    }
+    [data-theme="light"] .timer-display .timer-sub {
+      color: #92640a;
+      opacity: 1;
+      font-weight: 700;
+    }
+    [data-theme="light"] .timer-running .timer-display {
+      color: #0d9488;
+      text-shadow: 0 0 16px rgba(13, 148, 136, 0.3);
+    }
+    [data-theme="light"] .timer-running .timer-display .timer-sub {
+      color: #b8860b;
+    }
+    [data-theme="light"] .timer-ring-wrap::before {
+      background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%);
+    }
+    [data-theme="light"] .timer-running .timer-ring-wrap::before {
+      background: radial-gradient(circle, rgba(180,134,11,0.14) 0%, rgba(13,148,136,0.1) 40%, transparent 70%);
+    }
+    [data-theme="light"] .timer-card::before {
+      background:
+        radial-gradient(circle at 50% 40%, rgba(13,148,136,0.12), transparent 55%),
+        radial-gradient(circle at 50% 60%, rgba(180,134,11,0.1), transparent 50%);
+    }
     .timer-presets {
       display: flex;
       gap: 8px;
@@ -936,7 +1093,7 @@
         <div id="todayShamsi" style="margin-top:6px;font-size:0.9rem;color:#ffffff;font-weight:500;"></div>
       </div>
       <div class="header-actions">
-        <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام پریا، به پلنت خوش اومدی</span>
+        <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا، به پلنت خوش اومدی</span>
         <div class="top-row">
           <button type="button" class="btn btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="تم روشن / تیره">🌙</button>
           <button type="button" class="btn btn-sm" id="calendarBtn" onclick="openCalendar()" title="تقویم شمسی">📅 تقویم</button>
@@ -1006,15 +1163,44 @@
       </div>
       <div class="timer-status" id="timerStatus">درس را انتخاب کن و شروع بزن</div>
       <div class="timer-ring-wrap">
-        <svg viewBox="0 0 200 200" aria-hidden="true">
+        <span class="timer-hour timer-h12">۱۲</span>
+        <span class="timer-hour timer-h3">۳</span>
+        <span class="timer-hour timer-h6">۶</span>
+        <span class="timer-hour timer-h9">۹</span>
+        <svg viewBox="0 0 220 220" aria-hidden="true">
           <defs>
             <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#c4785a"/>
-              <stop offset="100%" stop-color="#e0a88a"/>
+              <stop offset="0%" stop-color="#5eead4"/>
+              <stop offset="30%" stop-color="#0d9488"/>
+              <stop offset="65%" stop-color="#d4a84b"/>
+              <stop offset="100%" stop-color="#b45309"/>
             </linearGradient>
+            <linearGradient id="timerOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#b8860b" stop-opacity="0.75"/>
+              <stop offset="50%" stop-color="#0f766e" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#b8860b" stop-opacity="0.75"/>
+            </linearGradient>
+            <radialGradient id="timerCenter" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(13,148,136,0.18)"/>
+              <stop offset="70%" stop-color="rgba(184,134,11,0.08)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
           </defs>
-          <circle class="timer-ring-bg" cx="100" cy="100" r="90"></circle>
-          <circle class="timer-ring-fg" id="timerRingFg" cx="100" cy="100" r="90"></circle>
+          <!-- دایره مرکزی نرم -->
+          <circle cx="110" cy="110" r="72" fill="url(#timerCenter)" transform="rotate(90 110 110)"/>
+          <!-- حلقه بیرونی طلایی تزئینی -->
+          <circle cx="110" cy="110" r="104" fill="none" stroke="url(#timerOuter)" stroke-width="2" stroke-dasharray="6 4"/>
+          <!-- حلقه پس‌زمینه -->
+          <circle class="timer-ring-bg" cx="110" cy="110" r="90"></circle>
+          <!-- حلقه پیشرفت -->
+          <circle class="timer-ring-fg" id="timerRingFg" cx="110" cy="110" r="90" filter="url(#timerGlow)"></circle>
+          <!-- حلقه داخلی ظریف -->
+          <circle cx="110" cy="110" r="76" fill="none" stroke="rgba(13,148,136,0.35)" stroke-width="1.5" stroke-dasharray="2 5"/>
+          <circle cx="110" cy="110" r="68" fill="none" stroke="rgba(184,134,11,0.3)" stroke-width="1.25"/>
         </svg>
         <div class="timer-display">
           <span id="timerDisplay">00:00:00</span>
@@ -1121,63 +1307,19 @@
 
 
 
-    <!-- کارهای امروز / فردا / دیروز -->
-    <div class="card collapsible collapsed" id="tasksCard">
-      <h2 onclick="toggleCollapse('tasksCard')">✅ کارها و برنامه مطالعه <span class="toggle-icon">▼</span></h2>
-      <div class="collapsible-body">
-        <p class="hint">با عبور از نیمه‌شب، کارهای انجام‌نشدهٔ دیروز در تب «دیروز» با عنوان «کارهای انجام‌نشده» می‌مانند. می‌توانی تاریخ کار را هم مشخص کنی.</p>
-        <div class="tasks-tabs">
-          <button type="button" class="tab active" data-task-tab="today" onclick="switchTaskTab('today')">📅 امروز</button>
-          <button type="button" class="tab" data-task-tab="tomorrow" onclick="switchTaskTab('tomorrow')">🌅 فردا</button>
-          <button type="button" class="tab" data-task-tab="yesterday" onclick="switchTaskTab('yesterday')">🕓 دیروز</button>
-        </div>
-        <div id="tasksProgress" class="tasks-progress-wrap"></div>
-        <div id="tasksList"></div>
-        <div class="tomorrow-input-row" style="flex-direction:column;align-items:stretch;margin-top:12px;" id="tasksAddRow">
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <input type="text" id="taskInput" placeholder="مثلاً: شستن لباس‌ها / زیست فصل ۳" maxlength="140" style="flex:2;min-width:160px;" />
-            <input type="text" id="taskDate" placeholder="تاریخ ۱۴۰۴/۰۷/۲۶" title="تاریخ شمسی کار" style="flex:1;min-width:120px;" />
-            <select id="taskSubject" style="flex:1;min-width:110px;">
-              <option value="">بدون درس</option>
-              <optgroup label="تخصصی">
-                <option value="زیست">زیست</option>
-                <option value="شیمی">شیمی</option>
-                <option value="فیزیک">فیزیک</option>
-                <option value="ریاضی">ریاضی</option>
-                <option value="زمین‌شناسی">زمین‌شناسی</option>
-              </optgroup>
-              <optgroup label="عمومی">
-                <option value="دینی">دینی</option>
-                <option value="زبان">زبان</option>
-                <option value="فارسی">فارسی</option>
-                <option value="عربی">عربی</option>
-              </optgroup>
-            </select>
-            <select id="taskPriority" style="width:110px;">
-              <option value="normal">اولویت عادی</option>
-              <option value="high">اولویت بالا</option>
-              <option value="low">اولویت پایین</option>
-            </select>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
-            <button type="button" class="btn btn-sm btn-primary" onclick="addTaskItem()">＋ افزودن</button>
-            <button type="button" class="btn btn-sm" onclick="clearDoneTasks()">پاک کردن انجام‌شده‌ها</button>
-            <button type="button" class="btn btn-sm" onclick="moveUndoneToTomorrow()" id="btnMoveToTomorrow">انتقال ناتمام‌ها به فردا</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- برنامه مشاور -->
     <div class="card collapsible collapsed" id="consultantCard">
       <h2 onclick="toggleCollapse('consultantCard')">📋 برنامه مشاور <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-        <p class="hint">برنامهٔ مطالعه‌ای که مشاورت برات نوشته رو اینجا وارد کن. وقتی وارد سایت می‌شی، برنامهٔ امروز بالای صفحه هم نشون داده می‌شه.</p>
+        <p class="hint">برنامهٔ مشاور را برای هر روز ثبت کن. با انتخاب تاریخ از تقویم می‌توانی برنامهٔ روزهای قبل را هم ببینی.</p>
         <div id="todayConsultantPlan" style="margin-bottom:14px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--accent-dim);"></div>
         <div class="form-grid">
           <div>
             <label>📅 تاریخ برنامه</label>
-            <input type="text" id="consultantDate" placeholder="مثلاً ۱۴۰۴/۰۷/۲۸" />
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="text" id="consultantDate" readonly placeholder="از تقویم انتخاب کن" style="flex:1;cursor:pointer;" onclick="openPickerCal('consultant')" />
+              <button type="button" class="btn btn-sm" onclick="openPickerCal('consultant')">📅</button>
+            </div>
           </div>
           <div>
             <label>📖 درس‌ها / برنامه آن روز</label>
@@ -1187,7 +1329,9 @@
         <div class="form-actions" style="margin-top:10px;">
           <button type="button" class="btn btn-primary btn-sm" onclick="saveConsultantPlan()">💾 ذخیره برنامه این روز</button>
           <button type="button" class="btn btn-sm" onclick="deleteConsultantPlan()">حذف برنامه این تاریخ</button>
+          <button type="button" class="btn btn-sm" onclick="viewConsultantSelected()">👁️ مشاهده برنامه این تاریخ</button>
         </div>
+        <div id="consultantSelectedView" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);display:none;"></div>
         <div id="consultantPlanList" style="margin-top:14px;"></div>
       </div>
     </div>
@@ -1196,11 +1340,14 @@
     <div class="card collapsible collapsed" id="mazCard">
       <h2 onclick="toggleCollapse('mazCard')">📝 منابع آزمون ماز (هر دو هفته) <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-        <p class="hint">منابع هر درس تا کجا در آزمون جمعهٔ هر دو هفته می‌آید + تاریخ آزمون‌ها را اینجا نگه دار.</p>
+        <p class="hint">منابع دروس تخصصی + ثبت نتیجه هر آزمون (رتبه، تراز، درصد هر درس).</p>
         <div class="form-grid">
           <div>
-            <label>📅 تاریخ آزمون بعدی</label>
-            <input type="text" id="mazExamDate" placeholder="مثلاً ۱۴۰۴/۰۸/۰۲" />
+            <label>📅 تاریخ آزمون</label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="text" id="mazExamDate" readonly placeholder="از تقویم انتخاب کن" style="flex:1;cursor:pointer;" onclick="openPickerCal('maz')" />
+              <button type="button" class="btn btn-sm" onclick="openPickerCal('maz')">📅</button>
+            </div>
           </div>
           <div>
             <label>📌 توضیح / یادداشت آزمون</label>
@@ -1208,22 +1355,30 @@
           </div>
         </div>
         <div style="margin-top:12px;">
-          <label>📚 منابع به تفکیک درس</label>
+          <label>📚 منابع دروس تخصصی</label>
           <div id="mazSubjects" class="form-grid" style="margin-top:8px;">
             <div><label>زیست</label><input type="text" id="maz_زیست" placeholder="تا فصل / صفحه..." /></div>
             <div><label>شیمی</label><input type="text" id="maz_شیمی" placeholder="تا فصل / صفحه..." /></div>
             <div><label>فیزیک</label><input type="text" id="maz_فیزیک" placeholder="تا فصل / صفحه..." /></div>
             <div><label>ریاضی</label><input type="text" id="maz_ریاضی" placeholder="تا فصل / صفحه..." /></div>
             <div><label>زمین‌شناسی</label><input type="text" id="maz_زمین‌شناسی" placeholder="تا فصل / صفحه..." /></div>
-            <div><label>دینی</label><input type="text" id="maz_دینی" placeholder="تا درس..." /></div>
-            <div><label>زبان</label><input type="text" id="maz_زبان" placeholder="تا درس..." /></div>
-            <div><label>فارسی</label><input type="text" id="maz_فارسی" placeholder="تا درس..." /></div>
-            <div><label>عربی</label><input type="text" id="maz_عربی" placeholder="تا درس..." /></div>
+          </div>
+        </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
+          <label style="font-weight:600;color:var(--accent);">📊 نتیجه آزمون</label>
+          <div class="form-grid" style="margin-top:10px;">
+            <div><label>🏆 رتبه</label><input type="number" id="mazRank" min="1" placeholder="مثلاً ۱۲۳۴" /></div>
+            <div><label>📈 تراز</label><input type="number" id="mazTraz" min="0" placeholder="مثلاً ۶۵۰۰" /></div>
+            <div><label>زیست ٪</label><input type="number" id="mazPct_زیست" min="0" max="100" step="0.1" placeholder="٪" /></div>
+            <div><label>شیمی ٪</label><input type="number" id="mazPct_شیمی" min="0" max="100" step="0.1" placeholder="٪" /></div>
+            <div><label>فیزیک ٪</label><input type="number" id="mazPct_فیزیک" min="0" max="100" step="0.1" placeholder="٪" /></div>
+            <div><label>ریاضی ٪</label><input type="number" id="mazPct_ریاضی" min="0" max="100" step="0.1" placeholder="٪" /></div>
+            <div><label>زمین‌شناسی ٪</label><input type="number" id="mazPct_زمین‌شناسی" min="0" max="100" step="0.1" placeholder="٪" /></div>
           </div>
         </div>
         <div class="form-actions" style="margin-top:12px;">
-          <button type="button" class="btn btn-primary btn-sm" onclick="saveMazData()">💾 ذخیره منابع ماز</button>
-          <button type="button" class="btn btn-sm" onclick="addMazExamDate()">＋ افزودن تاریخ آزمون</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveMazData()">💾 ذخیره منابع</button>
+          <button type="button" class="btn btn-sm btn-primary" onclick="saveMazExamResult()">＋ ثبت نتیجه آزمون</button>
         </div>
         <div id="mazExamDatesList" style="margin-top:12px;"></div>
         <div id="mazSummary" style="margin-top:12px;font-size:0.9rem;color:var(--text-muted);"></div>
@@ -1369,7 +1524,7 @@
         <span class="pill">تست‌ها: <strong id="histTests">۰</strong></span>
       </div>
       <div class="filter-row">
-        <select id="filterRange" onchange="renderHistory()">
+        <select id="filterRange" onchange="document.getElementById('historyDayKey').value='';renderHistory()">
           <option value="all">همه روزها</option>
           <option value="today">فقط امروز</option>
           <option value="7" selected>۷ روز اخیر</option>
@@ -1391,6 +1546,11 @@
             <option value="عربی">عربی</option>
           </optgroup>
         </select>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input type="text" id="historyDayKey" readonly placeholder="انتخاب روز از تقویم" style="min-width:140px;cursor:pointer;" onclick="openPickerCal('history')" />
+          <button type="button" class="btn btn-sm" onclick="openPickerCal('history')">📅 روز</button>
+          <button type="button" class="btn btn-sm" onclick="document.getElementById('historyDayKey').value='';document.getElementById('filterRange').value='7';renderHistory();">پاک</button>
+        </div>
         <input type="search" id="filterSearch" placeholder="🔍 جستجو در یادداشت / بخش تست..." oninput="renderHistory()" />
         <button class="btn" onclick="exportData()">💾 خروجی پشتیبان</button>
         <button class="btn" onclick="document.getElementById('importFile').click()">📥 ورود پشتیبان</button>
@@ -1416,6 +1576,23 @@
       <div class="cal-grid" id="calGrid"></div>
       <div style="margin-top:14px;text-align:center;">
         <button type="button" class="btn btn-sm" onclick="closeCalendar()">بستن</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- جزئیات روز (تقویم) -->
+  <div id="dayDetailOverlay" class="cal-overlay" onclick="if(event.target===this)closeDayDetail()">
+    <div class="cal-box" style="max-width:400px;">
+      <h3 id="dayDetailTitle" style="color:var(--accent);margin-bottom:10px;font-size:1.05rem;">جزئیات روز</h3>
+      <div id="dayDetailBody" style="font-size:0.92rem;line-height:1.8;margin-bottom:12px;"></div>
+      <div style="margin-bottom:10px;">
+        <label>📌 یادداشت این روز</label>
+        <textarea id="dayDetailNote" rows="2" placeholder="یادداشت..." style="resize:vertical;"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+        <button type="button" class="btn btn-sm btn-primary" id="dayDetailSaveNote" onclick="saveDayDetailNote()">💾 ذخیره یادداشت</button>
+        <button type="button" class="btn btn-sm btn-primary" id="dayDetailDownload" onclick="downloadDayDetailImage()">🖼️ تصویر روز</button>
+        <button type="button" class="btn btn-sm" onclick="closeDayDetail()">بستن</button>
       </div>
     </div>
   </div>
@@ -1930,7 +2107,6 @@
     }
     function updateAll() {
       updateStats(); renderChart(); renderWeekCompare(); renderHistory(); renderExtras();
-      try { renderTasks(); } catch(e) {}
       try { renderConsultantPlans(); } catch(e) {}
       try { renderMazData(); } catch(e) {}
       try { renderTodayPlanBanner(); } catch(e) {}
@@ -2264,8 +2440,12 @@
           return blob.indexOf(q) !== -1;
         });
       }
+      const dayKeyEl = document.getElementById('historyDayKey');
+      const pickedDay = dayKeyEl && dayKeyEl.value ? dayKeyEl.value.trim() : '';
       const todayKey = jalaliToKey(toJalaliStr());
-      if (range === 'today') {
+      if (pickedDay) {
+        filtered = filtered.filter(function(s) { return jalaliToKey(s.date) === pickedDay; });
+      } else if (range === 'today') {
         filtered = filtered.filter(function(s) { return jalaliToKey(s.date) === todayKey; });
       } else if (range === '7' || range === '30') {
         const days = parseInt(range);
@@ -2370,13 +2550,13 @@
       } catch (e) {}
 
       const isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
-      const bg = isDark ? '#120c0c' : '#f7f0e8';
-      const cardBg = isDark ? '#201616' : '#fffbf6';
-      const textCol = isDark ? '#faf3eb' : '#2a1f1a';
-      const muted = isDark ? '#c4b0a0' : '#6b5a50';
-      const accent = isDark ? '#c4785a' : '#a65d3f';
-      const border = isDark ? 'rgba(196,140,110,0.3)' : 'rgba(160,110,80,0.22)';
-      const soft = isDark ? 'rgba(196,120,90,0.1)' : 'rgba(166,93,63,0.08)';
+      const bg = isDark ? '#0a1018' : '#f0fdfa';
+      const cardBg = isDark ? '#10202a' : '#f8fffe';
+      const textCol = isDark ? '#f5f0e6' : '#134e4a';
+      const muted = isDark ? '#a8c5c0' : '#0f766e';
+      const accent = isDark ? '#2dd4bf' : '#0d9488';
+      const border = isDark ? 'rgba(45,212,191,0.35)' : 'rgba(20,184,166,0.25)';
+      const soft = isDark ? 'rgba(212,168,75,0.12)' : 'rgba(180,83,9,0.08)';
 
       const bySubj = {};
       daySessions.forEach(function(s) {
@@ -2399,7 +2579,7 @@
       });
 
       // ارتفاع پویا برای کارت‌ها
-      const cardH = 118;
+      const cardH = 128;
       const headerH = 148;
       const footerH = 56;
       const pad = 28;
@@ -2413,21 +2593,20 @@
       const ctx = canvas.getContext('2d');
       ctx.scale(2, 2);
 
-      // پس‌زمینه کلاسیک قهوه‌ای
+      // پس‌زمینه هخامنشی — فیروزه و طلا
       const g = ctx.createLinearGradient(0, 0, width, height);
       if (isDark) {
-        g.addColorStop(0, '#1a1210');
-        g.addColorStop(0.4, '#140e0c');
-        g.addColorStop(1, '#0f0a08');
+        g.addColorStop(0, '#0e1a22');
+        g.addColorStop(0.4, '#0a141c');
+        g.addColorStop(1, '#070d12');
       } else {
-        g.addColorStop(0, '#faf6f0');
-        g.addColorStop(0.5, '#f5efe6');
-        g.addColorStop(1, '#f0e8dc');
+        g.addColorStop(0, '#f8fffe');
+        g.addColorStop(0.5, '#f0fdfa');
+        g.addColorStop(1, '#ccfbf1');
       }
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
-      // نقاط ظریف پس‌زمینه
-      ctx.fillStyle = isDark ? 'rgba(220,160,120,0.09)' : 'rgba(166,93,63,0.07)';
+      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath();
@@ -2438,18 +2617,17 @@
       // هاله‌های نرم
       if (isDark) {
         const rg1 = ctx.createRadialGradient(width * 0.15, 40, 0, width * 0.15, 40, 220);
-        rg1.addColorStop(0, 'rgba(139,92,246,0.22)');
+        rg1.addColorStop(0, 'rgba(45,212,191,0.2)');
         rg1.addColorStop(1, 'transparent');
         ctx.fillStyle = rg1;
         ctx.fillRect(0, 0, width, height);
         const rg2 = ctx.createRadialGradient(width * 0.85, height * 0.2, 0, width * 0.85, height * 0.2, 200);
-        rg2.addColorStop(0, 'rgba(34,211,238,0.12)');
+        rg2.addColorStop(0, 'rgba(212,168,75,0.15)');
         rg2.addColorStop(1, 'transparent');
         ctx.fillStyle = rg2;
         ctx.fillRect(0, 0, width, height);
       }
-      // کارت اصلی بیرونی با حاشیه واضح‌تر
-      const outerBorder = isDark ? 'rgba(45,212,191,0.4)' : border;
+      const outerBorder = isDark ? 'rgba(212,168,75,0.45)' : border;
       roundRect(ctx, 18, 18, width - 36, height - 36, 22, cardBg, outerBorder);
 
       // هدر
@@ -2470,6 +2648,20 @@
       if (totalTests > 0) summary += '   ·   📝 ' + toPersian(totalTests) + ' تست';
       if (totalVideo > 0) summary += '   ·   🎬 ' + toPersian(Math.round(totalVideo * 10) / 10) + ' س فیلم';
       ctx.fillText(summary, width - pad - 6, 112);
+
+      // خط تزئینی طلا–فیروزه زیر هدر
+      const lineGrad = ctx.createLinearGradient(pad, 0, width - pad, 0);
+      lineGrad.addColorStop(0, 'transparent');
+      lineGrad.addColorStop(0.2, isDark ? 'rgba(45,212,191,0.5)' : 'rgba(13,148,136,0.4)');
+      lineGrad.addColorStop(0.5, isDark ? 'rgba(212,168,75,0.7)' : 'rgba(184,134,11,0.55)');
+      lineGrad.addColorStop(0.8, isDark ? 'rgba(45,212,191,0.5)' : 'rgba(13,148,136,0.4)');
+      lineGrad.addColorStop(1, 'transparent');
+      ctx.strokeStyle = lineGrad;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(pad + 10, 128);
+      ctx.lineTo(width - pad - 10, 128);
+      ctx.stroke();
 
       // کارت هر درس
       function pill(label, bg, bd, tc, x, y) {
@@ -2500,27 +2692,63 @@
         const x0 = pad + 4;
         const w0 = width - pad * 2 - 8;
         // کارت درس با حاشیه مناسب تم
-        const innerBg = isDark ? '#1a2436' : '#ffffff';
-        const cardBorder = isDark ? 'rgba(45, 212, 191, 0.4)' : 'rgba(2, 132, 199, 0.28)';
+        const innerBg = isDark ? '#122028' : '#ffffff';
+        const cardBorder = isDark ? 'rgba(45, 212, 191, 0.35)' : 'rgba(13, 148, 136, 0.28)';
         roundRect(ctx, x0, y, w0, cardH - 6, 16, innerBg, cardBorder);
+        // نوار طلایی سمت راست کارت
+        ctx.fillStyle = isDark ? 'rgba(212,168,75,0.55)' : 'rgba(184,134,11,0.45)';
+        ctx.fillRect(x0 + w0 - 5, y + 12, 4, cardH - 30);
 
         // نام درس + متن رنگی تخصصی/عمومی بدون حاشیه
         ctx.textAlign = 'right';
         ctx.font = '700 17px Vazirmatn, Cairo, Tahoma, sans-serif';
         const subjW = ctx.measureText(subj).width;
         ctx.fillStyle = textCol;
-        ctx.fillText(subj, x0 + w0 - 18, y + 28);
+        ctx.fillText(subj, x0 + w0 - 22, y + 28);
         const typeLab = info.specialized ? 'تخصصی' : 'عمومی';
         const typeCol = info.specialized ? '#4ade80' : '#eab308';
         ctx.font = '600 13px Vazirmatn, Cairo, Tahoma, sans-serif';
         ctx.fillStyle = typeCol;
-        ctx.fillText(typeLab, x0 + w0 - 18 - subjW - 12, y + 28);
+        ctx.fillText(typeLab, x0 + w0 - 22 - subjW - 12, y + 28);
+
+        // نوار پیشرفت نسبت به مجموع روز
+        const barTrackX = x0 + 18;
+        const barTrackW = w0 - 40;
+        const barY = y + cardH - 28;
+        const barH2 = 8;
+        const pct = totalMin > 0 ? Math.min(1, info.minutes / totalMin) : 0;
+        ctx.fillStyle = isDark ? 'rgba(30,50,55,0.9)' : 'rgba(204,251,241,0.9)';
+        ctx.beginPath();
+        const br = 4;
+        ctx.moveTo(barTrackX + br, barY);
+        ctx.arcTo(barTrackX + barTrackW, barY, barTrackX + barTrackW, barY + barH2, br);
+        ctx.arcTo(barTrackX + barTrackW, barY + barH2, barTrackX, barY + barH2, br);
+        ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
+        ctx.arcTo(barTrackX, barY, barTrackX + barTrackW, barY, br);
+        ctx.closePath();
+        ctx.fill();
+        if (pct > 0) {
+          const fillW = Math.max(10, barTrackW * pct);
+          const bg2 = ctx.createLinearGradient(barTrackX, 0, barTrackX + fillW, 0);
+          bg2.addColorStop(0, '#5eead4');
+          bg2.addColorStop(0.6, '#2dd4bf');
+          bg2.addColorStop(1, '#d4a84b');
+          ctx.fillStyle = bg2;
+          ctx.beginPath();
+          ctx.moveTo(barTrackX + br, barY);
+          ctx.arcTo(barTrackX + fillW, barY, barTrackX + fillW, barY + barH2, br);
+          ctx.arcTo(barTrackX + fillW, barY + barH2, barTrackX, barY + barH2, br);
+          ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
+          ctx.arcTo(barTrackX, barY, barTrackX + fillW, barY, br);
+          ctx.closePath();
+          ctx.fill();
+        }
 
         // بج‌ها
         let bx = x0 + w0 - 18;
         const by = y + 58;
         const dur = formatDuration(info.minutes);
-        bx -= pill(dur, 'rgba(224,144,96,0.15)', '#e09060', '#e09060', bx, by);
+        bx -= pill(dur, 'rgba(45,212,191,0.15)', '#2dd4bf', '#d4a84b', bx, by);
         // برای دروس عمومی اگر تست زده نشده، بج تست نمایش داده نشود
         const showTests = info.specialized || info.tests > 0;
         if (showTests) {
@@ -2626,27 +2854,27 @@
 
       const g = ctx.createLinearGradient(0, 0, width, height);
       if (isDark) {
-        g.addColorStop(0, '#1a1210');
-        g.addColorStop(0.5, '#140e0c');
-        g.addColorStop(1, '#0f0a08');
+        g.addColorStop(0, '#0e1a22');
+        g.addColorStop(0.5, '#0a141c');
+        g.addColorStop(1, '#070d12');
       } else {
-        g.addColorStop(0, '#faf6f0');
-        g.addColorStop(1, '#f3ebe0');
+        g.addColorStop(0, '#f8fffe');
+        g.addColorStop(1, '#ccfbf1');
       }
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = isDark ? 'rgba(220,160,120,0.08)' : 'rgba(166,93,63,0.06)';
+      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
       for (let px = 12; px < width; px += 28) {
         for (let py = 12; py < height; py += 28) {
           ctx.beginPath(); ctx.arc(px, py, 1.1, 0, Math.PI * 2); ctx.fill();
         }
       }
 
-      const cardBg = isDark ? '#2a1c18' : '#fffbf6';
-      const textCol = isDark ? '#fff8f0' : '#2a1f1a';
-      const muted = isDark ? '#d4c0b0' : '#6b5a50';
-      const accent = isDark ? '#e09060' : '#a65d3f';
-      const border = isDark ? 'rgba(220,160,120,0.5)' : 'rgba(160,110,80,0.3)';
+      const cardBg = isDark ? '#10202a' : '#f8fffe';
+      const textCol = isDark ? '#f5f0e6' : '#134e4a';
+      const muted = isDark ? '#a8c5c0' : '#0f766e';
+      const accent = isDark ? '#2dd4bf' : '#0d9488';
+      const border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(20,184,166,0.28)';
       roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
 
       ctx.textAlign = 'right';
@@ -2694,27 +2922,37 @@
 
         // this week bar
         const ax = width / 2 + 40 - barMaxW / 2;
-        ctx.fillStyle = isDark ? 'rgba(30,40,60,0.8)' : 'rgba(226,232,240,0.9)';
-        ctx.fillRect(ax, y + 8, barMaxW, 12);
+        const barH = 14;
+        function roundBar(x, yy, w, h, color) {
+          ctx.beginPath();
+          const r = h / 2;
+          ctx.moveTo(x + r, yy);
+          ctx.arcTo(x + w, yy, x + w, yy + h, r);
+          ctx.arcTo(x + w, yy + h, x, yy + h, r);
+          ctx.arcTo(x, yy + h, x, yy, r);
+          ctx.arcTo(x, yy, x + w, yy, r);
+          ctx.closePath();
+          ctx.fillStyle = color;
+          ctx.fill();
+        }
+        roundBar(ax, y + 6, barMaxW, barH, isDark ? 'rgba(16,32,40,0.9)' : 'rgba(204,251,241,0.95)');
         if (wa) {
           const grad = ctx.createLinearGradient(ax, 0, ax + wa, 0);
-          grad.addColorStop(0, '#e09060');
-          grad.addColorStop(1, '#c4785a');
-          ctx.fillStyle = grad;
-          ctx.fillRect(ax, y + 8, wa, 12);
+          grad.addColorStop(0, '#5eead4');
+          grad.addColorStop(0.6, '#2dd4bf');
+          grad.addColorStop(1, '#d4a84b');
+          roundBar(ax, y + 6, wa, barH, grad);
         }
         ctx.fillStyle = accent;
-        ctx.font = '500 11px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.font = '600 12px Vazirmatn, Cairo, Tahoma, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(a.mins ? formatDuration(a.mins) : '—', ax + barMaxW / 2, y + 36);
+        ctx.fillText(a.mins ? formatDuration(a.mins) : '—', ax + barMaxW / 2, y + 38);
 
         // last week bar
         const bx = width / 2 - 140 - barMaxW / 2;
-        ctx.fillStyle = isDark ? 'rgba(30,40,60,0.8)' : 'rgba(226,232,240,0.9)';
-        ctx.fillRect(bx, y + 8, barMaxW, 12);
+        roundBar(bx, y + 6, barMaxW, barH, isDark ? 'rgba(16,32,40,0.9)' : 'rgba(204,251,241,0.95)');
         if (wb) {
-          ctx.fillStyle = 'rgba(148,163,184,0.65)';
-          ctx.fillRect(bx, y + 8, wb, 12);
+          roundBar(bx, y + 6, wb, barH, isDark ? 'rgba(100,140,135,0.5)' : 'rgba(13,148,136,0.3)');
         }
         ctx.fillStyle = muted;
         ctx.fillText(b.mins ? formatDuration(b.mins) : '—', bx + barMaxW / 2, y + 36);
@@ -2982,10 +3220,10 @@
             ? toPersian(Math.floor(d.m/60)) + 'س' + (d.m%60 ? toPersian(d.m%60) + 'د' : '')
             : toPersian(d.m) + 'د');
           const barColor = d.isToday
-            ? 'linear-gradient(180deg,#7dd3fc,#0284c7)'
-            : (d.m === 0 ? 'rgba(148,163,184,0.25)' : 'linear-gradient(180deg,var(--accent-soft),var(--accent))');
-          const boxBorder = d.isToday ? '1.5px solid #38bdf8' : '1px solid var(--border)';
-          const bgBox = d.isToday ? 'rgba(56,189,248,0.08)' : 'transparent';
+            ? 'linear-gradient(180deg,#5eead4,#d4a84b)'
+            : (d.m === 0 ? 'rgba(100,140,135,0.25)' : 'linear-gradient(180deg,var(--accent-soft),var(--accent))');
+          const boxBorder = d.isToday ? '1.5px solid #d4a84b' : '1px solid var(--border)';
+          const bgBox = d.isToday ? 'rgba(45,212,191,0.1)' : 'transparent';
           const tipText = formatDuration(d.m) + (d.tests > 0 ? ' · 📝 ' + toPersian(d.tests) + ' تست' : ' · بدون تست');
           html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)" title="' + tipText.replace(/"/g, '&quot;') + '" style="flex:1;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 2px;border-radius:10px;background:' + bgBox + ';border:' + boxBorder + ';position:relative;cursor:pointer;">' +
             '<div class="chart-bar" style="height:auto;width:100%;max-width:none;background:transparent;min-height:0;filter:none;display:flex;flex-direction:column;align-items:center;gap:6px;">' +
@@ -3951,9 +4189,21 @@
 
     // ===== تقویم شمسی =====
     var calJY = null, calJM = null;
+    var calPickerMode = null; // null | 'consultant' | 'maz' | 'history'
+    var dayDetailKey = null;
     var JALALI_MONTHS = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
 
     function openCalendar() {
+      calPickerMode = null;
+      var now = new Date();
+      var j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+      if (calJY == null) { calJY = j[0]; calJM = j[1]; }
+      renderCalendar();
+      var ov = document.getElementById('calOverlay');
+      if (ov) ov.classList.add('show');
+    }
+    function openPickerCal(mode) {
+      calPickerMode = mode || null;
       var now = new Date();
       var j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
       if (calJY == null) { calJY = j[0]; calJM = j[1]; }
@@ -3963,6 +4213,26 @@
     }
     function calDayTap(ev, key) {
       if (!key) return;
+      if (calPickerMode === 'consultant') {
+        var el = document.getElementById('consultantDate');
+        if (el) el.value = key.replace(/-/g, '/');
+        closeCalendar();
+        viewConsultantSelected();
+        return;
+      }
+      if (calPickerMode === 'maz') {
+        var el2 = document.getElementById('mazExamDate');
+        if (el2) el2.value = key.replace(/-/g, '/');
+        closeCalendar();
+        return;
+      }
+      if (calPickerMode === 'history') {
+        var el3 = document.getElementById('historyDayKey');
+        if (el3) el3.value = key;
+        closeCalendar();
+        renderHistory();
+        return;
+      }
       openCalDayDetail(key);
     }
     function getDayNotes() {
@@ -3977,21 +4247,55 @@
       renderCalendar();
     }
     function openCalDayDetail(key) {
+      dayDetailKey = key;
       var mins = getMinutesForDate(key);
       var tests = getTestsForDate(key);
       var notes = getDayNotes();
       var note = notes[key] || '';
-      var detail = 'تاریخ: ' + toPersian(key) + '\nزمان مطالعه: ' + formatDuration(mins) + (tests ? '\nتست: ' + toPersian(tests) : '');
-      var newNote = prompt(detail + '\n\nیادداشت این روز (خالی = حذف):\n', note);
-      if (newNote === null) return; // انصراف
-      saveDayNote(key, newNote);
-      if (confirm('دانلود تصویر خلاصه این روز؟')) {
-        downloadDayImage(key);
+      var daySessions = sessions.filter(function(s) { return isActive(s) && jalaliToKey(s.date) === key; });
+      var body = '<div><strong>📅 ' + toPersian(key) + '</strong></div>';
+      body += '<div>⏱️ زمان مطالعه: <strong>' + formatDuration(mins) + '</strong></div>';
+      if (tests) body += '<div>📝 تست: <strong>' + toPersian(tests) + '</strong></div>';
+      if (daySessions.length) {
+        body += '<div style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px;">';
+        daySessions.forEach(function(s) {
+          body += '<div style="margin-bottom:4px;">• ' + escapeHtml(s.subject) + ' — ' + formatDuration(s.minutes);
+          if (s.timeFrom && s.timeTo) body += ' <span style="color:var(--accent);">(' + toPersian(s.timeFrom) + ' تا ' + toPersian(s.timeTo) + ')</span>';
+          body += '</div>';
+        });
+        body += '</div>';
+      } else {
+        body += '<div style="color:var(--text-muted);margin-top:6px;">جلسه‌ای ثبت نشده</div>';
       }
+      var title = document.getElementById('dayDetailTitle');
+      var bodyEl = document.getElementById('dayDetailBody');
+      var noteEl = document.getElementById('dayDetailNote');
+      if (title) title.textContent = 'جزئیات ' + toPersian(key);
+      if (bodyEl) bodyEl.innerHTML = body;
+      if (noteEl) noteEl.value = note;
+      var ov = document.getElementById('dayDetailOverlay');
+      if (ov) ov.classList.add('show');
+    }
+    function closeDayDetail() {
+      var ov = document.getElementById('dayDetailOverlay');
+      if (ov) ov.classList.remove('show');
+      dayDetailKey = null;
+    }
+    function saveDayDetailNote() {
+      if (!dayDetailKey) return;
+      var noteEl = document.getElementById('dayDetailNote');
+      saveDayNote(dayDetailKey, noteEl ? noteEl.value : '');
+    }
+    function downloadDayDetailImage() {
+      if (!dayDetailKey) return;
+      var key = dayDetailKey;
+      closeDayDetail();
+      setTimeout(function() { downloadDayImage(key); }, 80);
     }
     function closeCalendar() {
       var ov = document.getElementById('calOverlay');
       if (ov) ov.classList.remove('show');
+      calPickerMode = null;
     }
     function calChangeMonth(delta) {
       calJM += delta;
@@ -4003,12 +4307,11 @@
       var title = document.getElementById('calTitle');
       var grid = document.getElementById('calGrid');
       if (!title || !grid) return;
-      title.textContent = JALALI_MONTHS[calJM - 1] + ' ' + toPersian(calJY);
+      var modeLabel = calPickerMode ? ' — انتخاب تاریخ' : '';
+      title.textContent = JALALI_MONTHS[calJM - 1] + ' ' + toPersian(calJY) + modeLabel;
       var dim = jalaliDaysInMonth(calJY, calJM);
-      // weekday of day 1: شنبه=0 in our grid (ش ی د س چ پ ج)
       var g = jalaliToGregorian(calJY, calJM, 1);
       var first = new Date(g[0], g[1] - 1, g[2]);
-      // JS: 0=Sun ... 6=Sat → we want Sat=0
       var startPad = (first.getDay() + 1) % 7;
       var todayKey = jalaliToKey(toJalaliStr());
       var html = '';
@@ -4025,9 +4328,24 @@
         if (key === todayKey) cls += ' today';
         if (hasNote) cls += ' has-note';
         var dot = mins > 0 ? '<span class="cal-dot"></span>' : '';
-        html += '<div class="' + cls + '" onclick="calDayTap(event,\'' + key + '\')" title="کلیک برای جزئیات"><span>' + toPersian(day) + '</span>' + dot + '</div>';
+        html += '<div class="' + cls + '" data-key="' + key + '" onclick="calDayTap(event,\'' + key + '\')" title="کلیک برای جزئیات"><span>' + toPersian(day) + '</span>' + dot + '</div>';
       }
       grid.innerHTML = html;
+    }
+    function viewConsultantSelected() {
+      var dateEl = document.getElementById('consultantDate');
+      var viewEl = document.getElementById('consultantSelectedView');
+      if (!dateEl || !viewEl) return;
+      var dateStr = (dateEl.value || '').trim();
+      if (!dateStr) { viewEl.style.display = 'none'; return; }
+      var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+      var plans = getConsultantPlans();
+      viewEl.style.display = '';
+      if (plans[key]) {
+        viewEl.innerHTML = '<strong>برنامه ' + toPersian(key) + ':</strong><div style="margin-top:6px;">' + escapeHtml(plans[key]) + '</div>';
+      } else {
+        viewEl.innerHTML = '<span style="color:var(--text-muted);">برای ' + toPersian(key) + ' برنامه‌ای ثبت نشده</span>';
+      }
     }
 
     // ===== PWA: نصب پایدار روی گوشی و کامپیوتر =====
@@ -4313,29 +4631,46 @@
     function getMazData() {
       try { return JSON.parse(localStorage.getItem('study_maz_data') || '{"subjects":{},"exams":[]}'); } catch(e) { return { subjects: {}, exams: [] }; }
     }
+    var MAZ_SPEC = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی'];
     function saveMazData() {
       var data = getMazData();
-      var subjects = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی','دینی','زبان','فارسی','عربی'];
-      subjects.forEach(function(s) {
+      MAZ_SPEC.forEach(function(s) {
         var inp = document.getElementById('maz_' + s);
         if (inp) data.subjects[s] = (inp.value || '').trim();
       });
-      var examDate = (document.getElementById('mazExamDate') || {}).value || '';
-      var examNote = (document.getElementById('mazExamNote') || {}).value || '';
-      if (examDate.trim()) {
-        data.exams = data.exams || [];
-        data.exams.push({ date: examDate.trim(), note: examNote.trim() });
-        document.getElementById('mazExamDate').value = '';
-        document.getElementById('mazExamNote').value = '';
-      }
       localStorage.setItem('study_maz_data', JSON.stringify(data));
       renderMazData();
       showToast('منابع ماز ذخیره شد ✓');
     }
-    function addMazExamDate() {
+    function saveMazExamResult() {
+      var data = getMazData();
       var examDate = (document.getElementById('mazExamDate') || {}).value || '';
-      if (!examDate.trim()) { showToast('تاریخ آزمون را وارد کن', true); return; }
-      saveMazData();
+      if (!examDate.trim()) { showToast('تاریخ آزمون را از تقویم انتخاب کن', true); return; }
+      var examNote = (document.getElementById('mazExamNote') || {}).value || '';
+      var rank = (document.getElementById('mazRank') || {}).value || '';
+      var traz = (document.getElementById('mazTraz') || {}).value || '';
+      var pcts = {};
+      MAZ_SPEC.forEach(function(s) {
+        var el = document.getElementById('mazPct_' + s);
+        if (el && el.value !== '') pcts[s] = parseFloat(el.value);
+      });
+      data.exams = data.exams || [];
+      data.exams.unshift({
+        date: examDate.trim(),
+        note: examNote.trim(),
+        rank: rank ? parseInt(rank, 10) : null,
+        traz: traz ? parseInt(traz, 10) : null,
+        pcts: pcts
+      });
+      localStorage.setItem('study_maz_data', JSON.stringify(data));
+      ['mazExamDate','mazExamNote','mazRank','mazTraz'].forEach(function(id) {
+        var e = document.getElementById(id); if (e) e.value = '';
+      });
+      MAZ_SPEC.forEach(function(s) {
+        var e = document.getElementById('mazPct_' + s); if (e) e.value = '';
+      });
+      renderMazData();
+      showToast('نتیجه آزمون ثبت شد ✓');
     }
     function removeMazExam(idx) {
       var data = getMazData();
@@ -4345,26 +4680,41 @@
     }
     function renderMazData() {
       var data = getMazData();
-      var subjects = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی','دینی','زبان','فارسی','عربی'];
-      subjects.forEach(function(s) {
+      MAZ_SPEC.forEach(function(s) {
         var inp = document.getElementById('maz_' + s);
         if (inp && document.activeElement !== inp) inp.value = data.subjects[s] || '';
       });
       var listEl = document.getElementById('mazExamDatesList');
       if (listEl) {
         var exams = data.exams || [];
-        if (!exams.length) listEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;">تاریخ آزمونی ثبت نشده</div>';
+        if (!exams.length) listEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;">آزمونی ثبت نشده</div>';
         else {
           listEl.innerHTML = exams.map(function(ex, i) {
-            return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;margin-bottom:6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">' +
-              '<span>📅 ' + toPersian(ex.date) + (ex.note ? ' — ' + escapeHtml(ex.note) : '') + '</span>' +
-              '<button type="button" class="session-delete" onclick="removeMazExam(' + i + ')">×</button></div>';
+            var html = '<div style="padding:12px;margin-bottom:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">';
+            html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">';
+            html += '<strong>📅 ' + toPersian(ex.date) + '</strong>';
+            html += '<button type="button" class="session-delete" onclick="removeMazExam(' + i + ')">×</button></div>';
+            if (ex.note) html += '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:6px;">' + escapeHtml(ex.note) + '</div>';
+            if (ex.rank || ex.traz) {
+              html += '<div style="margin-bottom:6px;">';
+              if (ex.rank) html += '<span class="pill" style="margin-left:6px;">🏆 رتبه: <strong>' + toPersian(ex.rank) + '</strong></span>';
+              if (ex.traz) html += '<span class="pill">📈 تراز: <strong>' + toPersian(ex.traz) + '</strong></span>';
+              html += '</div>';
+            }
+            if (ex.pcts) {
+              var pctParts = MAZ_SPEC.filter(function(s){ return ex.pcts[s] != null; }).map(function(s){
+                return s + ': ' + toPersian(ex.pcts[s]) + '٪';
+              });
+              if (pctParts.length) html += '<div style="font-size:0.85rem;color:var(--accent);">' + pctParts.join(' · ') + '</div>';
+            }
+            html += '</div>';
+            return html;
           }).join('');
         }
       }
       var sumEl = document.getElementById('mazSummary');
       if (sumEl) {
-        var parts = subjects.filter(function(s){ return data.subjects[s]; }).map(function(s){ return s + ': ' + data.subjects[s]; });
+        var parts = MAZ_SPEC.filter(function(s){ return data.subjects[s]; }).map(function(s){ return s + ': ' + data.subjects[s]; });
         sumEl.innerHTML = parts.length ? ('<strong>خلاصه منابع:</strong> ' + parts.map(escapeHtml).join(' · ')) : '';
       }
     }
