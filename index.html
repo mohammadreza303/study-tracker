@@ -75,7 +75,7 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-    /* پس‌زمینه هخامنشی — فیروزه و طلا */
+    /* پس‌زمینه هخامنشی — فیروزه و طلا (والپیپر) */
     body::before {
       content: '';
       position: fixed;
@@ -84,10 +84,14 @@
       pointer-events: none;
       background-color: #0a1018;
       background-image:
-        radial-gradient(ellipse 100% 60% at 50% -5%, rgba(45, 212, 191, 0.18), transparent 55%),
-        radial-gradient(ellipse 60% 45% at 100% 100%, rgba(212, 168, 75, 0.12), transparent 50%),
-        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(20, 184, 166, 0.1), transparent 50%),
-        linear-gradient(180deg, #0e1a22 0%, #0a1018 45%, #070d12 100%);
+        /* هاله مرکزی مثل نور روی سنگ فیروزه */
+        radial-gradient(ellipse 80% 50% at 50% 30%, rgba(45, 212, 191, 0.14), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(212, 168, 75, 0.12), transparent 50%),
+        radial-gradient(ellipse 45% 35% at 10% 70%, rgba(20, 184, 166, 0.1), transparent 50%),
+        radial-gradient(ellipse 60% 50% at 70% 90%, rgba(212, 168, 75, 0.08), transparent 55%),
+        /* عمق تیره گوشه‌ها */
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.45) 100%),
+        linear-gradient(165deg, #0e1a22 0%, #0a121a 35%, #081018 70%, #060e14 100%);
     }
     body::after {
       content: '';
@@ -95,31 +99,38 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      /* نقش هندسی الهام از نقوش تخت‌جمشید */
+      /* نقش هندسی تخت‌جمشید + بافت سنگ */
       background-image:
-        linear-gradient(90deg, rgba(212,168,75,0.04) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(45,212,191,0.04) 1px, transparent 1px),
-        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(212,168,75,0.03) 18px, rgba(212,168,75,0.03) 19px),
-        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(45,212,191,0.025) 18px, rgba(45,212,191,0.025) 19px);
-      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
-      opacity: 0.7;
+        /* لوزی‌های بزرگ */
+        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(212,168,75,0.035) 40px, rgba(212,168,75,0.035) 41px),
+        repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(45,212,191,0.03) 40px, rgba(45,212,191,0.03) 41px),
+        /* شبکه ظریف */
+        linear-gradient(90deg, rgba(212,168,75,0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(45,212,191,0.03) 1px, transparent 1px),
+        /* نقطه مثل بافت سنگ */
+        radial-gradient(circle at 20% 30%, rgba(212,168,75,0.06) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 60%, rgba(45,212,191,0.05) 0 1px, transparent 2px),
+        radial-gradient(circle at 40% 80%, rgba(212,168,75,0.04) 0 1px, transparent 2px);
+      background-size: 70px 70px, 70px 70px, 32px 32px, 32px 32px, 120px 120px, 90px 90px, 150px 150px;
+      opacity: 0.85;
     }
     body[data-theme="light"]::before {
       background-color: #f7f3ea;
       background-image:
-        radial-gradient(ellipse 110% 65% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 55%),
-        radial-gradient(ellipse 65% 50% at 100% 95%, rgba(212, 168, 75, 0.14), transparent 50%),
-        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(13, 148, 136, 0.1), transparent 50%),
-        linear-gradient(180deg, #faf6ee 0%, #f0ebe0 50%, #e8f5f2 100%);
+        radial-gradient(ellipse 80% 50% at 50% 25%, rgba(20, 184, 166, 0.14), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(212, 168, 75, 0.12), transparent 50%),
+        radial-gradient(ellipse 45% 35% at 5% 75%, rgba(13, 148, 136, 0.1), transparent 50%),
+        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(180, 150, 100, 0.12) 100%),
+        linear-gradient(165deg, #faf6ee 0%, #f3eee4 40%, #e8f5f2 100%);
     }
     body[data-theme="light"]::after {
       background-image:
-        linear-gradient(90deg, rgba(180,134,11,0.06) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(13,148,136,0.05) 1px, transparent 1px),
-        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(180,134,11,0.04) 18px, rgba(180,134,11,0.04) 19px),
-        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(13,148,136,0.035) 18px, rgba(13,148,136,0.035) 19px);
-      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
-      opacity: 0.75;
+        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(180,134,11,0.045) 40px, rgba(180,134,11,0.045) 41px),
+        repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(13,148,136,0.04) 40px, rgba(13,148,136,0.04) 41px),
+        linear-gradient(90deg, rgba(180,134,11,0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(13,148,136,0.035) 1px, transparent 1px);
+      background-size: 70px 70px, 70px 70px, 32px 32px, 32px 32px;
+      opacity: 0.8;
     }
     [data-theme="light"] .card {
       background: rgba(255, 252, 245, 0.92);
@@ -230,6 +241,41 @@
     }
     .header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
     .header-actions .top-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .mini-clock {
+      width: 64px; height: 64px; flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(20, 40, 48, 0.98), rgba(8, 16, 22, 1));
+      border: 2.5px solid rgba(212, 168, 75, 0.7);
+      box-shadow: 0 0 18px rgba(45, 212, 191, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: default;
+      position: relative;
+    }
+    [data-theme="light"] .mini-clock {
+      background: linear-gradient(145deg, #ffffff, #eef9f6);
+      border-color: rgba(13, 148, 136, 0.55);
+      box-shadow: 0 2px 14px rgba(13, 148, 136, 0.22);
+    }
+    .mini-clock svg { display: block; width: 54px; height: 54px; }
+    .mc-face { fill: #0a141a; }
+    [data-theme="light"] .mc-face { fill: #f8fffe; }
+    .mc-ring { fill: none; stroke: #2dd4bf; stroke-width: 1.5; opacity: 0.65; }
+    [data-theme="light"] .mc-ring { stroke: #0d9488; opacity: 0.55; }
+    .mc-tick { stroke: #f0d78c; stroke-width: 2; stroke-linecap: round; }
+    [data-theme="light"] .mc-tick { stroke: #b8860b; }
+    /* عقربه‌ها ضخیم و روشن — دیده شدن روی ویندوز */
+    .mc-hour { stroke: #ffe08a; stroke-width: 3.4; stroke-linecap: round; }
+    .mc-min { stroke: #5eead4; stroke-width: 2.6; stroke-linecap: round; }
+    .mc-sec { stroke: #ff6b7a; stroke-width: 1.5; stroke-linecap: round; }
+    .mc-center { fill: #ffe08a; }
+    [data-theme="light"] .mc-hour { stroke: #92400e; stroke-width: 3.4; }
+    [data-theme="light"] .mc-min { stroke: #0f766e; stroke-width: 2.6; }
+    [data-theme="light"] .mc-sec { stroke: #dc2626; stroke-width: 1.5; }
+    [data-theme="light"] .mc-center { fill: #92400e; }
+    @media (min-width: 900px) {
+      .mini-clock { width: 72px; height: 72px; }
+      .mini-clock svg { width: 62px; height: 62px; }
+    }
     .btn {
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(255,255,255,0.06);
@@ -1095,6 +1141,21 @@
       <div class="header-actions">
         <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا، به پلنت خوش اومدی</span>
         <div class="top-row">
+          <div class="mini-clock" id="miniClock" title="ساعت">
+            <svg viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="48" class="mc-face"/>
+              <circle cx="50" cy="50" r="45" class="mc-ring"/>
+              <!-- نشانه‌های ۱۲، ۳، ۶، ۹ -->
+              <line class="mc-tick" x1="50" y1="8" x2="50" y2="16"/>
+              <line class="mc-tick" x1="92" y1="50" x2="84" y2="50"/>
+              <line class="mc-tick" x1="50" y1="92" x2="50" y2="84"/>
+              <line class="mc-tick" x1="8" y1="50" x2="16" y2="50"/>
+              <g id="mcHourG"><line class="mc-hour" x1="50" y1="50" x2="50" y2="28"/></g>
+              <g id="mcMinG"><line class="mc-min" x1="50" y1="50" x2="50" y2="18"/></g>
+              <g id="mcSecG"><line class="mc-sec" x1="50" y1="55" x2="50" y2="14"/></g>
+              <circle cx="50" cy="50" r="4" class="mc-center"/>
+            </svg>
+          </div>
           <button type="button" class="btn btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="تم روشن / تیره">🌙</button>
           <button type="button" class="btn btn-sm" id="calendarBtn" onclick="openCalendar()" title="تقویم شمسی">📅 تقویم</button>
         </div>
@@ -4718,6 +4779,31 @@
         sumEl.innerHTML = parts.length ? ('<strong>خلاصه منابع:</strong> ' + parts.map(escapeHtml).join(' · ')) : '';
       }
     }
+
+    // ساعت آنالوگ کوچک — عقربه‌ها زمان واقعی را نشان می‌دهند
+    function updateMiniClock() {
+      var now = new Date();
+      var h = now.getHours() % 12;
+      var m = now.getMinutes();
+      var s = now.getSeconds();
+      var ms = now.getMilliseconds();
+      // هر ساعت = ۳۰ درجه، هر دقیقه = ۶ درجه، هر ثانیه = ۶ درجه
+      var hDeg = h * 30 + m * 0.5 + s * (0.5 / 60);
+      var mDeg = m * 6 + s * 0.1;
+      var sDeg = s * 6 + ms * 0.006;
+      var hg = document.getElementById('mcHourG');
+      var mg = document.getElementById('mcMinG');
+      var sg = document.getElementById('mcSecG');
+      if (hg) hg.setAttribute('transform', 'rotate(' + hDeg.toFixed(2) + ' 50 50)');
+      if (mg) mg.setAttribute('transform', 'rotate(' + mDeg.toFixed(2) + ' 50 50)');
+      if (sg) sg.setAttribute('transform', 'rotate(' + sDeg.toFixed(2) + ' 50 50)');
+    }
+    function tickMiniClock() {
+      updateMiniClock();
+      requestAnimationFrame(tickMiniClock);
+    }
+    updateMiniClock();
+    requestAnimationFrame(tickMiniClock);
 
     // بدون رمز — مستقیم ورود به اپ
     try { showApp(); } catch (e) { console.error(e); }
