@@ -808,16 +808,12 @@
       background: var(--bg-input);
       color: var(--text);
       font-size: 0.85rem; font-weight: 500;
-      cursor: default; position: relative;
+      cursor: pointer; position: relative;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       transition: border-color 0.15s, background 0.15s;
     }
-    .cal-day.empty { background: transparent; cursor: default; }
+    .cal-day.empty { background: transparent; cursor: default; pointer-events: none; }
     .cal-day.has-study { border-color: var(--border-light); }
-    .cal-day.has-note::after {
-      content: '📌'; position: absolute; top: 2px; left: 3px; font-size: 0.65rem;
-    }
-    .cal-day { position: relative; }
     .cal-day.today {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px var(--accent);
@@ -830,17 +826,8 @@
       border-color: var(--accent);
       background: var(--accent-dim);
     }
-    .cal-tooltip {
-      display: none; position: absolute; z-index: 10;
-      bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 8px 12px; min-width: 140px;
-      font-size: 0.78rem; color: var(--text); text-align: center;
-      box-shadow: var(--shadow); white-space: nowrap;
-      pointer-events: none;
-    }
-    .cal-day:hover .cal-tooltip { display: block; }
-    .cal-tooltip strong { color: var(--accent); display: block; margin-bottom: 2px; }
+    /* هیچ جزئیاتی با هاور نشان داده نشود */
+    .cal-tooltip, .cal-tip-btn { display: none !important; }
 
     /* تاریخچه بهبودیافته */
     .history-summary {
@@ -914,7 +901,7 @@
       .session-duration { width: 100%; text-align: right; margin-top: 4px; }
       .cal-box { max-width: 100% !important; padding: 14px 10px !important; }
       .cal-day { font-size: 0.78rem !important; border-radius: 8px !important; }
-      .cal-tooltip { white-space: normal !important; min-width: 160px; font-size: 0.75rem !important; }
+      .cal-tooltip { display: none !important; }
       .week-days-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 6px !important; }
       .tabs { gap: 6px !important; }
       .tab { padding: 8px 12px !important; font-size: 0.8rem !important; }
@@ -938,7 +925,7 @@
       border: 1px solid var(--border-light); font-family: inherit;
     }
     .cal-tip-btn:hover { filter: brightness(1.1); }
-    .cal-tooltip { pointer-events: auto; white-space: normal; }
+    .cal-tooltip { display: none !important; }
   </style>
 </head>
 <body data-theme="dark" data-bg="classic">
@@ -2330,8 +2317,6 @@
         } catch (e) {}
         const dayLabel = (isToday ? toPersian(g.date) + ' (امروز)' : toPersian(g.date)) + weekday;
         const testsStr = g.tests > 0 ? ' • 📝 ' + toPersian(g.tests) + ' تست' : '';
-        const sc = calcDayScore(key, g.total, g.tests);
-        const scoreStr = ' • ' + sc.emoji + ' ' + toPersian(sc.score) + '/۱۰';
         const itemsHtml = g.items.map(function(s) {
           const badge = isSpecialized(s.subject)
             ? '<span class="badge badge-spec">تخصصی</span>'
@@ -2352,7 +2337,7 @@
           return '<div class="session-item"><div class="session-info"><div class="session-subject">' + badge + escapeHtml(s.subject) + ' ' + testsInfo + '</div>' + metaLines + '</div><div class="session-duration">' + formatDuration(s.minutes) + '</div><button class="edit-btn" onclick="openEditSession(' + s.id + ')" title="ویرایش">✏️</button><button class="session-delete" onclick="deleteSession(' + s.id + ')" title="حذف">×</button></div>';
         }).join('');
         const safeKey = key.replace(/'/g, "\\'");
-        return '<div class="day-group"><div class="day-header"><span class="day-title">' + dayLabel + '</span><div class="day-actions"><span class="day-total">' + formatDuration(g.total) + testsStr + scoreStr + '</span><button class="btn btn-sm btn-primary" onclick="downloadDayImage(\'' + safeKey + '\')" title="دانلود تصویر خلاصه روز">🖼️ تصویر روز</button></div></div>' + itemsHtml + '</div>';
+        return '<div class="day-group"><div class="day-header"><span class="day-title">' + dayLabel + '</span><div class="day-actions"><span class="day-total">' + formatDuration(g.total) + testsStr + '</span><button class="btn btn-sm btn-primary" onclick="downloadDayImage(\'' + safeKey + '\')" title="دانلود تصویر خلاصه روز">🖼️ تصویر روز</button></div></div>' + itemsHtml + '</div>';
       }).join('');
     }
     function escapeHtml(text) {
@@ -2485,29 +2470,6 @@
       if (totalTests > 0) summary += '   ·   📝 ' + toPersian(totalTests) + ' تست';
       if (totalVideo > 0) summary += '   ·   🎬 ' + toPersian(Math.round(totalVideo * 10) / 10) + ' س فیلم';
       ctx.fillText(summary, width - pad - 6, 112);
-      // نمره هوشمند با ایموجی — واضح و برجسته
-      const scoreText = dayScore.emoji + '  نمره روز: ' + toPersian(dayScore.score) + ' از ۱۰  —  ' + dayScore.label;
-      ctx.font = '700 16px Vazirmatn, Cairo, Tahoma, sans-serif';
-      const scoreW = ctx.measureText(scoreText).width + 28;
-      const scoreX = width - pad - 6 - scoreW;
-      const scoreY = 120;
-      // پس‌زمینه قرص‌شکل نمره
-      ctx.beginPath();
-      const sr = 12;
-      ctx.moveTo(scoreX + sr, scoreY);
-      ctx.arcTo(scoreX + scoreW, scoreY, scoreX + scoreW, scoreY + 28, sr);
-      ctx.arcTo(scoreX + scoreW, scoreY + 28, scoreX, scoreY + 28, sr);
-      ctx.arcTo(scoreX, scoreY + 28, scoreX, scoreY, sr);
-      ctx.arcTo(scoreX, scoreY, scoreX + scoreW, scoreY, sr);
-      ctx.closePath();
-      ctx.fillStyle = isDark ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.85)';
-      ctx.fill();
-      ctx.strokeStyle = dayScore.color;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-      ctx.fillStyle = dayScore.color;
-      ctx.textAlign = 'right';
-      ctx.fillText(scoreText, width - pad - 20, scoreY + 19);
 
       // کارت هر درس
       function pill(label, bg, bd, tc, x, y) {
@@ -4057,25 +4019,13 @@
         var label = calJY + '/' + String(calJM).padStart(2, '0') + '/' + String(day).padStart(2, '0');
         var key = jalaliToKey(label);
         var mins = getMinutesForDate(key);
-        var tests = getTestsForDate(key);
         var hasNote = !!(getDayNotes()[key]);
         var cls = 'cal-day';
         if (mins > 0) cls += ' has-study';
         if (key === todayKey) cls += ' today';
         if (hasNote) cls += ' has-note';
-        var tip = '<div class="cal-tooltip" onclick="event.stopPropagation()"><strong>' + toPersian(label) + '</strong>';
-        if (mins > 0 || tests > 0) {
-          tip += formatDuration(mins);
-          if (tests > 0) tip += ' · 📝 ' + toPersian(tests) + ' تست';
-        } else {
-          tip += 'بدون مطالعه';
-        }
-        if (hasNote) tip += '<br>📌 دارد یادداشت';
-        tip += '<br><button type="button" class="cal-tip-btn" onclick="event.stopPropagation();openCalDayDetail(\'' + key + '\');">جزئیات / یادداشت</button>';
-        tip += '<br><button type="button" class="cal-tip-btn" onclick="event.stopPropagation();downloadDayImage(\'' + key + '\');">🖼️ تصویر روز</button>';
-        tip += '</div>';
         var dot = mins > 0 ? '<span class="cal-dot"></span>' : '';
-        html += '<div class="' + cls + '" onclick="calDayTap(event,\'' + key + '\')"><span>' + toPersian(day) + '</span>' + dot + tip + '</div>';
+        html += '<div class="' + cls + '" onclick="calDayTap(event,\'' + key + '\')" title="کلیک برای جزئیات"><span>' + toPersian(day) + '</span>' + dot + '</div>';
       }
       grid.innerHTML = html;
     }
