@@ -758,95 +758,55 @@
 
 
     /* تایمر دایره‌ای لوکس — فیروزه و طلا */
+    /* تایمر ساده و تمیز */
     .timer-card {
       text-align: center;
-      padding: 26px 18px 22px;
+      padding: 22px 18px 20px;
       position: relative;
-      overflow: hidden;
-    }
-    .timer-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 40%, rgba(45,212,191,0.08), transparent 55%),
-        radial-gradient(circle at 50% 60%, rgba(212,168,75,0.06), transparent 50%);
-      pointer-events: none;
     }
     .timer-ring-wrap {
       position: relative;
-      width: 260px;
-      height: 260px;
-      margin: 18px auto 22px;
+      width: 220px;
+      height: 220px;
+      margin: 14px auto 18px;
       z-index: 1;
     }
     .timer-hour {
       position: absolute;
       z-index: 3;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #5eead4;
-      text-shadow: 0 0 12px rgba(45, 212, 191, 0.4);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
       pointer-events: none;
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
-    .timer-h12 { top: 0; left: 50%; transform: translateX(-50%); }
-    .timer-h3  { top: 50%; right: 0; transform: translateY(-50%); }
-    .timer-h6  { bottom: 0; left: 50%; transform: translateX(-50%); }
-    .timer-h9  { top: 50%; left: 0; transform: translateY(-50%); }
-    [data-theme="light"] .timer-hour {
-      color: #0f766e;
-      text-shadow: 0 1px 3px rgba(255,255,255,0.95);
-      font-weight: 800;
-    }
-    .timer-ring-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 18px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(45,212,191,0.06) 0%, transparent 70%);
-      animation: timerPulse 3s ease-in-out infinite;
-      pointer-events: none;
-    }
-    .timer-running .timer-ring-wrap::before {
-      animation: timerPulseFast 1.6s ease-in-out infinite;
-      background: radial-gradient(circle, rgba(212,168,75,0.12) 0%, rgba(45,212,191,0.08) 40%, transparent 70%);
-    }
-    @keyframes timerPulse {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.06); opacity: 1; }
-    }
-    @keyframes timerPulseFast {
-      0%, 100% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.08); opacity: 1; }
-    }
+    .timer-h12 { top: 2px; left: 50%; transform: translateX(-50%); }
+    .timer-h3  { top: 50%; right: 2px; transform: translateY(-50%); }
+    .timer-h6  { bottom: 2px; left: 50%; transform: translateX(-50%); }
+    .timer-h9  { top: 50%; left: 2px; transform: translateY(-50%); }
+    [data-theme="light"] .timer-hour { color: #0f766e; }
     .timer-ring-wrap svg {
       width: 100%;
       height: 100%;
       transform: rotate(-90deg);
-      filter: drop-shadow(0 8px 32px rgba(45, 212, 191, 0.35));
-    }
-    .timer-running .timer-ring-wrap svg {
-      filter: drop-shadow(0 0 20px rgba(212, 168, 75, 0.45)) drop-shadow(0 8px 28px rgba(45, 212, 191, 0.3));
     }
     .timer-ring-bg {
       fill: none;
-      stroke: rgba(45, 212, 191, 0.18);
-      stroke-width: 14;
-      opacity: 1;
+      stroke: rgba(45, 212, 191, 0.22);
+      stroke-width: 10;
     }
     .timer-ring-fg {
       fill: none;
       stroke: url(#timerGrad);
-      stroke-width: 14;
+      stroke-width: 10;
       stroke-linecap: round;
       stroke-dasharray: 565.5;
       stroke-dashoffset: 565.5;
       transition: stroke-dashoffset 0.2s linear;
     }
     .timer-running .timer-ring-fg {
-      filter: drop-shadow(0 0 10px rgba(94, 234, 212, 0.7));
+      stroke-width: 11;
     }
     .timer-display {
       position: absolute;
@@ -855,74 +815,27 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 2.15rem;
+      font-size: 1.85rem;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: var(--gold-soft, #e8c76a);
       font-variant-numeric: tabular-nums;
       line-height: 1.15;
       pointer-events: none;
-      text-shadow: 0 0 30px rgba(45, 212, 191, 0.35), 0 2px 8px rgba(0,0,0,0.25);
       z-index: 2;
     }
     .timer-display .timer-sub {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      color: var(--accent-soft);
-      letter-spacing: 0.5px;
-      margin-top: 8px;
-      opacity: 0.9;
+      color: var(--text-muted);
+      letter-spacing: 0;
+      margin-top: 6px;
     }
-    .timer-running .timer-display {
-      color: #5eead4;
-      text-shadow: 0 0 28px rgba(45, 212, 191, 0.55), 0 0 12px rgba(212, 168, 75, 0.3);
-    }
-    .timer-running .timer-display .timer-sub { color: #e8c76a; }
-
-    /* تایمر در تم روز — کنتراست بالاتر */
-    [data-theme="light"] .timer-ring-bg {
-      stroke: rgba(13, 148, 136, 0.32);
-      stroke-width: 14;
-    }
-    [data-theme="light"] .timer-ring-fg {
-      filter: drop-shadow(0 0 6px rgba(13, 148, 136, 0.4));
-    }
-    [data-theme="light"] .timer-running .timer-ring-fg {
-      filter: drop-shadow(0 0 10px rgba(180, 134, 11, 0.5));
-    }
-    [data-theme="light"] .timer-ring-wrap svg {
-      filter: drop-shadow(0 6px 20px rgba(13, 148, 136, 0.25));
-    }
-    [data-theme="light"] .timer-running .timer-ring-wrap svg {
-      filter: drop-shadow(0 0 16px rgba(180, 134, 11, 0.35)) drop-shadow(0 6px 18px rgba(13, 148, 136, 0.22));
-    }
-    [data-theme="light"] .timer-display {
-      color: #0f766e;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.9), 0 0 14px rgba(13, 148, 136, 0.18);
-    }
-    [data-theme="light"] .timer-display .timer-sub {
-      color: #92640a;
-      opacity: 1;
-      font-weight: 700;
-    }
-    [data-theme="light"] .timer-running .timer-display {
-      color: #0d9488;
-      text-shadow: 0 0 16px rgba(13, 148, 136, 0.3);
-    }
-    [data-theme="light"] .timer-running .timer-display .timer-sub {
-      color: #b8860b;
-    }
-    [data-theme="light"] .timer-ring-wrap::before {
-      background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%);
-    }
-    [data-theme="light"] .timer-running .timer-ring-wrap::before {
-      background: radial-gradient(circle, rgba(180,134,11,0.14) 0%, rgba(13,148,136,0.1) 40%, transparent 70%);
-    }
-    [data-theme="light"] .timer-card::before {
-      background:
-        radial-gradient(circle at 50% 40%, rgba(13,148,136,0.12), transparent 55%),
-        radial-gradient(circle at 50% 60%, rgba(180,134,11,0.1), transparent 50%);
-    }
+    .timer-running .timer-display { color: var(--accent); }
+    [data-theme="light"] .timer-ring-bg { stroke: rgba(13, 148, 136, 0.28); }
+    [data-theme="light"] .timer-display { color: #0f766e; }
+    [data-theme="light"] .timer-running .timer-display { color: #0d9488; }
+    [data-theme="light"] .timer-display .timer-sub { color: #92640a; }
     .timer-presets {
       display: flex;
       gap: 8px;
@@ -1228,40 +1141,16 @@
         <span class="timer-hour timer-h3">۳</span>
         <span class="timer-hour timer-h6">۶</span>
         <span class="timer-hour timer-h9">۹</span>
-        <svg viewBox="0 0 220 220" aria-hidden="true">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
           <defs>
             <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#5eead4"/>
-              <stop offset="30%" stop-color="#0d9488"/>
-              <stop offset="65%" stop-color="#d4a84b"/>
-              <stop offset="100%" stop-color="#b45309"/>
+              <stop offset="50%" stop-color="#2dd4bf"/>
+              <stop offset="100%" stop-color="#d4a84b"/>
             </linearGradient>
-            <linearGradient id="timerOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#b8860b" stop-opacity="0.75"/>
-              <stop offset="50%" stop-color="#0f766e" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#b8860b" stop-opacity="0.75"/>
-            </linearGradient>
-            <radialGradient id="timerCenter" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="rgba(13,148,136,0.18)"/>
-              <stop offset="70%" stop-color="rgba(184,134,11,0.08)"/>
-              <stop offset="100%" stop-color="transparent"/>
-            </radialGradient>
-            <filter id="timerGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
           </defs>
-          <!-- دایره مرکزی نرم -->
-          <circle cx="110" cy="110" r="72" fill="url(#timerCenter)" transform="rotate(90 110 110)"/>
-          <!-- حلقه بیرونی طلایی تزئینی -->
-          <circle cx="110" cy="110" r="104" fill="none" stroke="url(#timerOuter)" stroke-width="2" stroke-dasharray="6 4"/>
-          <!-- حلقه پس‌زمینه -->
-          <circle class="timer-ring-bg" cx="110" cy="110" r="90"></circle>
-          <!-- حلقه پیشرفت -->
-          <circle class="timer-ring-fg" id="timerRingFg" cx="110" cy="110" r="90" filter="url(#timerGlow)"></circle>
-          <!-- حلقه داخلی ظریف -->
-          <circle cx="110" cy="110" r="76" fill="none" stroke="rgba(13,148,136,0.35)" stroke-width="1.5" stroke-dasharray="2 5"/>
-          <circle cx="110" cy="110" r="68" fill="none" stroke="rgba(184,134,11,0.3)" stroke-width="1.25"/>
+          <circle class="timer-ring-bg" cx="100" cy="100" r="90"></circle>
+          <circle class="timer-ring-fg" id="timerRingFg" cx="100" cy="100" r="90"></circle>
         </svg>
         <div class="timer-display">
           <span id="timerDisplay">00:00:00</span>
@@ -1372,25 +1261,29 @@
     <div class="card collapsible collapsed" id="consultantCard">
       <h2 onclick="toggleCollapse('consultantCard')">📋 برنامه مشاور <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-        <p class="hint">برنامهٔ مشاور را برای هر روز ثبت کن. با انتخاب تاریخ از تقویم می‌توانی برنامهٔ روزهای قبل را هم ببینی.</p>
+        <p class="hint">برای هر روز، برنامهٔ هر درس تخصصی و بخش عمومی را جدا ثبت کن. تاریخ را از تقویم انتخاب کن و بعداً می‌توانی برنامهٔ روزهای قبل را ببینی.</p>
         <div id="todayConsultantPlan" style="margin-bottom:14px;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--accent-dim);"></div>
-        <div class="form-grid">
-          <div>
-            <label>📅 تاریخ برنامه</label>
-            <div style="display:flex;gap:8px;align-items:center;">
-              <input type="text" id="consultantDate" readonly placeholder="از تقویم انتخاب کن" style="flex:1;cursor:pointer;" onclick="openPickerCal('consultant')" />
-              <button type="button" class="btn btn-sm" onclick="openPickerCal('consultant')">📅</button>
-            </div>
+        <div style="margin-bottom:12px;">
+          <label>📅 تاریخ برنامه</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="text" id="consultantDate" readonly placeholder="از تقویم انتخاب کن" style="flex:1;cursor:pointer;" onclick="openPickerCal('consultant')" />
+            <button type="button" class="btn btn-sm" onclick="openPickerCal('consultant')">📅 تقویم</button>
           </div>
-          <div>
-            <label>📖 درس‌ها / برنامه آن روز</label>
-            <input type="text" id="consultantPlanText" placeholder="مثلاً زیست فصل ۳ + شیمی تست + فیزیک فیلم" />
-          </div>
+        </div>
+        <div class="form-grid" style="margin-top:8px;">
+          <div><label>🧬 زیست</label><input type="text" id="consultant_زیست" placeholder="برنامه زیست..." /></div>
+          <div><label>⚗️ شیمی</label><input type="text" id="consultant_شیمی" placeholder="برنامه شیمی..." /></div>
+          <div><label>⚛️ فیزیک</label><input type="text" id="consultant_فیزیک" placeholder="برنامه فیزیک..." /></div>
+          <div><label>📐 ریاضی</label><input type="text" id="consultant_ریاضی" placeholder="برنامه ریاضی..." /></div>
+        </div>
+        <div style="margin-top:10px;">
+          <label>📚 عمومی (فارسی، عربی، دینی، زبان، زمین‌شناسی و ...)</label>
+          <textarea id="consultant_عمومی" rows="2" placeholder="مثلاً: فارسی آرایه + عربی درس ۳ + زمین فصل ۲" style="resize:vertical;"></textarea>
         </div>
         <div class="form-actions" style="margin-top:10px;">
           <button type="button" class="btn btn-primary btn-sm" onclick="saveConsultantPlan()">💾 ذخیره برنامه این روز</button>
-          <button type="button" class="btn btn-sm" onclick="deleteConsultantPlan()">حذف برنامه این تاریخ</button>
-          <button type="button" class="btn btn-sm" onclick="viewConsultantSelected()">👁️ مشاهده برنامه این تاریخ</button>
+          <button type="button" class="btn btn-sm" onclick="deleteConsultantPlan()">حذف این تاریخ</button>
+          <button type="button" class="btn btn-sm" onclick="viewConsultantSelected()">👁️ مشاهده این تاریخ</button>
         </div>
         <div id="consultantSelectedView" style="margin-top:12px;padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);display:none;"></div>
         <div id="consultantPlanList" style="margin-top:14px;"></div>
@@ -1401,7 +1294,7 @@
     <div class="card collapsible collapsed" id="mazCard">
       <h2 onclick="toggleCollapse('mazCard')">📝 منابع آزمون ماز (هر دو هفته) <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-        <p class="hint">منابع دروس تخصصی + ثبت نتیجه هر آزمون (رتبه، تراز، درصد هر درس).</p>
+        <p class="hint">منابع هر آزمون را با تاریخ ذخیره کن. بعداً می‌توانی آزمون قبلی/بعدی را ببینی و تصویر منابع بگیری.</p>
         <div class="form-grid">
           <div>
             <label>📅 تاریخ آزمون</label>
@@ -1411,7 +1304,7 @@
             </div>
           </div>
           <div>
-            <label>📌 توضیح / یادداشت آزمون</label>
+            <label>📌 توضیح / عنوان آزمون</label>
             <input type="text" id="mazExamNote" placeholder="مثلاً آزمون جامع نیم‌سال" />
           </div>
         </div>
@@ -1425,24 +1318,11 @@
             <div><label>زمین‌شناسی</label><input type="text" id="maz_زمین‌شناسی" placeholder="تا فصل / صفحه..." /></div>
           </div>
         </div>
-        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);">
-          <label style="font-weight:600;color:var(--accent);">📊 نتیجه آزمون</label>
-          <div class="form-grid" style="margin-top:10px;">
-            <div><label>🏆 رتبه</label><input type="number" id="mazRank" min="1" placeholder="مثلاً ۱۲۳۴" /></div>
-            <div><label>📈 تراز</label><input type="number" id="mazTraz" min="0" placeholder="مثلاً ۶۵۰۰" /></div>
-            <div><label>زیست ٪</label><input type="number" id="mazPct_زیست" min="0" max="100" step="0.1" placeholder="٪" /></div>
-            <div><label>شیمی ٪</label><input type="number" id="mazPct_شیمی" min="0" max="100" step="0.1" placeholder="٪" /></div>
-            <div><label>فیزیک ٪</label><input type="number" id="mazPct_فیزیک" min="0" max="100" step="0.1" placeholder="٪" /></div>
-            <div><label>ریاضی ٪</label><input type="number" id="mazPct_ریاضی" min="0" max="100" step="0.1" placeholder="٪" /></div>
-            <div><label>زمین‌شناسی ٪</label><input type="number" id="mazPct_زمین‌شناسی" min="0" max="100" step="0.1" placeholder="٪" /></div>
-          </div>
-        </div>
         <div class="form-actions" style="margin-top:12px;">
-          <button type="button" class="btn btn-primary btn-sm" onclick="saveMazData()">💾 ذخیره منابع</button>
-          <button type="button" class="btn btn-sm btn-primary" onclick="saveMazExamResult()">＋ ثبت نتیجه آزمون</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveMazExam()">💾 ذخیره این آزمون</button>
+          <button type="button" class="btn btn-sm" onclick="downloadMazImage()">🖼️ تصویر منابع</button>
         </div>
-        <div id="mazExamDatesList" style="margin-top:12px;"></div>
-        <div id="mazSummary" style="margin-top:12px;font-size:0.9rem;color:var(--text-muted);"></div>
+        <div id="mazExamDatesList" style="margin-top:14px;"></div>
       </div>
     </div>
 
@@ -1608,9 +1488,9 @@
           </optgroup>
         </select>
         <div style="display:flex;gap:6px;align-items:center;">
-          <input type="text" id="historyDayKey" readonly placeholder="انتخاب روز از تقویم" style="min-width:140px;cursor:pointer;" onclick="openPickerCal('history')" />
-          <button type="button" class="btn btn-sm" onclick="openPickerCal('history')">📅 روز</button>
-          <button type="button" class="btn btn-sm" onclick="document.getElementById('historyDayKey').value='';document.getElementById('filterRange').value='7';renderHistory();">پاک</button>
+          <input type="hidden" id="historyDayKey" value="" />
+          <button type="button" class="btn btn-sm" id="historyDayBtn" onclick="openPickerCal('history')" title="انتخاب روز از تقویم">📅 روز</button>
+          <button type="button" class="btn btn-sm" onclick="document.getElementById('historyDayKey').value='';document.getElementById('historyDayBtn').textContent='📅 روز';document.getElementById('filterRange').value='7';renderHistory();">پاک</button>
         </div>
         <input type="search" id="filterSearch" placeholder="🔍 جستجو در یادداشت / بخش تست..." oninput="renderHistory()" />
         <button class="btn" onclick="exportData()">💾 خروجی پشتیبان</button>
@@ -2270,22 +2150,16 @@
         });
         html += '</div>';
       }
-      html += '<div class="chart-title" style="margin-top:24px;">۷ روز اخیر (شامل امروز)</div>';
-      const days = []; let maxMin = 1;
-      for (let i = 6; i >= 0; i--) {
-        const jStr = daysAgoJalali(i);
-        const key = jalaliToKey(jStr);
-        const mins = getMinutesForDate(key);
-        const tests = getTestsForDate(key);
-        if (mins > maxMin) maxMin = mins;
-        const parts = jStr.split('/');
-        days.push({ label: toPersian(parts[1] + '/' + parts[2]), mins: mins, tests: tests, date: jStr });
-      }
+      html += '<div class="chart-title" style="margin-top:24px;">روزهای این هفته (شنبه تا جمعه)</div>';
+      const weekDays = getWeekDayStats(0);
+      let maxMin = 1;
+      weekDays.forEach(function(d) { if (d.mins > maxMin) maxMin = d.mins; });
       html += '<div class="chart-bars">';
-      days.forEach(function(d) {
-        const h = Math.max(4, Math.round((d.mins / maxMin) * 150));
-        const tip = formatDuration(d.mins) + (d.tests > 0 ? '\n📝 ' + toPersian(d.tests) + ' تست' : '\nبدون تست');
-        html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)"><div class="chart-bar" style="height:' + h + 'px"><div class="tooltip">' + formatDuration(d.mins) + '<br>📝 ' + (d.tests > 0 ? toPersian(d.tests) + ' تست' : 'بدون تست') + '</div></div><div class="chart-label">' + d.label + '</div></div>';
+      weekDays.forEach(function(d) {
+        const h = d.mins ? Math.max(8, Math.round((d.mins / maxMin) * 150)) : 4;
+        html += '<div class="chart-bar-wrap" onclick="toggleChartTip(this)" style="' + (d.isToday ? 'outline:1px solid var(--accent);border-radius:8px;' : '') + '">';
+        html += '<div class="chart-bar" style="height:' + h + 'px;opacity:' + (d.mins ? '1' : '0.35') + '"><div class="tooltip">' + d.weekday + ' ' + d.dayNum + '<br>' + formatDuration(d.mins) + '<br>📝 ' + (d.tests > 0 ? toPersian(d.tests) + ' تست' : 'بدون تست') + '</div></div>';
+        html += '<div class="chart-label">' + d.weekday.replace('شنبه','ش').replace('یکشنبه','ی').replace('دوشنبه','د').replace('سه‌شنبه','س').replace('چهارشنبه','چ').replace('پنجشنبه','پ').replace('جمعه','ج') + '<br>' + d.dayNum + '</div></div>';
       });
       html += '</div>';
       area.innerHTML = html;
@@ -2428,6 +2302,15 @@
       const range = getWeekRange(offset);
       const days = [];
       const todayKey = jalaliToKey(toJalaliStr());
+      // بررسی اینکه آیا هفته بین دو ماه است
+      var months = {};
+      for (let i = 0; i < 7; i++) {
+        const d0 = new Date(range.start);
+        d0.setDate(range.start.getDate() + i);
+        const j0 = toJalaliStr(d0);
+        months[j0.split('/')[1]] = true;
+      }
+      var multiMonth = Object.keys(months).length > 1;
       for (let i = 0; i < 7; i++) {
         const d = new Date(range.start);
         d.setDate(range.start.getDate() + i);
@@ -2435,10 +2318,15 @@
         const key = jalaliToKey(jStr);
         const mins = getMinutesForDate(key);
         const tests = getTestsForDate(key);
+        const parts = jStr.split('/');
+        // اگر هفته بین دو ماه باشد: ماه/روز — وگرنه فقط روز
+        const dayNum = multiMonth
+          ? toPersian(parts[1] + '/' + parts[2])
+          : toPersian(parts[2]);
         days.push({
           date: jStr, key: key, mins: mins, tests: tests,
           weekday: getWeekdayFa(d), isToday: key === todayKey,
-          dayNum: toPersian(jStr.split('/')[2])
+          dayNum: dayNum, monthNum: toPersian(parts[1])
         });
       }
       return days;
@@ -2470,7 +2358,7 @@
         const ha = Math.max(4, Math.round((a.mins / maxM) * 100));
         const hb = Math.max(4, Math.round((b.mins / maxM) * 100));
         html += '<div style="display:grid;grid-template-columns:70px 1fr 1fr;gap:8px;align-items:center;">';
-        html += '<div style="font-size:0.8rem;color:var(--text-muted);">' + a.weekday + '</div>';
+        html += '<div style="font-size:0.8rem;color:var(--text-muted);">' + a.weekday + '<br><span style="color:var(--accent);">' + a.dayNum + '</span></div>';
         html += '<div><div style="font-size:0.72rem;color:var(--accent);margin-bottom:2px;">این: ' + (a.mins ? formatDuration(a.mins) : '—') + '</div>';
         html += '<div style="height:10px;background:var(--bg-input);border-radius:6px;overflow:hidden;border:1px solid var(--border);"><div style="height:100%;width:' + (a.mins ? ha : 0) + '%;background:linear-gradient(90deg,var(--accent),var(--accent-soft));border-radius:6px;"></div></div></div>';
         html += '<div><div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:2px;">قبل: ' + (b.mins ? formatDuration(b.mins) : '—') + '</div>';
@@ -4278,6 +4166,7 @@
         var el = document.getElementById('consultantDate');
         if (el) el.value = key.replace(/-/g, '/');
         closeCalendar();
+        loadConsultantFields(key);
         viewConsultantSelected();
         return;
       }
@@ -4290,6 +4179,8 @@
       if (calPickerMode === 'history') {
         var el3 = document.getElementById('historyDayKey');
         if (el3) el3.value = key;
+        var btn = document.getElementById('historyDayBtn');
+        if (btn) btn.textContent = '📅 ' + toPersian(key);
         closeCalendar();
         renderHistory();
         return;
@@ -4616,37 +4507,95 @@
     })();
 
     // ===== برنامه مشاور =====
+    var CONSULTANT_FIELDS = ['زیست','شیمی','فیزیک','ریاضی','عمومی'];
     function getConsultantPlans() {
       try { return JSON.parse(localStorage.getItem('study_consultant_plans') || '{}'); } catch(e) { return {}; }
     }
+    function normalizeConsultantPlan(raw) {
+      if (!raw) return null;
+      if (typeof raw === 'string') {
+        return { زیست: '', شیمی: '', فیزیک: '', ریاضی: '', عمومی: raw };
+      }
+      return raw;
+    }
+    function formatConsultantPlan(plan) {
+      if (!plan) return '';
+      plan = normalizeConsultantPlan(plan);
+      var parts = [];
+      CONSULTANT_FIELDS.forEach(function(f) {
+        if (plan[f] && String(plan[f]).trim()) parts.push(f + ': ' + String(plan[f]).trim());
+      });
+      return parts.join(' · ');
+    }
+    function loadConsultantFields(key) {
+      var plans = getConsultantPlans();
+      var plan = normalizeConsultantPlan(plans[key]) || {};
+      CONSULTANT_FIELDS.forEach(function(f) {
+        var el = document.getElementById('consultant_' + f);
+        if (el) el.value = plan[f] || '';
+      });
+    }
     function saveConsultantPlan() {
       var dateEl = document.getElementById('consultantDate');
-      var textEl = document.getElementById('consultantPlanText');
       var dateStr = (dateEl && dateEl.value || '').trim();
-      var text = (textEl && textEl.value || '').trim();
-      if (!dateStr || !text) { showToast('تاریخ و برنامه را وارد کن', true); return; }
+      if (!dateStr) { showToast('تاریخ را از تقویم انتخاب کن', true); return; }
       var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+      var plan = {};
+      var hasAny = false;
+      CONSULTANT_FIELDS.forEach(function(f) {
+        var el = document.getElementById('consultant_' + f);
+        var v = el ? (el.value || '').trim() : '';
+        plan[f] = v;
+        if (v) hasAny = true;
+      });
+      if (!hasAny) { showToast('حداقل یک درس را پر کن', true); return; }
       var plans = getConsultantPlans();
-      plans[key] = text;
+      plans[key] = plan;
       localStorage.setItem('study_consultant_plans', JSON.stringify(plans));
-      if (dateEl) dateEl.value = '';
-      if (textEl) textEl.value = '';
       renderConsultantPlans();
       renderTodayPlanBanner();
+      viewConsultantSelected();
       showToast('برنامه مشاور ذخیره شد ✓');
     }
     function deleteConsultantPlan() {
       var dateEl = document.getElementById('consultantDate');
       var dateStr = (dateEl && dateEl.value || '').trim();
-      if (!dateStr) { showToast('تاریخ را وارد کن', true); return; }
+      if (!dateStr) { showToast('تاریخ را انتخاب کن', true); return; }
       var key = jalaliToKey(dateStr.replace(/-/g, '/'));
       var plans = getConsultantPlans();
       if (!plans[key]) { showToast('برنامه‌ای برای این تاریخ نیست', true); return; }
       delete plans[key];
       localStorage.setItem('study_consultant_plans', JSON.stringify(plans));
+      CONSULTANT_FIELDS.forEach(function(f) {
+        var el = document.getElementById('consultant_' + f);
+        if (el) el.value = '';
+      });
       renderConsultantPlans();
       renderTodayPlanBanner();
+      var viewEl = document.getElementById('consultantSelectedView');
+      if (viewEl) viewEl.style.display = 'none';
       showToast('برنامه حذف شد');
+    }
+    function viewConsultantSelected() {
+      var dateEl = document.getElementById('consultantDate');
+      var viewEl = document.getElementById('consultantSelectedView');
+      if (!dateEl || !viewEl) return;
+      var dateStr = (dateEl.value || '').trim();
+      if (!dateStr) { viewEl.style.display = 'none'; return; }
+      var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+      var plan = normalizeConsultantPlan(getConsultantPlans()[key]);
+      viewEl.style.display = '';
+      if (!plan) {
+        viewEl.innerHTML = '<span style="color:var(--text-muted);">برای ' + toPersian(key) + ' برنامه‌ای ثبت نشده</span>';
+        return;
+      }
+      var html = '<strong style="color:var(--accent);">برنامه ' + toPersian(key) + '</strong>';
+      CONSULTANT_FIELDS.forEach(function(f) {
+        if (plan[f] && String(plan[f]).trim()) {
+          html += '<div style="margin-top:6px;"><span style="color:var(--accent);font-weight:600;">' + f + ':</span> ' + escapeHtml(plan[f]) + '</div>';
+        }
+      });
+      viewEl.innerHTML = html;
     }
     function renderConsultantPlans() {
       var el = document.getElementById('consultantPlanList');
@@ -4655,9 +4604,9 @@
       var plans = getConsultantPlans();
       var todayKey = jalaliToKey(toJalaliStr());
       if (todayEl) {
-        if (plans[todayKey]) {
-          todayEl.innerHTML = '<strong>امروز:</strong> ' + escapeHtml(plans[todayKey]);
-          todayEl.style.display = '';
+        var todayPlan = normalizeConsultantPlan(plans[todayKey]);
+        if (todayPlan && formatConsultantPlan(todayPlan)) {
+          todayEl.innerHTML = '<strong>امروز:</strong> ' + escapeHtml(formatConsultantPlan(todayPlan));
         } else {
           todayEl.innerHTML = '<span style="color:var(--text-muted);">برای امروز برنامه‌ای ثبت نشده</span>';
         }
@@ -4667,11 +4616,18 @@
         el.innerHTML = '<div style="color:var(--text-muted);font-size:0.88rem;padding:8px;">هنوز برنامه‌ای ذخیره نشده</div>';
         return;
       }
-      el.innerHTML = keys.slice(0, 20).map(function(k) {
+      el.innerHTML = keys.slice(0, 25).map(function(k) {
+        var plan = normalizeConsultantPlan(plans[k]);
         var isToday = k === todayKey;
-        return '<div style="display:flex;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">' +
-          '<div><div style="font-weight:600;color:var(--accent);">' + toPersian(k) + (isToday ? ' (امروز)' : '') + '</div>' +
-          '<div style="font-size:0.9rem;margin-top:4px;">' + escapeHtml(plans[k]) + '</div></div></div>';
+        var body = '';
+        CONSULTANT_FIELDS.forEach(function(f) {
+          if (plan && plan[f] && String(plan[f]).trim()) {
+            body += '<div style="font-size:0.88rem;margin-top:3px;"><span style="color:var(--accent);">' + f + ':</span> ' + escapeHtml(plan[f]) + '</div>';
+          }
+        });
+        if (!body && typeof plans[k] === 'string') body = '<div style="font-size:0.9rem;margin-top:4px;">' + escapeHtml(plans[k]) + '</div>';
+        return '<div style="padding:10px 12px;margin-bottom:6px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);cursor:pointer;" onclick="document.getElementById(\'consultantDate\').value=\'' + k.replace(/-/g,'/') + '\';loadConsultantFields(\'' + k + '\');viewConsultantSelected();">' +
+          '<div style="font-weight:600;color:var(--accent);">' + toPersian(k) + (isToday ? ' (امروز)' : '') + '</div>' + body + '</div>';
       }).join('');
     }
     function renderTodayPlanBanner() {
@@ -4680,8 +4636,10 @@
       if (!banner || !textEl) return;
       var plans = getConsultantPlans();
       var todayKey = jalaliToKey(toJalaliStr());
-      if (plans[todayKey]) {
-        textEl.textContent = plans[todayKey];
+      var plan = normalizeConsultantPlan(plans[todayKey]);
+      var txt = formatConsultantPlan(plan);
+      if (txt) {
+        textEl.textContent = txt;
         banner.style.display = '';
       } else {
         banner.style.display = 'none';
@@ -4690,48 +4648,38 @@
 
     // ===== منابع ماز =====
     function getMazData() {
-      try { return JSON.parse(localStorage.getItem('study_maz_data') || '{"subjects":{},"exams":[]}'); } catch(e) { return { subjects: {}, exams: [] }; }
+      try { return JSON.parse(localStorage.getItem('study_maz_data') || '{"exams":[]}'); } catch(e) { return { exams: [] }; }
     }
     var MAZ_SPEC = ['زیست','شیمی','فیزیک','ریاضی','زمین‌شناسی'];
-    function saveMazData() {
-      var data = getMazData();
-      MAZ_SPEC.forEach(function(s) {
-        var inp = document.getElementById('maz_' + s);
-        if (inp) data.subjects[s] = (inp.value || '').trim();
-      });
-      localStorage.setItem('study_maz_data', JSON.stringify(data));
-      renderMazData();
-      showToast('منابع ماز ذخیره شد ✓');
-    }
-    function saveMazExamResult() {
-      var data = getMazData();
+    function saveMazExam() {
       var examDate = (document.getElementById('mazExamDate') || {}).value || '';
       if (!examDate.trim()) { showToast('تاریخ آزمون را از تقویم انتخاب کن', true); return; }
       var examNote = (document.getElementById('mazExamNote') || {}).value || '';
-      var rank = (document.getElementById('mazRank') || {}).value || '';
-      var traz = (document.getElementById('mazTraz') || {}).value || '';
-      var pcts = {};
+      var subjects = {};
+      var hasAny = false;
       MAZ_SPEC.forEach(function(s) {
-        var el = document.getElementById('mazPct_' + s);
-        if (el && el.value !== '') pcts[s] = parseFloat(el.value);
+        var inp = document.getElementById('maz_' + s);
+        var v = inp ? (inp.value || '').trim() : '';
+        subjects[s] = v;
+        if (v) hasAny = true;
       });
+      if (!hasAny) { showToast('حداقل یک منبع وارد کن', true); return; }
+      var data = getMazData();
       data.exams = data.exams || [];
-      data.exams.unshift({
-        date: examDate.trim(),
-        note: examNote.trim(),
-        rank: rank ? parseInt(rank, 10) : null,
-        traz: traz ? parseInt(traz, 10) : null,
-        pcts: pcts
+      var key = jalaliToKey(examDate.trim().replace(/-/g, '/'));
+      var existing = -1;
+      for (var i = 0; i < data.exams.length; i++) {
+        if (jalaliToKey(String(data.exams[i].date).replace(/-/g, '/')) === key) { existing = i; break; }
+      }
+      var entry = { date: examDate.trim(), note: examNote.trim(), subjects: subjects };
+      if (existing >= 0) data.exams[existing] = entry;
+      else data.exams.unshift(entry);
+      data.exams.sort(function(a, b) {
+        return jalaliToKey(String(b.date).replace(/-/g,'/')).localeCompare(jalaliToKey(String(a.date).replace(/-/g,'/')));
       });
       localStorage.setItem('study_maz_data', JSON.stringify(data));
-      ['mazExamDate','mazExamNote','mazRank','mazTraz'].forEach(function(id) {
-        var e = document.getElementById(id); if (e) e.value = '';
-      });
-      MAZ_SPEC.forEach(function(s) {
-        var e = document.getElementById('mazPct_' + s); if (e) e.value = '';
-      });
       renderMazData();
-      showToast('نتیجه آزمون ثبت شد ✓');
+      showToast('منابع آزمون ذخیره شد ✓');
     }
     function removeMazExam(idx) {
       var data = getMazData();
@@ -4739,45 +4687,118 @@
       localStorage.setItem('study_maz_data', JSON.stringify(data));
       renderMazData();
     }
-    function renderMazData() {
+    function loadMazExam(idx) {
       var data = getMazData();
+      var ex = (data.exams || [])[idx];
+      if (!ex) return;
+      var dateEl = document.getElementById('mazExamDate');
+      var noteEl = document.getElementById('mazExamNote');
+      if (dateEl) dateEl.value = ex.date;
+      if (noteEl) noteEl.value = ex.note || '';
       MAZ_SPEC.forEach(function(s) {
         var inp = document.getElementById('maz_' + s);
-        if (inp && document.activeElement !== inp) inp.value = data.subjects[s] || '';
+        if (inp) inp.value = (ex.subjects && ex.subjects[s]) || '';
       });
+      showToast('آزمون ' + toPersian(ex.date) + ' بارگذاری شد');
+    }
+    function renderMazData() {
+      var data = getMazData();
       var listEl = document.getElementById('mazExamDatesList');
-      if (listEl) {
-        var exams = data.exams || [];
-        if (!exams.length) listEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;">آزمونی ثبت نشده</div>';
-        else {
-          listEl.innerHTML = exams.map(function(ex, i) {
-            var html = '<div style="padding:12px;margin-bottom:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">';
-            html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">';
-            html += '<strong>📅 ' + toPersian(ex.date) + '</strong>';
-            html += '<button type="button" class="session-delete" onclick="removeMazExam(' + i + ')">×</button></div>';
-            if (ex.note) html += '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:6px;">' + escapeHtml(ex.note) + '</div>';
-            if (ex.rank || ex.traz) {
-              html += '<div style="margin-bottom:6px;">';
-              if (ex.rank) html += '<span class="pill" style="margin-left:6px;">🏆 رتبه: <strong>' + toPersian(ex.rank) + '</strong></span>';
-              if (ex.traz) html += '<span class="pill">📈 تراز: <strong>' + toPersian(ex.traz) + '</strong></span>';
-              html += '</div>';
-            }
-            if (ex.pcts) {
-              var pctParts = MAZ_SPEC.filter(function(s){ return ex.pcts[s] != null; }).map(function(s){
-                return s + ': ' + toPersian(ex.pcts[s]) + '٪';
-              });
-              if (pctParts.length) html += '<div style="font-size:0.85rem;color:var(--accent);">' + pctParts.join(' · ') + '</div>';
-            }
-            html += '</div>';
-            return html;
-          }).join('');
+      if (!listEl) return;
+      var exams = data.exams || [];
+      if (!exams.length) {
+        listEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.85rem;">آزمونی ثبت نشده</div>';
+        return;
+      }
+      var todayKey = jalaliToKey(toJalaliStr());
+      listEl.innerHTML = exams.map(function(ex, i) {
+        var key = jalaliToKey(String(ex.date).replace(/-/g, '/'));
+        var tag = '';
+        if (key > todayKey) tag = ' <span style="color:var(--accent);font-size:0.78rem;">(آینده)</span>';
+        else if (key === todayKey) tag = ' <span style="color:var(--success);font-size:0.78rem;">(امروز)</span>';
+        else tag = ' <span style="color:var(--text-muted);font-size:0.78rem;">(گذشته)</span>';
+        var html = '<div style="padding:12px;margin-bottom:8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-input);">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px;">';
+        html += '<strong style="cursor:pointer;" onclick="loadMazExam(' + i + ')">📅 ' + toPersian(ex.date) + tag + '</strong>';
+        html += '<span style="display:flex;gap:6px;"><button type="button" class="btn btn-sm" onclick="loadMazExam(' + i + ')">مشاهده</button>';
+        html += '<button type="button" class="btn btn-sm" onclick="downloadMazImage(' + i + ')">🖼️</button>';
+        html += '<button type="button" class="session-delete" onclick="removeMazExam(' + i + ')">×</button></span></div>';
+        if (ex.note) html += '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:6px;">' + escapeHtml(ex.note) + '</div>';
+        if (ex.subjects) {
+          var parts = MAZ_SPEC.filter(function(s){ return ex.subjects[s]; }).map(function(s){
+            return '<span style="margin-left:8px;"><strong style="color:var(--accent);">' + s + ':</strong> ' + escapeHtml(ex.subjects[s]) + '</span>';
+          });
+          if (parts.length) html += '<div style="font-size:0.88rem;line-height:1.8;">' + parts.join('') + '</div>';
         }
+        html += '</div>';
+        return html;
+      }).join('');
+    }
+    async function downloadMazImage(idx) {
+      var data = getMazData();
+      var exams = data.exams || [];
+      var ex = null;
+      if (typeof idx === 'number' && exams[idx]) ex = exams[idx];
+      else {
+        var dateStr = (document.getElementById('mazExamDate') || {}).value || '';
+        if (dateStr) {
+          var key = jalaliToKey(dateStr.replace(/-/g, '/'));
+          for (var i = 0; i < exams.length; i++) {
+            if (jalaliToKey(String(exams[i].date).replace(/-/g,'/')) === key) { ex = exams[i]; break; }
+          }
+        }
+        if (!ex && exams.length) ex = exams[0];
       }
-      var sumEl = document.getElementById('mazSummary');
-      if (sumEl) {
-        var parts = MAZ_SPEC.filter(function(s){ return data.subjects[s]; }).map(function(s){ return s + ': ' + data.subjects[s]; });
-        sumEl.innerHTML = parts.length ? ('<strong>خلاصه منابع:</strong> ' + parts.map(escapeHtml).join(' · ')) : '';
+      if (!ex) { showToast('آزمونی برای تصویر نیست', true); return; }
+      try { await document.fonts.ready; } catch(e) {}
+      var isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
+      var width = 720, pad = 28;
+      var lines = MAZ_SPEC.filter(function(s){ return ex.subjects && ex.subjects[s]; });
+      var height = 140 + Math.max(1, lines.length) * 48 + 60;
+      var canvas = document.createElement('canvas');
+      canvas.width = width * 2; canvas.height = height * 2;
+      var ctx = canvas.getContext('2d');
+      ctx.scale(2, 2);
+      var g = ctx.createLinearGradient(0, 0, width, height);
+      if (isDark) { g.addColorStop(0, '#0e1a22'); g.addColorStop(1, '#070d12'); }
+      else { g.addColorStop(0, '#f8fffe'); g.addColorStop(1, '#ccfbf1'); }
+      ctx.fillStyle = g; ctx.fillRect(0, 0, width, height);
+      var cardBg = isDark ? '#10202a' : '#f8fffe';
+      var accent = isDark ? '#2dd4bf' : '#0d9488';
+      var textCol = isDark ? '#f5f0e6' : '#134e4a';
+      var muted = isDark ? '#a8c5c0' : '#0f766e';
+      var border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(20,184,166,0.28)';
+      function rr(x,y,w,h,r,fill,bd) {
+        ctx.beginPath();
+        ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r);
+        ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+        if (bd) { ctx.strokeStyle = bd; ctx.lineWidth = 1.5; ctx.stroke(); }
       }
+      rr(16, 16, width - 32, height - 32, 18, cardBg, border);
+      ctx.textAlign = 'right'; ctx.direction = 'rtl';
+      ctx.fillStyle = accent; ctx.font = '700 22px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('📝 منابع آزمون ماز', width - pad, 52);
+      ctx.fillStyle = textCol; ctx.font = '500 15px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('📅 ' + toPersian(ex.date) + (ex.note ? '  —  ' + ex.note : ''), width - pad, 82);
+      var y = 110;
+      if (!lines.length) {
+        ctx.fillStyle = muted; ctx.font = '400 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+        ctx.fillText('منبعی ثبت نشده', width - pad, y);
+      } else {
+        lines.forEach(function(s) {
+          rr(pad, y - 8, width - pad * 2, 40, 10, isDark ? '#122028' : '#ffffff', isDark ? 'rgba(45,212,191,0.3)' : 'rgba(13,148,136,0.25)');
+          ctx.fillStyle = accent; ctx.font = '700 15px Vazirmatn, Cairo, Tahoma, sans-serif';
+          ctx.fillText(s, width - pad - 12, y + 18);
+          ctx.fillStyle = textCol; ctx.font = '500 14px Vazirmatn, Cairo, Tahoma, sans-serif';
+          ctx.fillText(ex.subjects[s], width - pad - 90, y + 18);
+          y += 48;
+        });
+      }
+      var a = document.createElement('a');
+      a.download = 'maz-' + String(ex.date).replace(/\//g, '-') + '.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      showToast('تصویر منابع دانلود شد ✓');
     }
 
     // ساعت آنالوگ کوچک — عقربه‌ها زمان واقعی را نشان می‌دهند
