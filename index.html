@@ -75,7 +75,7 @@
       transition: background 0.3s, color 0.3s;
       position: relative;
     }
-    /* پس‌زمینه هخامنشی — فیروزه و طلا (والپیپر) */
+    /* پس‌زمینه فیروزه و طلا */
     body::before {
       content: '';
       position: fixed;
@@ -84,14 +84,10 @@
       pointer-events: none;
       background-color: #0a1018;
       background-image:
-        /* هاله مرکزی مثل نور روی سنگ فیروزه */
-        radial-gradient(ellipse 80% 50% at 50% 30%, rgba(45, 212, 191, 0.14), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(212, 168, 75, 0.12), transparent 50%),
-        radial-gradient(ellipse 45% 35% at 10% 70%, rgba(20, 184, 166, 0.1), transparent 50%),
-        radial-gradient(ellipse 60% 50% at 70% 90%, rgba(212, 168, 75, 0.08), transparent 55%),
-        /* عمق تیره گوشه‌ها */
-        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(0,0,0,0.45) 100%),
-        linear-gradient(165deg, #0e1a22 0%, #0a121a 35%, #081018 70%, #060e14 100%);
+        radial-gradient(ellipse 100% 60% at 50% -5%, rgba(45, 212, 191, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 45% at 100% 100%, rgba(212, 168, 75, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(20, 184, 166, 0.1), transparent 50%),
+        linear-gradient(180deg, #0e1a22 0%, #0a1018 45%, #070d12 100%);
     }
     body::after {
       content: '';
@@ -99,38 +95,30 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      /* نقش هندسی تخت‌جمشید + بافت سنگ */
       background-image:
-        /* لوزی‌های بزرگ */
-        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(212,168,75,0.035) 40px, rgba(212,168,75,0.035) 41px),
-        repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(45,212,191,0.03) 40px, rgba(45,212,191,0.03) 41px),
-        /* شبکه ظریف */
-        linear-gradient(90deg, rgba(212,168,75,0.03) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(45,212,191,0.03) 1px, transparent 1px),
-        /* نقطه مثل بافت سنگ */
-        radial-gradient(circle at 20% 30%, rgba(212,168,75,0.06) 0 1px, transparent 2px),
-        radial-gradient(circle at 70% 60%, rgba(45,212,191,0.05) 0 1px, transparent 2px),
-        radial-gradient(circle at 40% 80%, rgba(212,168,75,0.04) 0 1px, transparent 2px);
-      background-size: 70px 70px, 70px 70px, 32px 32px, 32px 32px, 120px 120px, 90px 90px, 150px 150px;
-      opacity: 0.85;
+        linear-gradient(90deg, rgba(212,168,75,0.04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(45,212,191,0.04) 1px, transparent 1px),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(212,168,75,0.03) 18px, rgba(212,168,75,0.03) 19px),
+        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(45,212,191,0.025) 18px, rgba(45,212,191,0.025) 19px);
+      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
+      opacity: 0.7;
     }
     body[data-theme="light"]::before {
       background-color: #f7f3ea;
       background-image:
-        radial-gradient(ellipse 80% 50% at 50% 25%, rgba(20, 184, 166, 0.14), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 90% 10%, rgba(212, 168, 75, 0.12), transparent 50%),
-        radial-gradient(ellipse 45% 35% at 5% 75%, rgba(13, 148, 136, 0.1), transparent 50%),
-        radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(180, 150, 100, 0.12) 100%),
-        linear-gradient(165deg, #faf6ee 0%, #f3eee4 40%, #e8f5f2 100%);
+        radial-gradient(ellipse 110% 65% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 55%),
+        radial-gradient(ellipse 65% 50% at 100% 95%, rgba(212, 168, 75, 0.14), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 0% 80%, rgba(13, 148, 136, 0.1), transparent 50%),
+        linear-gradient(180deg, #faf6ee 0%, #f0ebe0 50%, #e8f5f2 100%);
     }
     body[data-theme="light"]::after {
       background-image:
-        repeating-linear-gradient(60deg, transparent, transparent 40px, rgba(180,134,11,0.045) 40px, rgba(180,134,11,0.045) 41px),
-        repeating-linear-gradient(-60deg, transparent, transparent 40px, rgba(13,148,136,0.04) 40px, rgba(13,148,136,0.04) 41px),
-        linear-gradient(90deg, rgba(180,134,11,0.04) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(13,148,136,0.035) 1px, transparent 1px);
-      background-size: 70px 70px, 70px 70px, 32px 32px, 32px 32px;
-      opacity: 0.8;
+        linear-gradient(90deg, rgba(180,134,11,0.06) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(13,148,136,0.05) 1px, transparent 1px),
+        repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(180,134,11,0.04) 18px, rgba(180,134,11,0.04) 19px),
+        repeating-linear-gradient(-45deg, transparent, transparent 18px, rgba(13,148,136,0.035) 18px, rgba(13,148,136,0.035) 19px);
+      background-size: 36px 36px, 36px 36px, 40px 40px, 40px 40px;
+      opacity: 0.75;
     }
     [data-theme="light"] .card {
       background: rgba(255, 252, 245, 0.92);
@@ -140,25 +128,6 @@
     [data-theme="light"] .stat-card {
       background: rgba(255, 252, 245, 0.9);
       border-color: rgba(13, 148, 136, 0.2);
-    }
-    [data-theme="light"] header h1 {
-      background: linear-gradient(135deg, #b8860b, #0d9488);
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent;
-      -webkit-text-fill-color: transparent;
-    }
-    [data-theme="light"] .btn-primary {
-      background: linear-gradient(135deg, #0f766e 0%, #14b8a6 45%, #d4a017 100%);
-      border-color: rgba(180, 134, 11, 0.4);
-      box-shadow: 0 4px 18px rgba(13, 148, 136, 0.22);
-    }
-    /* حاشیه کارت‌ها با حس طلایی-فیروزه‌ای */
-    .card {
-      border-image: none;
-    }
-    header {
-      border-bottom: 2px solid transparent;
-      border-image: linear-gradient(90deg, transparent, rgba(212,168,75,0.5), rgba(45,212,191,0.5), transparent) 1;
     }
 
     #loginScreen {
@@ -244,26 +213,30 @@
     .mini-clock {
       width: 64px; height: 64px; flex-shrink: 0;
       border-radius: 50%;
-      background: linear-gradient(145deg, rgba(20, 40, 48, 0.98), rgba(8, 16, 22, 1));
-      border: 2.5px solid rgba(212, 168, 75, 0.7);
-      box-shadow: 0 0 18px rgba(45, 212, 191, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+      background: var(--bg-card);
+      border: 2px solid var(--border-light);
+      box-shadow: var(--shadow);
       display: flex; align-items: center; justify-content: center;
       cursor: default;
       position: relative;
+    }
+    .mini-clock svg { display: block; width: 54px; height: 54px; }
+    .mc-face { fill: #0a141a; }
+    [data-theme="light"] .mc-face { fill: #f8fffe; }
+    .mini-clock {
+      background: linear-gradient(145deg, rgba(20, 40, 48, 0.98), rgba(8, 16, 22, 1));
+      border: 2.5px solid rgba(212, 168, 75, 0.7);
+      box-shadow: 0 0 18px rgba(45, 212, 191, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
     }
     [data-theme="light"] .mini-clock {
       background: linear-gradient(145deg, #ffffff, #eef9f6);
       border-color: rgba(13, 148, 136, 0.55);
       box-shadow: 0 2px 14px rgba(13, 148, 136, 0.22);
     }
-    .mini-clock svg { display: block; width: 54px; height: 54px; }
-    .mc-face { fill: #0a141a; }
-    [data-theme="light"] .mc-face { fill: #f8fffe; }
     .mc-ring { fill: none; stroke: #2dd4bf; stroke-width: 1.5; opacity: 0.65; }
     [data-theme="light"] .mc-ring { stroke: #0d9488; opacity: 0.55; }
     .mc-tick { stroke: #f0d78c; stroke-width: 2; stroke-linecap: round; }
     [data-theme="light"] .mc-tick { stroke: #b8860b; }
-    /* عقربه‌ها ضخیم و روشن — دیده شدن روی ویندوز */
     .mc-hour { stroke: #ffe08a; stroke-width: 3.4; stroke-linecap: round; }
     .mc-min { stroke: #5eead4; stroke-width: 2.6; stroke-linecap: round; }
     .mc-sec { stroke: #ff6b7a; stroke-width: 1.5; stroke-linecap: round; }
@@ -292,10 +265,10 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
     }
     .btn:hover {
-      border-color: rgba(56,189,248,0.45);
+      border-color: rgba(45, 212, 191, 0.45);
       color: var(--accent);
-      background: rgba(56,189,248,0.1);
-      box-shadow: 0 6px 20px rgba(56,189,248,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+      background: rgba(45, 212, 191, 0.1);
+      box-shadow: 0 6px 20px rgba(45, 212, 191, 0.15), inset 0 1px 0 rgba(255,255,255,0.12);
     }
     .btn-primary {
       background: linear-gradient(135deg, #0f766e 0%, #14b8a6 40%, #d4a84b 100%);
@@ -339,16 +312,16 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
     }
     [data-theme="light"] .btn:hover {
-      background: rgba(2,132,199,0.1);
-      border-color: rgba(2,132,199,0.3);
+      background: rgba(13, 148, 136, 0.1);
+      border-color: rgba(13, 148, 136, 0.3);
     }
     [data-theme="light"] .btn-primary {
-      background: linear-gradient(135deg, rgba(2,132,199,0.85) 0%, rgba(14,165,233,0.75) 100%);
-      border: 1px solid rgba(14,165,233,0.4);
-      box-shadow: 0 4px 16px rgba(2,132,199,0.2), inset 0 1px 0 rgba(255,255,255,0.35);
+      background: linear-gradient(135deg, #0f766e 0%, #14b8a6 45%, #d4a017 100%);
+      border: 1px solid rgba(180, 134, 11, 0.4);
+      box-shadow: 0 4px 16px rgba(13, 148, 136, 0.22), inset 0 1px 0 rgba(255,255,255,0.3);
     }
     [data-theme="light"] .btn-primary:hover {
-      background: linear-gradient(135deg, rgba(2,132,199,0.95) 0%, rgba(14,165,233,0.9) 100%);
+      background: linear-gradient(135deg, #0d9488 0%, #d4a017 100%);
     }
     [data-theme="light"] .btn-danger {
       background: rgba(220,38,38,0.08);
@@ -748,7 +721,7 @@
     }
     .install-banner.show { display: flex; }
     .install-banner p { font-size: 0.9rem; color: var(--text); margin: 0; }
-    [data-theme="dark"] .card { border-color: rgba(220, 160, 120, 0.45); }
+    [data-theme="dark"] .card { border-color: rgba(45, 212, 191, 0.32); }
     [data-theme="dark"] .stat-card { border-color: rgba(220, 160, 120, 0.45); }
     [data-theme="dark"] input, [data-theme="dark"] select, [data-theme="dark"] textarea {
       border-color: rgba(220, 160, 120, 0.4);
@@ -776,7 +749,7 @@
       z-index: 3;
       font-size: 0.95rem;
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent-soft);
       pointer-events: none;
       line-height: 1;
       font-variant-numeric: tabular-nums;
@@ -818,7 +791,7 @@
       font-size: 1.85rem;
       font-weight: 700;
       letter-spacing: 2px;
-      color: var(--gold-soft, #e8c76a);
+      color: var(--accent-soft);
       font-variant-numeric: tabular-nums;
       line-height: 1.15;
       pointer-events: none;
@@ -1049,7 +1022,7 @@
     <header>
       <div>
         <h1>📚 ثبت‌کننده ساعت مطالعه</h1>
-        <div id="todayShamsi" style="margin-top:6px;font-size:0.9rem;color:#ffffff;font-weight:500;"></div>
+        <div id="todayShamsi" style="margin-top:6px;font-size:0.9rem;color:var(--text-muted);font-weight:500;"></div>
       </div>
       <div class="header-actions">
         <span id="greeting" style="font-size:0.95rem;font-weight:500;">👋 سلام محمدرضا، به پلنت خوش اومدی</span>
@@ -1172,7 +1145,7 @@
     <div class="card collapsible collapsed" id="addFormCard">
       <h2 onclick="toggleCollapse('addFormCard')">✍️ ثبت مطالعه <span class="toggle-icon">▼</span></h2>
       <div class="collapsible-body">
-      <p class="hint">می‌تونی چند درس مختلف در یک روز ثبت کنی. سال و ماه قفل هستن، فقط روز رو تغییر بده.</p>
+      <p class="hint">می‌تونی چند درس مختلف در یک روز ثبت کنی. تاریخ پیش‌فرض امروز است؛ با تقویم می‌تونی روز دیگه‌ای انتخاب کنی.</p>
       <form id="addForm" onsubmit="addSession(event)">
         <div class="form-grid">
           <div>
@@ -1837,8 +1810,7 @@
       currentJY = j[0]; currentJM = j[1];
       const weekday = getWeekdayFa(now);
       document.getElementById('todayShamsi').textContent = '( ' + toPersian(toJalaliStr()) + ' — ' + weekday + ' )';
-      const defaultDay = j[2] < START_DAY ? START_DAY : j[2];
-      setSessionDateFields(j[0], j[1], defaultDay);
+      setSessionDateFields(j[0], j[1], j[2]);
       updateWeekday();
       loadData();
       loadSyncSettings();
@@ -1935,16 +1907,7 @@
         showToast('حداقل زمان مطالعه، تست، فیلم یا تشریحی را وارد کنید', true); return;
       }
       if (!parseJalali(dateStr)) { showToast('تاریخ معتبر نیست', true); return; }
-      const dayNum = parseInt(document.getElementById('dateDay').value) || 0;
       const parts = dateStr.split('/');
-      const jy = parseInt(parts[0]), jm = parseInt(parts[1]), jd = parseInt(parts[2]);
-      const nowJ = gregorianToJalali(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
-      if (jy < nowJ[0] || (jy === nowJ[0] && jm < nowJ[1]) || (jy === nowJ[0] && jm === nowJ[1] && jd < START_DAY)) {
-        if (!(jy > nowJ[0] || (jy === nowJ[0] && jm > nowJ[1]))) {
-          showToast('شروع اصلی از روز ' + toPersian(START_DAY) + ' است. تاریخ قبل از آن ثبت نمی‌شود.', true);
-          return;
-        }
-      }
       const nowIso = new Date().toISOString();
       sessions.unshift({
         id: Date.now() + Math.random(),
@@ -1964,7 +1927,12 @@
       });
       saveData();
       document.getElementById('addForm').reset();
-      setSessionDateFields(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+      // بعد از ثبت، تاریخ دوباره روی امروز برمی‌گردد
+      (function() {
+        var now = new Date();
+        var j = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+        setSessionDateFields(j[0], j[1], j[2]);
+      })();
       document.getElementById('hours').value = '';
       document.getElementById('minutes').value = '';
       document.getElementById('tests').value = '';
@@ -2506,12 +2474,12 @@
       } catch (e) {}
 
       const isDark = (document.body.getAttribute('data-theme') || 'dark') === 'dark';
-      const bg = isDark ? '#0a1018' : '#f0fdfa';
+      const bg = isDark ? '#0a1018' : '#f7f3ea';
       const cardBg = isDark ? '#10202a' : '#f8fffe';
-      const textCol = isDark ? '#f5f0e6' : '#134e4a';
-      const muted = isDark ? '#a8c5c0' : '#0f766e';
+      const textCol = isDark ? '#f5f0e6' : '#1a2e2c';
+      const muted = isDark ? '#a8c5c0' : '#3d6b66';
       const accent = isDark ? '#2dd4bf' : '#0d9488';
-      const border = isDark ? 'rgba(45,212,191,0.35)' : 'rgba(20,184,166,0.25)';
+      const border = isDark ? 'rgba(45,212,191,0.35)' : 'rgba(13,148,136,0.25)';
       const soft = isDark ? 'rgba(212,168,75,0.12)' : 'rgba(180,83,9,0.08)';
 
       const bySubj = {};
@@ -2827,10 +2795,10 @@
       }
 
       const cardBg = isDark ? '#10202a' : '#f8fffe';
-      const textCol = isDark ? '#f5f0e6' : '#134e4a';
-      const muted = isDark ? '#a8c5c0' : '#0f766e';
+      const textCol = isDark ? '#f5f0e6' : '#1a2e2c';
+      const muted = isDark ? '#a8c5c0' : '#3d6b66';
       const accent = isDark ? '#2dd4bf' : '#0d9488';
-      const border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(20,184,166,0.28)';
+      const border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(13,148,136,0.28)';
       roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
 
       ctx.textAlign = 'right';
@@ -4780,9 +4748,9 @@
       ctx.fillStyle = g; ctx.fillRect(0, 0, width, height);
       var cardBg = isDark ? '#10202a' : '#f8fffe';
       var accent = isDark ? '#2dd4bf' : '#0d9488';
-      var textCol = isDark ? '#f5f0e6' : '#134e4a';
-      var muted = isDark ? '#a8c5c0' : '#0f766e';
-      var border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(20,184,166,0.28)';
+      var textCol = isDark ? '#f5f0e6' : '#1a2e2c';
+      var muted = isDark ? '#a8c5c0' : '#3d6b66';
+      var border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(13,148,136,0.28)';
       function rr(x,y,w,h,r,fill,bd) {
         ctx.beginPath();
         ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r);
