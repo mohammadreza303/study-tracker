@@ -2502,14 +2502,82 @@
         return bySubj[b].minutes - bySubj[a].minutes;
       });
 
-      // ارتفاع پویا برای کارت‌ها
-      const cardH = 128;
+      // یادداشت روز از تقویم (اگر باشد)
+      var dayNoteText = '';
+      try {
+        var allNotes = getDayNotes();
+        if (allNotes && allNotes[dateKey]) dayNoteText = String(allNotes[dateKey]).trim();
+      } catch (e) {}
+
       const headerH = 148;
       const footerH = 56;
       const pad = 28;
-      const width = 760;
+      const width = 780;
       const gap = 14;
-      const height = headerH + subjList.length * (cardH + gap) + footerH + pad;
+      const baseCardH = 110; // حداقل ارتفاع کارت بدون یادداشت
+
+      // محاسبه ارتفاع واقعی هر کارت قبل از رسم
+      function wrapTextMeasure(text, maxWidth, font) {
+        // موقت از یک canvas اندازه‌گیری می‌کنیم
+        var c = document.createElement('canvas').getContext('2d');
+        c.font = font;
+        var words = String(text).split(/\s+/);
+        var lines = [];
+        var line = '';
+        for (var i = 0; i < words.length; i++) {
+          var test = line ? (line + ' ' + words[i]) : words[i];
+          if (c.measureText(test).width > maxWidth && line) {
+            lines.push(line);
+            line = words[i];
+          } else {
+            line = test;
+          }
+        }
+        if (line) lines.push(line);
+        // اگر یک کلمه خیلی بلند باشد
+        if (!lines.length && text) {
+          var t = String(text);
+          while (t.length) {
+            var cut = t.length;
+            while (cut > 1 && c.measureText(t.slice(0, cut)).width > maxWidth) cut--;
+            lines.push(t.slice(0, cut));
+            t = t.slice(cut);
+          }
+        }
+        return lines.length ? lines : [''];
+      }
+
+      var cardHeights = [];
+      var noteFont = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+      var textMaxW = width - pad * 2 - 50;
+      subjList.forEach(function(subj) {
+        var info = bySubj[subj];
+        var h = baseCardH;
+        if (info.timeRanges && info.timeRanges.length) {
+          var tLines = wrapTextMeasure('⏰ ' + info.timeRanges.join(' · '), textMaxW, noteFont);
+          h += tLines.length * 18;
+        }
+        if (info.sections && info.sections.length) {
+          var secLines = wrapTextMeasure('📝 تست‌های زده‌شده: ' + info.sections.join('، '), textMaxW, noteFont);
+          h += secLines.length * 18;
+        }
+        if (info.notes && info.notes.length) {
+          var nLines = wrapTextMeasure('📌 یادداشت: ' + info.notes.join(' | '), textMaxW, noteFont);
+          h += nLines.length * 18;
+        }
+        h = Math.max(baseCardH, h);
+        cardHeights.push(h);
+      });
+
+      var dayNoteH = 0;
+      if (dayNoteText) {
+        var dnLines = wrapTextMeasure('📝 یادداشت روز: ' + dayNoteText, textMaxW, noteFont);
+        dayNoteH = 24 + dnLines.length * 18 + 16;
+      }
+
+      var cardsTotalH = 0;
+      cardHeights.forEach(function(h) { cardsTotalH += h + gap; });
+      const height = headerH + dayNoteH + cardsTotalH + footerH + pad;
 
       const canvas = document.createElement('canvas');
       canvas.width = width * 2;
@@ -2517,74 +2585,92 @@
       const ctx = canvas.getContext('2d');
       ctx.scale(2, 2);
 
-      // پس‌زمینه هخامنشی — فیروزه و طلا
-      const g = ctx.createLinearGradient(0, 0, width, height);
-      if (isDark) {
-        g.addColorStop(0, '#0e1a22');
-        g.addColorStop(0.4, '#0a141c');
-        g.addColorStop(1, '#070d12');
-      } else {
-        g.addColorStop(0, '#f8fffe');
-        g.addColorStop(0.5, '#f0fdfa');
-        g.addColorStop(1, '#ccfbf1');
-      }
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
-      for (let px = 12; px < width; px += 28) {
-        for (let py = 12; py < height; py += 28) {
-          ctx.beginPath();
-          ctx.arc(px, py, 1.1, 0, Math.PI * 2);
-          ctx.fill();
+      function wrapText(text, maxWidth, font) {
+        ctx.font = font;
+        var words = String(text).split(/\s+/);
+        var lines = [];
+        var line = '';
+        for (var i = 0; i < words.length; i++) {
+          var test = line ? (line + ' ' + words[i]) : words[i];
+          if (ctx.measureText(test).width > maxWidth && line) {
+            lines.push(line);
+            line = words[i];
+          } else {
+            line = test;
+          }
         }
+        if (line) lines.push(line);
+        if (!lines.length && text) {
+          var t = String(text);
+          while (t.length) {
+            var cut = t.length;
+            while (cut > 1 && ctx.measureText(t.slice(0, cut)).width > maxWidth) cut--;
+            lines.push(t.slice(0, cut));
+            t = t.slice(cut);
+          }
+        }
+        return lines.length ? lines : [''];
       }
-      // هاله‌های نرم
-      if (isDark) {
-        const rg1 = ctx.createRadialGradient(width * 0.15, 40, 0, width * 0.15, 40, 220);
-        rg1.addColorStop(0, 'rgba(45,212,191,0.2)');
-        rg1.addColorStop(1, 'transparent');
-        ctx.fillStyle = rg1;
-        ctx.fillRect(0, 0, width, height);
-        const rg2 = ctx.createRadialGradient(width * 0.85, height * 0.2, 0, width * 0.85, height * 0.2, 200);
-        rg2.addColorStop(0, 'rgba(212,168,75,0.15)');
-        rg2.addColorStop(1, 'transparent');
-        ctx.fillStyle = rg2;
-        ctx.fillRect(0, 0, width, height);
-      }
-      const outerBorder = isDark ? 'rgba(212,168,75,0.45)' : border;
-      roundRect(ctx, 18, 18, width - 36, height - 36, 22, cardBg, outerBorder);
+
+      // پس‌زمینه ساده و یکدست — بدون هاله
+      ctx.fillStyle = cardBg;
+      ctx.fillRect(0, 0, width, height);
+      // فقط یک خط دور ساده
+      ctx.strokeStyle = border;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(1, 1, width - 2, height - 2);
 
       // هدر
       ctx.textAlign = 'right';
       ctx.direction = 'rtl';
       ctx.fillStyle = accent;
-      ctx.font = '700 24px Vazirmatn, Cairo, Tahoma, sans-serif';
-      ctx.fillText('📚 خلاصه مطالعه روز', width - pad - 6, 58);
+      ctx.font = '700 26px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.fillText('📚 خلاصه مطالعه روز', width - pad - 6, 56);
 
       ctx.fillStyle = textCol;
-      ctx.font = '500 16px Vazirmatn, Cairo, Tahoma, sans-serif';
+      ctx.font = '600 17px Vazirmatn, Cairo, Tahoma, sans-serif';
       const dateLabel = toPersian(daySessions[0].date) + (weekday ? '  —  ' + weekday : '');
-      ctx.fillText(dateLabel, width - pad - 6, 86);
+      ctx.fillText(dateLabel, width - pad - 6, 84);
 
-      ctx.fillStyle = muted;
-      ctx.font = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
-      let summary = 'مجموع  ' + formatDuration(totalMin);
-      if (totalTests > 0) summary += '   ·   📝 ' + toPersian(totalTests) + ' تست';
-      if (totalVideo > 0) summary += '   ·   🎬 ' + toPersian(Math.round(totalVideo * 10) / 10) + ' س فیلم';
-      ctx.fillText(summary, width - pad - 6, 112);
+      // خلاصه به صورت بج‌های جدا
+      (function() {
+        var sx = width - pad - 6;
+        var sy = 112;
+        function sumPill(label, bg, bd, tc) {
+          ctx.font = '600 12px Vazirmatn, Cairo, Tahoma, sans-serif';
+          var tw = ctx.measureText(label).width;
+          var bw = tw + 18, bh = 26, bx = sx - bw, by = sy - 16, r = 9;
+          ctx.beginPath();
+          ctx.moveTo(bx + r, by);
+          ctx.arcTo(bx + bw, by, bx + bw, by + bh, r);
+          ctx.arcTo(bx + bw, by + bh, bx, by + bh, r);
+          ctx.arcTo(bx, by + bh, bx, by, r);
+          ctx.arcTo(bx, by, bx + bw, by, r);
+          ctx.closePath();
+          ctx.fillStyle = bg; ctx.fill();
+          ctx.strokeStyle = bd; ctx.lineWidth = 1.2; ctx.stroke();
+          ctx.fillStyle = tc; ctx.textAlign = 'right';
+          ctx.fillText(label, sx - 9, sy + 1);
+          sx -= (bw + 10);
+        }
+        sumPill('⏱ ' + formatDuration(totalMin), isDark ? 'rgba(45,212,191,0.18)' : 'rgba(13,148,136,0.12)', isDark ? '#2dd4bf' : '#0d9488', isDark ? '#5eead4' : '#0f766e');
+        if (totalTests > 0) sumPill('📝 ' + toPersian(totalTests) + ' تست', isDark ? 'rgba(244,114,182,0.16)' : 'rgba(219,39,119,0.1)', isDark ? '#f472b6' : '#db2777', isDark ? '#f9a8d4' : '#be185d');
+        if (totalVideo > 0) sumPill('🎬 ' + toPersian(Math.round(totalVideo * 10) / 10) + ' س فیلم', isDark ? 'rgba(168,85,247,0.16)' : 'rgba(126,34,206,0.1)', isDark ? '#c084fc' : '#7c3aed', isDark ? '#d8b4fe' : '#6b21a8');
+        sumPill(toPersian(subjList.length) + ' درس', isDark ? 'rgba(212,168,75,0.16)' : 'rgba(180,134,11,0.12)', isDark ? '#d4a84b' : '#b8860b', isDark ? '#e8c76a' : '#92640a');
+      })();
 
       // خط تزئینی طلا–فیروزه زیر هدر
       const lineGrad = ctx.createLinearGradient(pad, 0, width - pad, 0);
       lineGrad.addColorStop(0, 'transparent');
-      lineGrad.addColorStop(0.2, isDark ? 'rgba(45,212,191,0.5)' : 'rgba(13,148,136,0.4)');
-      lineGrad.addColorStop(0.5, isDark ? 'rgba(212,168,75,0.7)' : 'rgba(184,134,11,0.55)');
-      lineGrad.addColorStop(0.8, isDark ? 'rgba(45,212,191,0.5)' : 'rgba(13,148,136,0.4)');
+      lineGrad.addColorStop(0.2, isDark ? 'rgba(45,212,191,0.55)' : 'rgba(13,148,136,0.4)');
+      lineGrad.addColorStop(0.5, isDark ? 'rgba(212,168,75,0.75)' : 'rgba(184,134,11,0.55)');
+      lineGrad.addColorStop(0.8, isDark ? 'rgba(45,212,191,0.55)' : 'rgba(13,148,136,0.4)');
       lineGrad.addColorStop(1, 'transparent');
       ctx.strokeStyle = lineGrad;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.5;
       ctx.beginPath();
-      ctx.moveTo(pad + 10, 128);
-      ctx.lineTo(width - pad - 10, 128);
+      ctx.moveTo(pad + 10, 130);
+      ctx.lineTo(width - pad - 10, 130);
       ctx.stroke();
 
       // کارت هر درس
@@ -2610,20 +2696,36 @@
         return bw + 8;
       }
 
+      // یادداشت روز (کامل، چندخطی)
       let y = headerH + 8;
-      subjList.forEach(function(subj, idx) {
-        const info = bySubj[subj];
+      if (dayNoteText) {
         const x0 = pad + 4;
         const w0 = width - pad * 2 - 8;
-        // کارت درس با حاشیه مناسب تم
+        const dnLines = wrapText('📝 یادداشت روز: ' + dayNoteText, w0 - 36, '600 13px Vazirmatn, Cairo, Tahoma, sans-serif');
+        const dnH = 22 + dnLines.length * 18 + 14;
+        roundRect(ctx, x0, y, w0, dnH, 14, isDark ? 'rgba(212,168,75,0.12)' : 'rgba(180,134,11,0.1)', isDark ? 'rgba(212,168,75,0.45)' : 'rgba(180,134,11,0.35)');
+        ctx.textAlign = 'right';
+        ctx.fillStyle = isDark ? '#e8c76a' : '#92640a';
+        ctx.font = '600 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+        dnLines.forEach(function(ln, li) {
+          ctx.fillText(ln, x0 + w0 - 18, y + 24 + li * 18);
+        });
+        y += dnH + gap;
+      }
+
+      subjList.forEach(function(subj, idx) {
+        const info = bySubj[subj];
+        const cardH = cardHeights[idx];
+        const x0 = pad + 4;
+        const w0 = width - pad * 2 - 8;
         const innerBg = isDark ? '#122028' : '#ffffff';
         const cardBorder = isDark ? 'rgba(45, 212, 191, 0.35)' : 'rgba(13, 148, 136, 0.28)';
         roundRect(ctx, x0, y, w0, cardH - 6, 16, innerBg, cardBorder);
-        // نوار طلایی سمت راست کارت
+        // نوار طلایی سمت راست
         ctx.fillStyle = isDark ? 'rgba(212,168,75,0.55)' : 'rgba(184,134,11,0.45)';
-        ctx.fillRect(x0 + w0 - 5, y + 12, 4, cardH - 30);
+        ctx.fillRect(x0 + w0 - 5, y + 10, 4, Math.max(20, cardH - 26));
 
-        // نام درس + متن رنگی تخصصی/عمومی بدون حاشیه
+        // نام درس
         ctx.textAlign = 'right';
         ctx.font = '700 17px Vazirmatn, Cairo, Tahoma, sans-serif';
         const subjW = ctx.measureText(subj).width;
@@ -2635,45 +2737,11 @@
         ctx.fillStyle = typeCol;
         ctx.fillText(typeLab, x0 + w0 - 22 - subjW - 12, y + 28);
 
-        // نوار پیشرفت نسبت به مجموع روز
-        const barTrackX = x0 + 18;
-        const barTrackW = w0 - 40;
-        const barY = y + cardH - 28;
-        const barH2 = 8;
-        const pct = totalMin > 0 ? Math.min(1, info.minutes / totalMin) : 0;
-        ctx.fillStyle = isDark ? 'rgba(30,50,55,0.9)' : 'rgba(204,251,241,0.9)';
-        ctx.beginPath();
-        const br = 4;
-        ctx.moveTo(barTrackX + br, barY);
-        ctx.arcTo(barTrackX + barTrackW, barY, barTrackX + barTrackW, barY + barH2, br);
-        ctx.arcTo(barTrackX + barTrackW, barY + barH2, barTrackX, barY + barH2, br);
-        ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
-        ctx.arcTo(barTrackX, barY, barTrackX + barTrackW, barY, br);
-        ctx.closePath();
-        ctx.fill();
-        if (pct > 0) {
-          const fillW = Math.max(10, barTrackW * pct);
-          const bg2 = ctx.createLinearGradient(barTrackX, 0, barTrackX + fillW, 0);
-          bg2.addColorStop(0, '#5eead4');
-          bg2.addColorStop(0.6, '#2dd4bf');
-          bg2.addColorStop(1, '#d4a84b');
-          ctx.fillStyle = bg2;
-          ctx.beginPath();
-          ctx.moveTo(barTrackX + br, barY);
-          ctx.arcTo(barTrackX + fillW, barY, barTrackX + fillW, barY + barH2, br);
-          ctx.arcTo(barTrackX + fillW, barY + barH2, barTrackX, barY + barH2, br);
-          ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
-          ctx.arcTo(barTrackX, barY, barTrackX + fillW, barY, br);
-          ctx.closePath();
-          ctx.fill();
-        }
-
         // بج‌ها
         let bx = x0 + w0 - 18;
-        const by = y + 58;
+        const by = y + 56;
         const dur = formatDuration(info.minutes);
         bx -= pill(dur, 'rgba(45,212,191,0.15)', '#2dd4bf', '#d4a84b', bx, by);
-        // برای دروس عمومی اگر تست زده نشده، بج تست نمایش داده نشود
         const showTests = info.specialized || info.tests > 0;
         if (showTests) {
           ctx.fillStyle = muted;
@@ -2702,25 +2770,69 @@
           bx -= pill('📄 تشریحی', 'rgba(249,115,22,0.12)', '#fb923c', '#fb923c', bx, by);
         }
 
-        // بازه زمانی تایمر + تست‌ها + یادداشت
-        let ly = y + 86;
-        ctx.font = '400 12px Vazirmatn, Cairo, Tahoma, sans-serif';
-        ctx.fillStyle = muted;
+        // جزئیات: زمان، تست، یادداشت — با پس‌زمینه رنگی خوانا
+        let ly = y + 80;
         ctx.textAlign = 'right';
+        const contentW = w0 - 40;
+        const plainColor = isDark ? '#d1d5db' : '#6b7280';
+
         if (info.timeRanges && info.timeRanges.length) {
-          ctx.fillStyle = accent;
-          ctx.fillText('⏰ ' + info.timeRanges.map(function(t){ return t.replace(/\d/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; }); }).join(' · '), x0 + w0 - 18, ly);
-          ly += 16;
-          ctx.fillStyle = muted;
+          ctx.fillStyle = plainColor;
+          ctx.font = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+          const tLine = '⏰ ' + info.timeRanges.map(function(t){ return t.replace(/\d/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; }); }).join(' · ');
+          wrapText(tLine, contentW, ctx.font).forEach(function(ln) {
+            ctx.fillText(ln, x0 + w0 - 18, ly);
+            ly += 18;
+          });
         }
-        if (info.sections.length) {
-          ctx.fillText('تست‌های زده‌شده: ' + info.sections.join('، '), x0 + w0 - 18, ly);
-          ly += 18;
+        if (info.sections && info.sections.length) {
+          ctx.fillStyle = plainColor;
+          ctx.font = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+          wrapText('📝 تست‌های زده‌شده: ' + info.sections.join('، '), contentW, ctx.font).forEach(function(ln) {
+            ctx.fillText(ln, x0 + w0 - 18, ly);
+            ly += 18;
+          });
         }
-        if (info.notes.length) {
-          const noteStr = info.notes.join(' | ');
-          const maxLen = 75;
-          ctx.fillText('یادداشت: ' + (noteStr.length > maxLen ? noteStr.slice(0, maxLen) + '…' : noteStr), x0 + w0 - 18, ly);
+        if (info.notes && info.notes.length) {
+          ctx.fillStyle = plainColor;
+          ctx.font = '400 13px Vazirmatn, Cairo, Tahoma, sans-serif';
+          wrapText('📌 یادداشت: ' + info.notes.join(' | '), contentW, ctx.font).forEach(function(ln) {
+            ctx.fillText(ln, x0 + w0 - 18, ly);
+            ly += 18;
+          });
+        }
+
+        // نوار پیشرفت پایین کارت
+        const barTrackX = x0 + 18;
+        const barTrackW = w0 - 40;
+        const barY = y + cardH - 22;
+        const barH2 = 7;
+        const pct = totalMin > 0 ? Math.min(1, info.minutes / totalMin) : 0;
+        ctx.fillStyle = isDark ? 'rgba(30,50,55,0.9)' : 'rgba(204,251,241,0.9)';
+        ctx.beginPath();
+        const br = 4;
+        ctx.moveTo(barTrackX + br, barY);
+        ctx.arcTo(barTrackX + barTrackW, barY, barTrackX + barTrackW, barY + barH2, br);
+        ctx.arcTo(barTrackX + barTrackW, barY + barH2, barTrackX, barY + barH2, br);
+        ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
+        ctx.arcTo(barTrackX, barY, barTrackX + barTrackW, barY, br);
+        ctx.closePath();
+        ctx.fill();
+        if (pct > 0) {
+          const fillW = Math.max(10, barTrackW * pct);
+          const bg2 = ctx.createLinearGradient(barTrackX, 0, barTrackX + fillW, 0);
+          bg2.addColorStop(0, '#5eead4');
+          bg2.addColorStop(0.6, '#2dd4bf');
+          bg2.addColorStop(1, '#d4a84b');
+          ctx.fillStyle = bg2;
+          ctx.beginPath();
+          ctx.moveTo(barTrackX + br, barY);
+          ctx.arcTo(barTrackX + fillW, barY, barTrackX + fillW, barY + barH2, br);
+          ctx.arcTo(barTrackX + fillW, barY + barH2, barTrackX, barY + barH2, br);
+          ctx.arcTo(barTrackX, barY + barH2, barTrackX, barY, br);
+          ctx.arcTo(barTrackX, barY, barTrackX + fillW, barY, br);
+          ctx.closePath();
+          ctx.fill();
         }
 
         y += cardH + gap - 6;
@@ -2785,21 +2897,16 @@
         g.addColorStop(0, '#f8fffe');
         g.addColorStop(1, '#ccfbf1');
       }
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = isDark ? 'rgba(45,212,191,0.08)' : 'rgba(13,148,136,0.06)';
-      for (let px = 12; px < width; px += 28) {
-        for (let py = 12; py < height; py += 28) {
-          ctx.beginPath(); ctx.arc(px, py, 1.1, 0, Math.PI * 2); ctx.fill();
-        }
-      }
-
       const cardBg = isDark ? '#10202a' : '#f8fffe';
       const textCol = isDark ? '#f5f0e6' : '#1a2e2c';
       const muted = isDark ? '#a8c5c0' : '#3d6b66';
       const accent = isDark ? '#2dd4bf' : '#0d9488';
-      const border = isDark ? 'rgba(212,168,75,0.4)' : 'rgba(13,148,136,0.28)';
-      roundRect(ctx, 16, 16, width - 32, height - 32, 20, cardBg, border);
+      const border = isDark ? 'rgba(45,212,191,0.35)' : 'rgba(13,148,136,0.28)';
+      ctx.fillStyle = cardBg;
+      ctx.fillRect(0, 0, width, height);
+      ctx.strokeStyle = border;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(1, 1, width - 2, height - 2);
 
       ctx.textAlign = 'right';
       ctx.direction = 'rtl';
