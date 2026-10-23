@@ -1196,15 +1196,13 @@
           </div>
           <div>
             <label>📅 تاریخ</label>
-            <div class="date-row">
-              <div>
-                <input type="number" id="dateDay" min="1" max="31" required placeholder="روز" oninput="updateWeekday()" />
-              </div>
-              <div>
-                <input type="text" id="dateMonthYear" readonly style="opacity:0.7;cursor:default;" />
-              </div>
-              <div class="weekday-label" id="weekdayLabel">—</div>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input type="text" id="sessionDate" readonly placeholder="از تقویم انتخاب کن" style="flex:1;min-width:140px;cursor:pointer;" onclick="openPickerCal('session')" />
+              <button type="button" class="btn btn-sm" onclick="openPickerCal('session')">📅 تقویم</button>
+              <span class="weekday-label" id="weekdayLabel" style="min-width:60px;">—</span>
             </div>
+            <input type="hidden" id="dateDay" value="" />
+            <input type="hidden" id="dateMonthYear" value="" />
           </div>
           <div>
             <label for="hours">⏰ ساعت</label>
@@ -1840,8 +1838,7 @@
       const weekday = getWeekdayFa(now);
       document.getElementById('todayShamsi').textContent = '( ' + toPersian(toJalaliStr()) + ' — ' + weekday + ' )';
       const defaultDay = j[2] < START_DAY ? START_DAY : j[2];
-      document.getElementById('dateDay').value = defaultDay;
-      document.getElementById('dateMonthYear').value = toPersian(j[0]) + '/' + toPersian(String(j[1]).padStart(2, '0'));
+      setSessionDateFields(j[0], j[1], defaultDay);
       updateWeekday();
       loadData();
       loadSyncSettings();
@@ -1862,6 +1859,25 @@
       const cycle = cy % 33;
       return breaks.indexOf(cycle) >= 0 ? 30 : 29;
     }
+    function setSessionDateFields(jy, jm, jd) {
+      currentJY = jy; currentJM = jm;
+      var dayEl = document.getElementById('dateDay');
+      var myEl = document.getElementById('dateMonthYear');
+      var sdEl = document.getElementById('sessionDate');
+      if (dayEl) dayEl.value = jd;
+      if (myEl) myEl.value = toPersian(jy) + '/' + toPersian(String(jm).padStart(2, '0'));
+      var full = jy + '/' + String(jm).padStart(2, '0') + '/' + String(jd).padStart(2, '0');
+      if (sdEl) sdEl.value = toPersian(full);
+      try {
+        const g = jalaliToGregorian(jy, jm, jd);
+        const d = new Date(g[0], g[1] - 1, g[2]);
+        var wl = document.getElementById('weekdayLabel');
+        if (wl) wl.textContent = getWeekdayFa(d);
+      } catch (e) {
+        var wl2 = document.getElementById('weekdayLabel');
+        if (wl2) wl2.textContent = '—';
+      }
+    }
     function updateWeekday() {
       let day = parseInt(document.getElementById('dateDay').value) || 1;
       const maxD = jalaliDaysInMonth(currentJY, currentJM);
@@ -1869,17 +1885,9 @@
         day = day - maxD;
         currentJM += 1;
         if (currentJM > 12) { currentJM = 1; currentJY += 1; }
-        document.getElementById('dateDay').value = day;
-        document.getElementById('dateMonthYear').value = toPersian(currentJY) + '/' + toPersian(String(currentJM).padStart(2, '0'));
       }
       if (day < 1) day = 1;
-      try {
-        const g = jalaliToGregorian(currentJY, currentJM, day);
-        const d = new Date(g[0], g[1] - 1, g[2]);
-        document.getElementById('weekdayLabel').textContent = getWeekdayFa(d);
-      } catch (e) {
-        document.getElementById('weekdayLabel').textContent = '—';
-      }
+      setSessionDateFields(currentJY, currentJM, day);
     }
     function getSelectedDateStr() {
       const day = parseInt(document.getElementById('dateDay').value) || 1;
@@ -1956,8 +1964,7 @@
       });
       saveData();
       document.getElementById('addForm').reset();
-      document.getElementById('dateDay').value = Math.max(START_DAY, parseInt(parts[2]) || START_DAY);
-      document.getElementById('dateMonthYear').value = toPersian(currentJY) + '/' + toPersian(String(currentJM).padStart(2, '0'));
+      setSessionDateFields(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
       document.getElementById('hours').value = '';
       document.getElementById('minutes').value = '';
       document.getElementById('tests').value = '';
@@ -4162,6 +4169,14 @@
     }
     function calDayTap(ev, key) {
       if (!key) return;
+      if (calPickerMode === 'session') {
+        var parts = key.replace(/-/g, '/').split('/');
+        if (parts.length === 3) {
+          setSessionDateFields(parseInt(parts[0], 10), parseInt(parts[1], 10), parseInt(parts[2], 10));
+        }
+        closeCalendar();
+        return;
+      }
       if (calPickerMode === 'consultant') {
         var el = document.getElementById('consultantDate');
         if (el) el.value = key.replace(/-/g, '/');
